@@ -136,7 +136,7 @@
                         <li class="nav-header">ข้อมูลหลัก</li>
                         <li class="nav-item">
                         <a href="{{Route('student.create')}}" class="nav-link">
-                                <i class="nav-icon fa fa-calendar"></i> เพิ่มนักเรียน</a>
+                                <i class="nav-icon fa fa-calendar"></i> เพิ่มนักเรียน555</a>
                         </li>
                         <li class="nav-item has-treeview">
                             <a href="{{Route('student.index')}}" class="nav-link">
