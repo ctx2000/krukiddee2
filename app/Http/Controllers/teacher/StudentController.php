@@ -5,6 +5,7 @@ namespace App\Http\Controllers\teacher;
 use App\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StudentRequest;
 
 class StudentController extends Controller
@@ -53,8 +54,25 @@ class StudentController extends Controller
         $student->bankNumber = $request->bankNumber;
         $student->description = $request->description;
         //$student->picture = $request->picture;
-        $student->picture = 'nopic';
+        //$student->picture = 'nopic';
         $student->user_id = $request->user_id;
+
+        if($request->hasFile('picture')){
+            //random file name
+            //$newFileName = str_random(40);
+            $newFileName = uniqid().'.'.$request->picture->extension();
+
+            //upload file
+            $request->picture->storeAs('images',$newFileName,'public');
+            $student->picture = $newFileName;
+
+            //resize
+            // $path = Storage::disk('public')->path('images/resize/');
+            // Image::make($request->picture->getRealPath(),$newFileName)->resize(120,null,function($contraint){
+            //     $contraint->aspectRatio();
+            // })->save($path.$newFileName);
+        }
+
         $student->save();
         return redirect()->route('student.index');
 
@@ -102,6 +120,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
+        Storage::disk('public')->delete('images/'.$student->picture);
         $student->delete();
         return redirect()->route('student.index');
     }

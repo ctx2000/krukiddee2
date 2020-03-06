@@ -64,7 +64,9 @@
                                         <td> {{$s->bankName}}</td>
                                         <td> {{$s->bankNumber}}</td>
                                         <td> {{$s->description}}</td>
-                                        <td> {{$s->picture}}</td>
+                                        <td>
+                                            <img src="{{asset('storage/images/'.$s->picture)}}" width="50">
+                                        </td>
                                         <td>
                                             <a href="">Edit</a> |
                                             <form action="{{route('student.destroy',['id'=>$s->id])}}" method="POST"

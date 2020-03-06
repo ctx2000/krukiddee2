@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index');
 
 });
+
 //Route for admin
 Route::group(['prefix' => 'admin'], function(){
     Route::group(['middleware' => ['admin']], function(){
@@ -48,6 +49,10 @@ Route::get('/teacher/news','teacher\TeacherController@news')->middleware('teache
 Route::get('/teacher/edit','teacher\TeacherController@edit')->middleware('teacher')->name('teacher.edit');
 
 Route::resource('/teacher/student', 'teacher\StudentController')->middleware('teacher');
+
+Route::resource('/member/index', 'member\MemberContentController')->middleware('auth');
+
+Route::resource('/donation', 'DonationController')->middleware('auth');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
