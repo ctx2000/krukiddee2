@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -26,7 +25,7 @@
                     <a class="nav-link" data-widget="pushmenu" href=""><i class="fa fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{ route('teacher.dashboard')}}" class="nav-link">หน้าแรก</a>
+                    <a href="{{ route('teacher.dashboard')}}" class="nav-link">หน้าแรก</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="{{route('teacher.show')}}" class="nav-link">Contact</a>
@@ -73,7 +72,7 @@
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
+                        <i class="fa fa-bell"></i>
                         <span class="badge badge-warning navbar-badge">15</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -124,7 +123,7 @@
                         {{-- <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"> --}}
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">{{ auth()->user()->name }}</a>
+                        <a href="{{route('teacher.edit')}}" class="d-block">{{ auth()->user()->name }} | <u>แก้ไข</u></a>
                     </div>
                 </div>
 
@@ -135,12 +134,16 @@
 
                         <li class="nav-header">ข้อมูลหลัก</li>
                         <li class="nav-item">
-                        <a href="{{Route('student.create')}}" class="nav-link">
+                            <a href="{{Route('student.create')}}" class="nav-link">
                                 <i class="nav-icon fa fa-calendar"></i> เพิ่มนักเรียน555</a>
                         </li>
                         <li class="nav-item has-treeview">
                             <a href="{{Route('student.index')}}" class="nav-link">
                                 <i class="nav-icon fa fa-envelope-o"></i> จัดการนักเรียน</a>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="{{route('teacher.news')}}" class="nav-link">
+                                <i class="nav-icon fa fa-envelope-o"></i> เพิ่มบทความ</a>
                         </li>
 
 
@@ -154,7 +157,8 @@
         @yield('content')
 
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2018 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+            <strong>Copyright &copy; 2014-2018 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
+            reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 3.0.0-alpha
             </div>
@@ -167,7 +171,7 @@
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
-        <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
 </body>
 
