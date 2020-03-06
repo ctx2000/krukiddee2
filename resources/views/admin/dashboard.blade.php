@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                    <a href="{{route('teacher.show')}}" class="nav-link">Contact</a>
                     You are logged in! as admin
                 </div>
             </div>

@@ -18,6 +18,7 @@ Route::get('/teacherRegister', function(){
     return view('auth/teacherRegister');
 })->name('teacherRegister');
 
+
 Auth::routes();
 
 
@@ -40,8 +41,9 @@ Route::group(['prefix' => 'teacher'], function(){
 
     });
 });
+Route::get('/teacher/show','teacher\TeacherController@show')->middleware('teacher')->name('teacher.show');
 
-Route::resource('/teacher/student', 'teacher\StudentController')->middleware('auth');
+Route::resource('/teacher/student', 'teacher\StudentController')->middleware('teacher');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

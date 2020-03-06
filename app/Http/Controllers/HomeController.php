@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\user;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -28,8 +29,8 @@ class HomeController extends Controller
             return view('admin/dashboard');
 
         }else if(auth()->user()->isTeacher()){
-
-            return view('teacher/dashboard');
+            return redirect()->route('teacher.dashboard');
+            //return view('teacher/dashboard');
 
         } else {
             return view('home');

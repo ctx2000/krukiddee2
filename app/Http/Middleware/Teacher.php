@@ -15,6 +15,11 @@ class Teacher
      */
     public function handle($request, Closure $next)
     {
+        if( auth()->check() && $request->user()->type =='3' ){
         return $next($request);
+        }else {
+            abort(403, 'Unauthorized action.');
+        }
+
     }
 }

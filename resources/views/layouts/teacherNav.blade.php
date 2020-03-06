@@ -29,7 +29,7 @@
                 <a href="{{ route('teacher.dashboard')}}" class="nav-link">หน้าแรก</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
+                    <a href="{{route('teacher.show')}}" class="nav-link">Contact</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();

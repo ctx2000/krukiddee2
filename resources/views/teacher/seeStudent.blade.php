@@ -65,7 +65,17 @@
                                         <td> {{$s->bankNumber}}</td>
                                         <td> {{$s->description}}</td>
                                         <td> {{$s->picture}}</td>
-                                        <td>Edit | Delete</td>
+                                        <td>
+                                            <a href="">Edit</a> |
+                                            <form action="{{route('student.destroy',['id'=>$s->id])}}" method="POST"
+                                                class="d-inline" onsubmit="return confirm('ต้องการลบข้อมูล?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger btn-sm">
+                                                    <li class="fa fa-trash text-white"></li>
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
 
                                     @endforeach

@@ -16,10 +16,13 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $stu = Student::all();
+
+        $stu = Student::where('user_id','=',auth()->user()->id)->get();
         return view('teacher/seeStudent',[
             'stu' => $stu
         ]);
+
+
     }
 
     /**
@@ -99,6 +102,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+        return redirect()->route('student.index');
     }
 }
