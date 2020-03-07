@@ -57,6 +57,8 @@ Route::resource('/member/index', 'member\MemberContentController')->middleware('
 
 Route::resource('/member/donation', 'DonationController');
 
+Route::get('/member/history','DonationController@history')->name('donation.history')->middleware('auth');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 

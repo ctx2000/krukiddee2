@@ -10,6 +10,7 @@
 
 <body>
     <h5>asdasd</h5>
+
     <form action=" {{route('donation.store')}} " method="POST" enctype="multipart/form-data">
 
         @csrf

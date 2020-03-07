@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StudentRequest;
+use Illuminate\Support\Facades\DB;
 
 class DonationController extends Controller
 {
@@ -18,7 +19,7 @@ class DonationController extends Controller
      */
     public function index()
     {
-        $student = Student::where('status','=','open')->get();
+        $student = Student::where('status','=','open')->orderBy('level','desc')->get();
         return view('home',[
             'student' => $student
         ]);
@@ -82,7 +83,7 @@ class DonationController extends Controller
      */
     public function show(student $student)
     {
-        //
+        return 'test';
     }
 
     /**
@@ -121,5 +122,31 @@ class DonationController extends Controller
     public function destroy(student $student)
     {
         //
+    }
+
+    public function history()
+    {
+        $donation = Donation::where('user_id','=',auth()->user()->id)->get();
+
+        $stu = DB::table('students')->join('donations',function ($join){
+            $join->on('students.id','=','donations.student_id')
+            ->where('donations.user_id','=',auth()->user()->id);
+        })->select('students.*')->distinct()->get();
+        // $student = DB::table('students')->join('donations','students.id','=','donations.student_id')
+        // ->select('students.*')->get();
+
+        //return $stu;
+
+        return view('history',[
+            'donation' => $donation,
+            'stu' => $stu
+        ]);
+
+        //$donation = Donation::where('user_id','=',auth()->user()->id)->get();
+        //$user = Student::with('donation')->where('user_id','=',auth()->user()->id)->get();
+        //return $donation;
+        //$student = Student::where('id','=',);
+
+        //2foreatch น่าจะได้
     }
 }
