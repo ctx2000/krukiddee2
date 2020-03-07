@@ -19,6 +19,7 @@
                     <table class="table">
                         <tr>
                             <th>ชื่อ</th>
+                            <th>ที่อยู่</th>
                             <th>ตัวเลือก</th>
                         </tr>
 
@@ -28,17 +29,19 @@
 
 
                             <td>{{$s->name}}</td>
+                        <td>{{$s->address}}</td>
                             <td>
-                                @if ($s->level == '1')
-                                <a href="" class="btn btn-outline-primary">donate</a>
+                                <a href="{{route('student.edit',['id'=>$s->id])}}">Edit</a>
+                                <a href="{{route('donation.edit',['id'=>$s->id])}}" >donate</a>
+                                {{-- @if ($s->level == '1')
+                                <a href="{{route('donate.edit',['id'=>$s->id])}}" class="btn btn-outline-primary">donate</a>
                                 @elseif ($s->level == '2')
-                                <a href="" class="btn btn-outline-success">donate</a>
+                                <a href="{{route('donate.edit',['id'=>$s->id])}}" class="btn btn-outline-success">donate</a>
                                 @elseif ($s->level == '3')
-                                <a href="" class="btn btn-outline-warning">donate</a>
+                                <a href="{{route('donate.edit',['id'=>$s->id])}}" class="btn btn-outline-warning">donate</a>
                                 @else
-                                <a href="" class="btn btn-outline-danger">donate</a>
-
-                                @endif
+                                <a href="{{route('donate.edit',['id'=>$s->id])}}" class="btn btn-outline-danger">donate</a>
+                                @endif --}}
 
                             </td>
                         </tr>

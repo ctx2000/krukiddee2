@@ -68,7 +68,7 @@
                                             <img src="{{asset('storage/images/'.$s->picture)}}" width="50">
                                         </td>
                                         <td>
-                                            <a href="">Edit</a> |
+                                        <a href="{{route('student.edit',['id'=>$s->id])}}">Edit</a> |
                                             <form action="{{route('student.destroy',['id'=>$s->id])}}" method="POST"
                                                 class="d-inline" onsubmit="return confirm('ต้องการลบข้อมูล?')">
                                                 @csrf

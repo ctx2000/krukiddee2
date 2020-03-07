@@ -98,7 +98,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        return $student;
     }
 
     /**

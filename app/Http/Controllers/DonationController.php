@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Donation;
 use App\Student;
+use App\Donation;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StudentRequest;
 
 class DonationController extends Controller
 {
@@ -28,7 +31,7 @@ class DonationController extends Controller
      */
     public function create()
     {
-        return view('donate');
+        //
     }
 
     /**
@@ -38,13 +41,15 @@ class DonationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   //เพิ่มการบริจาค
+    {
+
         $donate = new Donation();
         if(auth()->user()){
             $donate->user_id = auth()->user()->id;
         }
 
         $donate->student_id = $request->student_id;
+        $donate->price = $request->price;
         $donate->description = $request->description;
         $donate->status = 'checking';
 
@@ -65,43 +70,44 @@ class DonationController extends Controller
         }
 
         $donate->save();
-        return redirect()->route('/');
+        return redirect()->route('donation.index');
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Donation  $donation
+     * @param  \App\student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Donation $donation)
-    {   //ดูประวัติการบริจาค
-        $showDonate = Donation::where('user_id','=',auth()->user()->id);
-        return view('history',[
-            'showDonate' => $showDonate
-        ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Donation  $donation
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Donation $donation)
+    public function show(student $student)
     {
         //
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\student  $student
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $stu = Student::where('id','=',$id)->first();
+       // return $stu;
+        return view('donate',[
+            'stu' => $stu
+        ]);
+     }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Donation  $donation
+     * @param  \App\student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Donation $donation)
+    public function update(Request $request, student $student)
     {
         //
     }
@@ -109,10 +115,10 @@ class DonationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Donation  $donation
+     * @param  \App\student  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Donation $donation)
+    public function destroy(student $student)
     {
         //
     }

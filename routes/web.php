@@ -19,6 +19,7 @@ Route::get('/teacherRegister', function(){
 })->name('teacherRegister');
 
 
+
 Auth::routes();
 
 
@@ -28,7 +29,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 });
 
-Route::resource('/home/donate', 'DonationController')->middleware('auth');
+
 
 //Route for admin
 Route::group(['prefix' => 'admin'], function(){
@@ -54,7 +55,8 @@ Route::resource('/teacher/student', 'teacher\StudentController')->middleware('te
 
 Route::resource('/member/index', 'member\MemberContentController')->middleware('auth');
 
-Route::resource('/donation', 'DonationController')->middleware('auth');
+Route::resource('/member/donation', 'DonationController');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
