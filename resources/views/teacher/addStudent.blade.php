@@ -38,23 +38,39 @@
                         <div class="card-body">
                             <form action=" {{route('student.store')}} " method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <div class="form-group">
-                                    <label for="name">ชื่อ</label>
-                                    <input name="name" type="text" class="form-control" id="name"
-                                        aria-describedby="nameHelp">
-                                </div>
-                                <div class="form-group">
-                                    <label for="lastname">นามสกุล</label>
-                                    <input name="lastname" type="text" class="form-control" id="price"
-                                        aria-describedby="priceHelp">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="name">ชื่อ</label>
+                                        <input name="name" type="text" class="form-control" id="name"
+                                            aria-describedby="nameHelp">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="lastname">นามสกุล</label>
+                                        <input name="lastname" type="text" class="form-control" id="price"
+                                            aria-describedby="priceHelp">
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="address">ที่อยู่</label>
                                     {{ Form::text('address', null, ['class'=>'form-control']) }}
                                 </div>
-                                <div class="form-group">
-                                    <label for="tel">หมายเลขโทรศัพท์นักเรียน(ถ้ามี)</label>
-                                    {{ Form::text('tel', null, ['class'=>'form-control']) }}
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label for="tel">หมายเลขโทรศัพท์นักเรียน(ถ้ามี)</label>
+                                        {{ Form::text('tel', null, ['class'=>'form-control']) }}
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="tel">ระดับความเร่งด่วน</label>
+                                        {{ Form::select('level',['1'=>'ไม่เร่งด่วน','2'=>'เร่งด่วนเล็กน้อย','3'=>'เร่งด่วน','4'=>'เร่งด่วนมาก'], null, ['class'=>'form-control','placeholder' => 'เลือกระดับความเร่งด่วนในการรับบริจาค..']) }}
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="tel">วันที่ปิดรับบริจาค</label>
+                                        {{ Form::date('closeDonate', \Carbon\Carbon::now(),['class'=>'form-control']) }}
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="tel">จำนวนเงินสูงสุด</label>
+                                        {{ Form::number('maxDonate', null, ['class'=>'form-control','min'=>0]) }}
+                                    </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
@@ -78,15 +94,17 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="description">รายละเอียดของนักเรียน</label>
-                                    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <textarea class="form-control" name="description" id="exampleFormControlTextarea1"
+                                        rows="3"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="picture" name="picture">
-                                        <label class="custom-file-label" for="validatedCustomFile">เลือกภาพนักเรียน</label>
+                                        <label class="custom-file-label"
+                                            for="validatedCustomFile">เลือกภาพนักเรียน</label>
                                     </div>
                                 </div>
-                                <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+
                                 <button type="submit" class="btn btn-primary">เพิ่มนักเรียน</button>
                             </form>
                         </div>

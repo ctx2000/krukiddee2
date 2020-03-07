@@ -33,7 +33,7 @@ class HomeController extends Controller
             //return view('teacher/dashboard');
 
         } else {
-            return view('home');
+            return redirect()->route('donation.index');
         }
     }
 }

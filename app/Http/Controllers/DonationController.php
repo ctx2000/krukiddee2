@@ -15,9 +15,9 @@ class DonationController extends Controller
      */
     public function index()
     {
-        $donate = Student::where('status','=','open')->get();
+        $student = Student::where('status','=','open')->get();
         return view('home',[
-            'donate' => $donate
+            'student' => $student
         ]);
     }
 
@@ -41,7 +41,7 @@ class DonationController extends Controller
     {   //เพิ่มการบริจาค
         $donate = new Donation();
         if(auth()->user()){
-            $donate->user_id = $request->auth()->user()->id;
+            $donate->user_id = auth()->user()->id;
         }
 
         $donate->student_id = $request->student_id;

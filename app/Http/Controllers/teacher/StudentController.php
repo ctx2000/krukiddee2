@@ -53,9 +53,10 @@ class StudentController extends Controller
         $student->bankName = $request->bankName;
         $student->bankNumber = $request->bankNumber;
         $student->description = $request->description;
-        //$student->picture = $request->picture;
-        //$student->picture = 'nopic';
-        $student->user_id = $request->user_id;
+        $student->level = $request->level;
+        $student->closeDonate = $request->closeDonate;
+        $student->maxDonate = $request->maxDonate;
+        $student->user_id = auth()->user()->id;
 
         if($request->hasFile('picture')){
             //random file name

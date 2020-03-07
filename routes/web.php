@@ -28,6 +28,8 @@ Route::group(['middleware' => ['auth']], function () {
 
 });
 
+Route::resource('/home/donate', 'DonationController')->middleware('auth');
+
 //Route for admin
 Route::group(['prefix' => 'admin'], function(){
     Route::group(['middleware' => ['admin']], function(){
