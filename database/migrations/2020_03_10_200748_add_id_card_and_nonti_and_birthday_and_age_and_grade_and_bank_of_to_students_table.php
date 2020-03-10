@@ -14,7 +14,7 @@ class AddIdCardAndNontiAndBirthdayAndAgeAndGradeAndBankOfToStudentsTable extends
     public function up()
     {
         Schema::table('students', function (Blueprint $table) {
-            $table->string('id_card',13)->after('address');
+            $table->string('id_card',13)->after('address')->unique();
             $table->date('birthday')->after('address');
             $table->integer('age')->after('address');
             $table->string('grade')->after('address');

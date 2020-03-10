@@ -59,7 +59,7 @@
 
                                     <div class="form-group col-md-4">
                                         <label for="age">อายุ</label>
-                                        <input name="age" type="text" class="form-control" id="name"
+                                        <input name="age" type="number" class="form-control" id="name"
                                             aria-describedby="nameHelp">
                                     </div>
                                     <div class="form-group col-md-4">
