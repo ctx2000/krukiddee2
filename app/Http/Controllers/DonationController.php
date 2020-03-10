@@ -20,6 +20,7 @@ class DonationController extends Controller
     public function index()
     {
         $student = Student::where('status','=','open')->orderBy('level','desc')->get();
+        //return $student;
         return view('home',[
             'student' => $student
         ]);

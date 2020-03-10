@@ -43,4 +43,7 @@ class NontificationController extends Controller
         return  redirect()->route('student.index');
 
     }
+    public function badge(){
+
+    }
 }
