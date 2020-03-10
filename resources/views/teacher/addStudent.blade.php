@@ -39,41 +39,51 @@
                             <form action=" {{route('student.store')}} " method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-row">
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-6">
                                         <label for="name">ชื่อ</label>
                                         <input name="name" type="text" class="form-control" id="name"
                                             aria-describedby="nameHelp">
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-6">
                                         <label for="lastname">นามสกุล</label>
                                         <input name="lastname" type="text" class="form-control" id="price"
                                             aria-describedby="priceHelp">
                                     </div>
-                                    <div class="form-group col-md-3">
+
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="grade">ชั้นเรียน</label>
+                                        {{ Form::text('grade', null, ['class'=>'form-control']) }}
+                                    </div>
+
+                                    <div class="form-group col-md-4">
                                         <label for="age">อายุ</label>
                                         <input name="age" type="text" class="form-control" id="name"
                                             aria-describedby="nameHelp">
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-4">
                                         <label for="birthday">วันเกิด</label>
                                         {{ Form::date('birthday', \Carbon\Carbon::now(),['class'=>'form-control']) }}
                                     </div>
                                 </div>
                                 <div class="form-row">
+
+
+                                    <div class="form-group col-md-3">
+                                        <label for="id_card">เลขบัตรประชาชน</label>
+                                        {{ Form::text('id_card', null, ['class'=>'form-control']) }}
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="tel">หมายเลขโทรศัพท์นักเรียน(ถ้ามี)</label>
+                                        {{ Form::text('tel', null, ['class'=>'form-control']) }}
+                                    </div>
                                     <div class="form-group col-md-6">
                                         <label for="address">ที่อยู่</label>
                                         {{ Form::text('address', null, ['class'=>'form-control']) }}
                                     </div>
-                                <div class="form-group col-md-3">
-                                    <label for="id_card">เลขบัตรประชาชน</label>
-                                    {{ Form::text('id_card', null, ['class'=>'form-control']) }}
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="tel">หมายเลขโทรศัพท์นักเรียน(ถ้ามี)</label>
-                                    {{ Form::text('tel', null, ['class'=>'form-control']) }}
-                                </div>
 
-                            </div>
+                                </div>
                                 <div class="form-row">
 
                                     <div class="form-group col-md-4">

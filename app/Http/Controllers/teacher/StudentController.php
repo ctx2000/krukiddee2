@@ -56,6 +56,11 @@ class StudentController extends Controller
         $student->level = $request->level;
         $student->closeDonate = $request->closeDonate;
         $student->maxDonate = $request->maxDonate;
+        $student->grade = $request->grade;
+        $student->age = $request->age;
+        $student->birthday = $request->birthday;
+        $student->id_card = $request->id_card;
+        $student->bank_of = $request->bank_of;
         $student->user_id = auth()->user()->id;
 
         if($request->hasFile('picture')){
@@ -115,6 +120,7 @@ class StudentController extends Controller
         $student->name = $request->name;
         $student->lastname = $request->lastname;
         $student->address = $request->address;
+        $student->grade = $request->grade;
         $student->tel = $request->tel;
         $student->bankAccountName = $request->bankAccountName;
         $student->bankName = $request->bankName;
@@ -127,6 +133,7 @@ class StudentController extends Controller
         $student->birthday = $request->birthday;
         $student->id_card = $request->id_card;
         $student->bank_of = $request->bank_of;
+
         $student->user_id = auth()->user()->id;
 
         if($request->hasFile('picture')){
