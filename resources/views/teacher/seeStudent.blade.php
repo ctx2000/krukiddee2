@@ -10,12 +10,12 @@
                     <h1 class="m-0 text-dark">Dashboard</h1>
                 </div>
                 <!-- /.col -->
-                <div class="col-sm-6">
+                {{-- <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active">Dashboard v2</li>
                     </ol>
-                </div>
+                </div> --}}
                 <!-- /.col -->
             </div>
             <!-- /.row -->
@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="card-body">
-                            <table class="table">
+                            <table class="table table-responsive table-hover">
                                 <thead>
                                     <tr>
                                         <th scope="col">ชื่อ-นามสกุล</th>
@@ -48,8 +48,9 @@
                                         <th scope="col">ชื่อบัญชี</th>
                                         <th scope="col">ธนาคาร</th>
                                         <th scope="col">หมายเลขบัญชี</th>
-                                        <th scope="col">รายละเอียด</th>
+
                                         <th scope="col">รูป</th>
+
                                         <th scope="col">ตัวเลือก</th>
 
                                     </tr>
@@ -63,12 +64,19 @@
                                         <td> {{$s->bankAccountName}}</td>
                                         <td> {{$s->bankName}}</td>
                                         <td> {{$s->bankNumber}}</td>
-                                        <td> {{$s->description}}</td>
+
                                         <td>
                                             <img src="{{asset('storage/images/'.$s->picture)}}" width="50">
                                         </td>
+
+
+
                                         <td>
-                                        <a href="{{route('student.edit',['id'=>$s->id])}}">Edit</a> |
+                                            <a href=" {{route('nontification.create',['id'=>$s->id])}} " class="btn btn-outline-success btn-sm">เพิ่มคำขอบคุณ</a> |
+                                            <a href="{{route('student.edit',['id'=>$s->id])}}"
+                                                class="btn btn-info btn-sm">
+                                                <li class="fa fa-pencil text-white"></li>
+                                            </a> |
                                             <form action="{{route('student.destroy',['id'=>$s->id])}}" method="POST"
                                                 class="d-inline" onsubmit="return confirm('ต้องการลบข้อมูล?')">
                                                 @csrf

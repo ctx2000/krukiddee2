@@ -23,6 +23,10 @@ Route::get('/teacherRegister', function(){
 Auth::routes();
 
 
+
+Route::get('/teacher/nontification/{id}', 'teacher\NontificationController@create')->name('nontification.create')->middleware('teacher');
+Route::post('/teacher/nontification/store', 'teacher\NontificationController@store')->name('nontification.store')->middleware('teacher');
+
 //Route for normal user
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index');

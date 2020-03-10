@@ -98,7 +98,9 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        return $student;
+        return view('teacher/editStudent',[
+            'student' => $student
+        ]);
     }
 
     /**
@@ -110,7 +112,42 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        $student->name = $request->name;
+        $student->lastname = $request->lastname;
+        $student->address = $request->address;
+        $student->tel = $request->tel;
+        $student->bankAccountName = $request->bankAccountName;
+        $student->bankName = $request->bankName;
+        $student->bankNumber = $request->bankNumber;
+        $student->description = $request->description;
+        $student->level = $request->level;
+        $student->closeDonate = $request->closeDonate;
+        $student->maxDonate = $request->maxDonate;
+        $student->age = $request->age;
+        $student->birthday = $request->birthday;
+        $student->id_card = $request->id_card;
+        $student->bank_of = $request->bank_of;
+        $student->user_id = auth()->user()->id;
+
+        if($request->hasFile('picture')){
+            Storage::disk('public')->delete('images/'.$student->picture);
+            //random file name
+            //$newFileName = str_random(40);
+            $newFileName = uniqid().'.'.$request->picture->extension();
+
+            //upload file
+            $request->picture->storeAs('images',$newFileName,'public');
+            $student->picture = $newFileName;
+
+            //resize
+            // $path = Storage::disk('public')->path('images/resize/');
+            // Image::make($request->picture->getRealPath(),$newFileName)->resize(120,null,function($contraint){
+            //     $contraint->aspectRatio();
+            // })->save($path.$newFileName);
+        }
+
+        $student->save();
+        return redirect()->route('student.index');
     }
 
     /**
