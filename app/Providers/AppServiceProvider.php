@@ -32,6 +32,9 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer('*', function($view)
         {
+            if (Auth::check()){
+
+
             $userId = Auth::user()->id;
             $count = Nontification::where('user_id','=',$userId)->count();
             $nonti = Nontification::where('user_id','=',$userId)->get();
@@ -39,6 +42,7 @@ class AppServiceProvider extends ServiceProvider
                 'badge'=>$count,
                 'nonti'=>$nonti
                 ]);
+            }
     });
 
         //$count = Nontification::count()->where('user_id','=',$userId);
