@@ -30,7 +30,7 @@
 
                     <div class="row">
 
-                        <h5>news</h5>
+                        <h5>Reciept Check</h5>
                         {{-- content here --}}
 
 

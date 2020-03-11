@@ -138,8 +138,8 @@
                                 <i class="nav-icon fa fa-envelope-o"></i> จัดการนักเรียน</a>
                         </li>
                         <li class="nav-item has-treeview">
-                            <a href="{{route('teacher.news')}}" class="nav-link">
-                                <i class="nav-icon fa fa-envelope-o"></i> เพิ่มบทความ</a>
+                            <a href="{{route('teacher.checkReciept')}}" class="nav-link">
+                                <i class="nav-icon fa fa-newspaper-o"></i> ยืนยันสลิป</a>
                         </li>
 
 

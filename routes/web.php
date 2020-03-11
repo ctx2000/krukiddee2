@@ -51,7 +51,7 @@ Route::group(['prefix' => 'teacher'], function(){
 });
 Route::get('/teacher/show','teacher\TeacherController@show')->middleware('teacher')->name('teacher.show');
 
-Route::get('/teacher/news','teacher\TeacherController@news')->middleware('teacher')->name('teacher.news');
+Route::get('/teacher/news','teacher\TeacherController@checkReciept')->middleware('teacher')->name('teacher.checkReciept');
 
 Route::get('/teacher/edit','teacher\TeacherController@edit')->middleware('teacher')->name('teacher.edit');
 

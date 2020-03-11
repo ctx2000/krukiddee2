@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Storage;
 
 class RegisterController extends Controller
 {
@@ -65,6 +66,29 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if(isset($data['id_card'])){
+            $id_card = $data['id_card'];
+        }else{
+            $id_card = 'x';
+        }
+        if(isset($data['pic_id_card'])){
+            //random file name
+            //$newFileName = str_random(40);
+            $newFileName = uniqid().'.'.$data['pic_id_card']->extension();
+
+            //upload file
+            $data['pic_id_card']->storeAs('id_card',$newFileName,'public');
+
+
+            //resize
+            // $path = Storage::disk('public')->path('images/resize/');
+            // Image::make($request->picture->getRealPath(),$newFileName)->resize(120,null,function($contraint){
+            //     $contraint->aspectRatio();
+            // })->save($path.$newFileName);
+        }else {
+            $newFileName = 'x';
+        }
+
         return User::create([
             'name' => $data['name'],
             'lastname' => $data['lastname'],
@@ -72,6 +96,9 @@ class RegisterController extends Controller
             'tel' => $data['tel'],
             'schoolname' => $data['schoolname'],
             'address' => $data['address'],
+            'pic_id_card' => $newFileName,
+            'id_card' => $id_card,
+
             'password' => Hash::make($data['password']),
             'type' => $data['type'],
         ]);

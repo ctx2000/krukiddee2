@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
     <title>AdminLTE 3 | Dashboard</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,17 +31,7 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="{{route('donation.history')}}" class="nav-link">ประวัติการบริจาค</a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-
-                </li>
             </ul>
 
             <!-- SEARCH FORM -->
@@ -109,6 +100,7 @@
     </div>
     <!-- ./wrapper -->
     <script src="{{ asset('js/app.js') }}"></script>
+
 
 </body>
 
