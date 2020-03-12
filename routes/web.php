@@ -49,8 +49,24 @@ Route::group(['prefix' => 'teacher'], function(){
 
     });
 });
+//admin
+Route::get('/admin/member/all', 'admin\adminController@member')->name('admin.member')->middleware('admin');
 
+Route::get('/admin/teacher/all', 'admin\adminController@teacher')->name('admin.teacher')->middleware('admin');
 
+Route::get('/admin/student/all', 'admin\adminController@student')->name('admin.student')->middleware('admin');
+
+Route::get('/admin/addStudent', 'admin\adminController@addStudent')->name('admin.addStudent')->middleware('admin');
+
+Route::get('/admin/checkReciept', 'admin\adminController@checkReciept')->name('admin.checkReciept')->middleware('admin');
+
+Route::get('/admin/addTeacher', 'admin\adminController@addTeacher')->name('admin.addTeacher')->middleware('admin');
+
+Route::post('/admin/storeTeacher', 'admin\adminController@storeTeacher')->name('admin.storeTeacher')->middleware('admin');
+
+Route::get('/admin/acceptTeacher', 'admin\adminController@acceptTeacher')->name('admin.acceptTeacher')->middleware('admin');
+
+//teacher
 Route::get('/teacher/show','teacher\TeacherController@show')->middleware('teacher')->name('teacher.show');
 
 Route::get('/teacher/checked/{id}/check/{check}', 'teacher\TeacherController@checkedReciept')->name('teacher.checkedReciept')->middleware('teacher');
@@ -61,12 +77,12 @@ Route::get('/teacher/edit','teacher\TeacherController@edit')->middleware('teache
 
 Route::resource('/teacher/student', 'teacher\StudentController')->middleware('teacher');
 
+//member
 Route::resource('/member/index', 'member\MemberContentController')->middleware('auth');
 
 Route::resource('/member/donation', 'DonationController');
 
 Route::get('/member/history','DonationController@history')->name('donation.history')->middleware('auth');
-
 
 Route::get('/home', 'HomeController@index')->name('home');
 
