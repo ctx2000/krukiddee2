@@ -59,6 +59,7 @@ Route::get('/admin/student/all', 'admin\adminController@student')->name('admin.s
 Route::get('/admin/addStudent', 'admin\adminController@addStudent')->name('admin.addStudent')->middleware('admin');
 
 Route::get('/admin/checkReciept', 'admin\adminController@checkReciept')->name('admin.checkReciept')->middleware('admin');
+Route::get('/admin/allReciept', 'admin\adminController@allReciept')->name('admin.allReciept')->middleware('admin');
 
 Route::get('/admin/addTeacher', 'admin\adminController@addTeacher')->name('admin.addTeacher')->middleware('admin');
 

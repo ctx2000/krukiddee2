@@ -76,6 +76,12 @@ class AdminController extends Controller
          ]);
 
     }
+    public function allReciept(){
+        $donate = Donation::all();
+        return view('admin/allReciept',[
+            'donate'=>$donate
+        ]);
+    }
     public function addTeacher(){
         return view('admin/addTeacher');
     }

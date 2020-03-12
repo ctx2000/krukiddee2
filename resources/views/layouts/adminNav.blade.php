@@ -210,7 +210,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/UI/icons.html" class="nav-link">
+                                    <a href="{{route('admin.allReciept')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>การบริจาคทั้งหมด</p>
                                     </a>
