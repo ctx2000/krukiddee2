@@ -49,7 +49,11 @@ Route::group(['prefix' => 'teacher'], function(){
 
     });
 });
+
+
 Route::get('/teacher/show','teacher\TeacherController@show')->middleware('teacher')->name('teacher.show');
+
+Route::get('/teacher/checked/{id}/check/{check}', 'teacher\TeacherController@checkedReciept')->name('teacher.checkedReciept')->middleware('teacher');
 
 Route::get('/teacher/news','teacher\TeacherController@checkReciept')->middleware('teacher')->name('teacher.checkReciept');
 
