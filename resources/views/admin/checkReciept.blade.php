@@ -30,7 +30,26 @@
 
                     <div class="row">
 
-
+                        <h5>Reciept Check</h5>
+                <table class="table">
+                    <tr>
+                        <th>ชื่อนักเรียน</th>
+                        <th>จำนวนเงินบริจาค</th>
+                        <th>ใบเสร็จ</th>
+                        <th>ตัวเลือก</th>
+                    </tr>
+                    @foreach ($student as $s)
+                    <tr>
+                        <td>{{$s->name.' '.$s->lastname}}</td>
+                        <td>{{$s->price}}</td>
+                    <td><img class="" src="{{asset('storage/receipt/'.$s->picture)}}"width="50" alt=""></td>
+                    <td>
+                    <a href="{{route('teacher.checkedReciept',['id'=>$s->id,'check'=>'true'])}}">ยืนยัน</a>  |
+                    <a href="{{route('teacher.checkedReciept',['id'=>$s->id,'check'=>'false'])}}">ไม่ถูกต้อง</a>
+                    </td>
+                    </tr>
+                    @endforeach
+                </table>
                         {{-- content here --}}
 
 

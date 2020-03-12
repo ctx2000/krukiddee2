@@ -33,15 +33,30 @@ class AdminController extends Controller
         ]);
     }
     public function member(){
-        return view('admin/memberAll');
+        $user = User::where('type','=',1)->get();
+        return view('admin/memberAll',[
+            'user'=>$user
+        ]);
     }
 
     public function teacher(){
-        return view('admin/teacherAll');
+        $teacher = User::where('type','=',3)->get();
+        return view('admin/teacherAll',[
+            'teacher'=>$teacher
+        ]);
+    }
+    public function acceptTeacher(){
+        $teacher = User::where('type','=',2)->get();
+        return view('admin/acceptTeacher',[
+            'teacher'=>$teacher
+        ]);
     }
 
     public function student(){
-        return view('admin/studentAll');
+        $student = Student::all();
+        return view('admin/studentAll',[
+            'student'=>$student
+        ]);
     }
     public function addStudent(){
         $teacher = User::where('type','=',3)->get();
@@ -50,7 +65,16 @@ class AdminController extends Controller
         ]);
     }
     public function checkReciept(){
-        return view('admin/checkReciept');
+        $student = DB::table('users')->join('students','users.id','=','students.user_id')->join('donations',function ($join){
+            $join->on('donations.student_id','=','students.id')
+            ->where('donations.status','=','checking');
+        })->orderBy('donations.student_id','desc')->select('donations.*','students.name','students.lastname')->get();
+
+        //return $student;
+         return view('admin/checkReciept',[
+             'student' => $student
+         ]);
+
     }
     public function addTeacher(){
         return view('admin/addTeacher');
@@ -83,9 +107,7 @@ class AdminController extends Controller
         $teacher->save();
 
     }
-    public function acceptTeacher(){
-        return view('admin/acceptTeacher');
-    }
+
 
 
 }

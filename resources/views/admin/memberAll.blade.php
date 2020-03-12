@@ -31,7 +31,17 @@
                     <div class="row">
 
 
-                        {{-- content here --}}
+                        <table class="table">
+                            <tr>
+                               <th>ชื่อ</th>
+                            </tr>
+                            @foreach ($user as $s)
+                            <tr>
+                            <td>{{$s->name}}</td>
+                            </tr>
+
+                            @endforeach
+                        </table>
 
 
                     </div>
