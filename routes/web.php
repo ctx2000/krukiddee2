@@ -11,9 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');//รัเทอนไปโดเนชั่น
+// });
+Route::get('/','DonationController@index');
+// Route::get('/', function () {
+//     redirect()->route('donation.index');//รัเทอนไปโดเนชั่น
+// });
 Route::get('/teacherRegister', function(){
     return view('auth/teacherRegister');
 })->name('teacherRegister');
@@ -63,6 +67,8 @@ Route::get('/admin/allReciept', 'admin\adminController@allReciept')->name('admin
 
 Route::get('/admin/addTeacher', 'admin\adminController@addTeacher')->name('admin.addTeacher')->middleware('admin');
 
+Route::post('/admin/searchTeacher', 'admin\adminController@searchTeacher')->name('admin.searchTeacher')->middleware('admin');
+
 Route::post('/admin/storeTeacher', 'admin\adminController@storeTeacher')->name('admin.storeTeacher')->middleware('admin');
 
 Route::get('/admin/acceptTeacher', 'admin\adminController@acceptTeacher')->name('admin.acceptTeacher')->middleware('admin');
@@ -81,9 +87,12 @@ Route::resource('/teacher/student', 'teacher\StudentController')->middleware('te
 //member
 Route::resource('/member/index', 'member\MemberContentController')->middleware('auth');
 
-Route::resource('/member/donation', 'DonationController');
+Route::resource('/donation', 'DonationController');
 
 Route::get('/member/history','DonationController@history')->name('donation.history')->middleware('auth');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// //ralatable
+// Route::get('/admin/member/all', 'admin\adminController@member')->name('admin.member')->middleware('admin');
+// Route::get('/admin/member/ajax', 'admin\adminController@memberAjax')->name('admin.memberAjax')->middleware('admin');

@@ -64,7 +64,7 @@
 
                         </div>
 
-                        {{$teacher->links()}}
+
                     </div>
                 </div>
 

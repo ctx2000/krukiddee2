@@ -35,6 +35,7 @@
                             <table class="table">
                                 <tr>
                                     <th>ชื่อ</th>
+
                                     <th>ที่อยู่</th>
                                     <th>ตัวเลือก</th>
                                 </tr>

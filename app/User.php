@@ -25,6 +25,7 @@ class User extends Authenticatable
 
     }
 
+
     /**
      * The attributes that are mass assignable.
      *
@@ -51,10 +52,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function student(){
-        return $this->hasMany(Student::class);
+    // public function student(){
+    //     return $this->hasMany(Student::class);
+    // }
+    // public function students(){
+    //     return $this->belongsToMany(Student::class,'donations','user_id','student_id')->withPivot('price')->withPivot('picture')->withPivot('description')->withPivot('status')->withTimestamps();
+    // }
+    public static function laratablesCustomAction($user)
+    {
+
+        return view('admin/tool/memberAction', compact('user'))->render();
     }
-    public function students(){
-        return $this->belongsToMany(Student::class,'donations','user_id','student_id')->withPivot('price')->withPivot('picture')->withPivot('description')->withPivot('status')->withTimestamps();
+
+    public function laratablesRowData() {
+        return [
+            'id' => $this->id
+        ];
     }
 }

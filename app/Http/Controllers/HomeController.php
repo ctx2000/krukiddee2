@@ -34,7 +34,9 @@ class HomeController extends Controller
             //return view('teacher/dashboard');
 
         } else {
+            //return view('welcome');//รัเทินไปหน้าโดเนชั่นอินเด็ก
             return redirect()->route('donation.index');
+            //return redirect()->route('donation.index');
         }
     }
 }

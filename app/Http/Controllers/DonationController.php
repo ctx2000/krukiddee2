@@ -21,7 +21,10 @@ class DonationController extends Controller
     {
         $student = Student::where('status','=','open')->orderBy('level','desc')->get();
         //return $student;
-        return view('home',[
+        // return view('home',[//รีเทินไปเวลคัม
+        //     'student' => $student
+        // ]);
+        return view('welcome',[//รีเทินไปเวลคัม
             'student' => $student
         ]);
     }

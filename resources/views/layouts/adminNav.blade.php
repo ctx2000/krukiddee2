@@ -25,7 +25,7 @@
                     <a class="nav-link" data-widget="pushmenu" href=""><i class="fa fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ route('teacher.dashboard')}}" class="nav-link">หน้าแรก</a>
+                    <a href="{{ route('admin.dashboard')}}" class="nav-link">หน้าแรก</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="{{route('teacher.show')}}" class="nav-link">Contact</a>
@@ -248,9 +248,12 @@
             </div>
             <!-- /.sidebar -->
         </aside>
-        <div id="app">
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
             @yield('content')
-        </div>
+
         <footer class="main-footer">
             <strong>Copyright &copy; 2014-2018 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
             reserved.
@@ -266,7 +269,8 @@
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
-    <script src="{{ asset('js/app.js') }}"></script>
+
+
 
 </body>
 

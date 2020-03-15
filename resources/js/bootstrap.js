@@ -2,7 +2,9 @@
 window._ = require('lodash');
 
 window.$ = window.jQuery = require('jquery');
+
 window.Popper = require('popper.js').default;
+
 require('bootstrap');
 
 require('admin-lte/build/js/AdminLTE');

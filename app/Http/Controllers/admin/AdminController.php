@@ -9,6 +9,7 @@ use App\Donation;
 use App\Student;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Freshbitsweb\Laratables\Laratables;
 
 class AdminController extends Controller
 {
@@ -33,17 +34,35 @@ class AdminController extends Controller
         ]);
     }
     public function member(){
-        $user = User::where('type','=',1)->get();
+        $user = User::where('type','=',1)->paginate(10);
         return view('admin/memberAll',[
             'user'=>$user
         ]);
+
     }
 
     public function teacher(){
-        $teacher = User::where('type','=',3)->get();
+        $teacher = User::where('type','=',3)->paginate(5);
         return view('admin/teacherAll',[
             'teacher'=>$teacher
         ]);
+    }
+    public function searchTeacher(request $request){
+        $like = $request->search;
+        //$teacher = User::where('email','LIKE','%'.$like.'%')->get();
+        $teacher = User::where('type','=',3)
+                    ->where(function ($query)use ($like) {
+                        $query->where('name', 'LIKE', '%'.$like.'%')
+                        ->orWhere('email', 'LIKE', '%'.$like.'%')
+                        ->orWhere('lastname','LIKE', '%'.$like.'%')
+                        ->orWhere('address','LIKE', '%'.$like.'%')
+                        ->orWhere('schoolname','LIKE', '%'.$like.'%')
+                        ->orWhere('tel','LIKE', '%'.$like.'%');
+        })->get();
+        return view('admin/tool/searchTeacher',[
+            'teacher'=>$teacher
+        ]);
+        // return $like;
     }
     public function acceptTeacher(){
         $teacher = User::where('type','=',2)->get();
@@ -51,6 +70,7 @@ class AdminController extends Controller
             'teacher'=>$teacher
         ]);
     }
+
 
     public function student(){
         $student = Student::all();

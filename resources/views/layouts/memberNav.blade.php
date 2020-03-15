@@ -21,6 +21,8 @@
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand-md  navbar-white navbar-light border-bottom ">
             <!-- Left navbar links -->
+            @auth
+
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href=""><i class="fa fa-bars"></i></a>
@@ -34,10 +36,7 @@
 
             </ul>
 
-            <!-- SEARCH FORM -->
 
-
-            <!-- Right navbar links -->
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Messages Dropdown Menu -->
@@ -56,7 +55,7 @@
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell"></i>
 
-                    <span class="badge badge-warning ">{{ $badge }}</span>
+                        <span class="badge badge-warning ">{{ $badge }}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <span class="dropdown-item dropdown-header">15 Notifications</span>
@@ -76,6 +75,41 @@
                     </a>
                 </li>
             </ul>
+
+            @else
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href=""><i class="fa fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="{{route('donation.index')}}" class="nav-link">บริจาค</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="#" class="nav-link">เกี่ยวกับเรา</a>
+                </li>
+
+            </ul>
+
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Messages Dropdown Menu -->
+                <li class="nav-item d-none d-sm-inline-block">
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">เข้าสู่ระบบ</a>
+                </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">สมัครสมาชิก</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('teacherRegister') }}">สมัครครู</a>
+                    </li>
+
+            </ul>
+            @endauth
         </nav>
 
         <!-- /.navbar -->
