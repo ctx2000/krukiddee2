@@ -36,7 +36,7 @@
                         </div>
 
                         <div class="card-body">
-                            <form action=" {{route('student.store')}} " method="POST" enctype="multipart/form-data">
+                            <form action=" {{route('admin.studentStore')}} " method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
@@ -125,11 +125,18 @@
                                 </div>
                                 <div class="form-row ">
                                     <div class="form-group col-md-6">
-                                        <label for="user_id">เลือกธนาคาร</label>
-                                        {{ Form::select('user_id', $teacher->pluck('name','id') , null, ['class'=>'form-control','placeholder' => 'เลือกครู...']) }}
+                                        <label for="user_id">เลือกครู</label>
+                                        <select id="user_id" name="user_id" class="form-control" placeholder="เลือกครู...">
+                                            <option value="" disabled selected>เลือกครู...</option>
+                                            @foreach ($teacher as $t)
+                                        <option  value="{{ $t->id }}">{{ $t->name.' '.$t->lastname }}----โรงเรียน{{$t->schoolname}}</option>
+                                            @endforeach
+                                        </select>
+
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="description">รายละเอียดของนักเรียน</label>
+
                                         {{ Form::textarea('description', null, ['id'=>'exampleFormControlTextarea1','rows'=>'2','class'=>'form-control']) }}
 
                                     </div>

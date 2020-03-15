@@ -1,31 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.memberNav')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+@section('content')
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Dashboard</h1>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard v2</li>
+                    </ol>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>บริจาคให้ : {{$stu->name}} </h3>
+                        </div>
+                        <div class="card-body">
+                            {{-- คอนเท้น --}}
 
-<body>
-    <h5>asdasd</h5>
+                            <form action=" {{route('donation.store')}} " method="POST" enctype="multipart/form-data">
 
-    <form action=" {{route('donation.store')}} " method="POST" enctype="multipart/form-data">
+                                @csrf
 
-        @csrf
+                                <label for="description">จำนวนเงินบริจาค</label>
+                                {{ Form::number('price', null, ['class'=>'form-control','min'=>0]) }}
+                                <label for="description">รายละเอียดของนักเรียน</label>
+                                <textarea class="form-control" name="description" id="exampleFormControlTextarea1"
+                                    rows="3"></textarea>
+
+                                <input type="file" class="form-control" id="picture" name="picture">
+
+                                <input type="hidden" name="student_id" value="{{$stu->id}}">
+
+                                <button type="submit" class="btn btn-primary mt-3">บันทึก</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 
 
-        {{ Form::number('price', null, ['class'=>'form-control','min'=>0]) }}
-        <label for="description">รายละเอียดของนักเรียน</label>
-        <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
-        <input type="file" class="custom-file-input" id="picture" name="picture">
-        <label class="custom-file-label" for="validatedCustomFile">เลือกภาพนักเรียน</label>
-        <input type="hidden" name="student_id" value="{{$stu->id}}">
 
-        <button type="submit" class="btn btn-primary mt-3">บันทึก</button>
-    </form>
-
-</body>
-
-</html>
+@endsection

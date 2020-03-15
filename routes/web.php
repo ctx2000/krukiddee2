@@ -56,22 +56,19 @@ Route::group(['prefix' => 'teacher'], function(){
 //admin
 Route::get('/admin/member/all', 'admin\adminController@member')->name('admin.member')->middleware('admin');
 
-Route::get('/admin/teacher/all', 'admin\adminController@teacher')->name('admin.teacher')->middleware('admin');
-
 Route::get('/admin/student/all', 'admin\adminController@student')->name('admin.student')->middleware('admin');
-
 Route::get('/admin/addStudent', 'admin\adminController@addStudent')->name('admin.addStudent')->middleware('admin');
+Route::post('/admin/studentStore', 'admin\adminController@studentStore')->name('admin.studentStore')->middleware('admin');
 
 Route::get('/admin/checkReciept', 'admin\adminController@checkReciept')->name('admin.checkReciept')->middleware('admin');
 Route::get('/admin/allReciept', 'admin\adminController@allReciept')->name('admin.allReciept')->middleware('admin');
 
+Route::get('/admin/teacher/all', 'admin\adminController@teacher')->name('admin.teacher')->middleware('admin');
 Route::get('/admin/addTeacher', 'admin\adminController@addTeacher')->name('admin.addTeacher')->middleware('admin');
-
 Route::post('/admin/searchTeacher', 'admin\adminController@searchTeacher')->name('admin.searchTeacher')->middleware('admin');
-
 Route::post('/admin/storeTeacher', 'admin\adminController@storeTeacher')->name('admin.storeTeacher')->middleware('admin');
-
 Route::get('/admin/acceptTeacher', 'admin\adminController@acceptTeacher')->name('admin.acceptTeacher')->middleware('admin');
+
 
 //teacher
 Route::get('/teacher/show','teacher\TeacherController@show')->middleware('teacher')->name('teacher.show');

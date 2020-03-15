@@ -111,7 +111,7 @@
 
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right"
-                            for="pic_id_card">เลือกภาพใบกระกอบวิชาชีพ</label>
+                                for="pic_id_card">เลือกภาพใบกระกอบวิชาชีพ</label>
                             <div class="col-md-6">
                                 <div class="custom-file">
 
@@ -147,12 +147,21 @@
                                     name="password_confirmation" required>
                             </div>
                         </div>
+
+                        <div class="form-group row mb-3">
+                            <div class="col-md-6 offset-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input " id="exampleCheck1">
+                                    <label class="form-check-label" for="exampleCheck1">กรุณายอมรับ<a href="#">ข้อกำหนดและการใช้งาน</a> </label>
+                                </div>
+                            </div>
+                        </div>
                         <input id="type" type="hidden" name="type" value="3">
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    สมัครสมาชิกครู
                                 </button>
                             </div>
                         </div>

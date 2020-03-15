@@ -95,13 +95,21 @@
                             </div>
                         </div>
                         <input id="schoolname" type="hidden"  name="schoolname" value="">
+                        <div class="form-group row mb-3">
+                            <div class="col-md-6 offset-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input " id="exampleCheck1">
+                                    <label class="form-check-label" for="exampleCheck1">กรุณายอมรับ<a href="#">ข้อกำหนดและการใช้งาน</a> </label>
+                                </div>
+                            </div>
+                        </div>
                         <input id="type" type="hidden"  name="type" value="1">
 
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    สมัครสมาชิก
                                 </button>
                             </div>
                         </div>
