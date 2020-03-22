@@ -27,8 +27,90 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-
             <div class="row">
+                @foreach ($stu as $s)
+
+
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="card h-100">
+                        <a href="#"><img src="{{asset('storage/images/'.$s->picture)}}" width="324" height="150"
+                                class="card-img-top"></a>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="#">{{$s->name.' '.$s->lastname}}</a>
+                            </h4>
+                            <br>
+                            <h5>{{$s->bankAccountName}}</h5>
+                            <p class="card-text">{{$s->bankName}}</p>
+                        </div>
+                        <div class="card-footer">
+
+
+
+
+                            <div class="btn-toolbar justify-content-between" role="toolbar"
+                                aria-label="Toolbar with button groups">
+                                @if ($s->closeDonate < now())
+                                <div class="btn-group mr-1" role="group" aria-label="First group">
+
+                                    <a href=" {{route('nontification.create',['id'=>$s->id])}} "
+                                        class="btn btn-outline-danger">เพิ่มคำขอบคุณ</a>
+
+                            </div>
+
+                            @endif
+
+                            <div class="input-group">
+                                <div class="btn-group" role="group" aria-label="3 group">
+                                    <a class="btn btn-outline-info" href="{{route('student.edit',['id'=>$s->id])}}">
+
+                                        <li style="color: #0f5e52;" class="fa fa-pencil "></li>
+
+                                    </a>
+
+                                </div>
+                                <div class="btn-group" role="group" aria-label="First group">
+                                    <form action="{{route('student.destroy',['id'=>$s->id])}}" method="POST"
+                                        class="d-inline" onsubmit="return confirm('ต้องการลบข้อมูล?')">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button class="btn btn-outline-secondary ">
+
+                                            <li style=" color: #545c5b;" class="fa fa-trash "></li>
+
+                                        </button>
+
+                                    </form>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                        {{-- <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                <div class="btn-group mr-1" role="group" aria-label="First group">
+
+                                        <button type="button" class="btn btn-secondary">Left</button>
+
+
+
+                                </div>
+                                <div class="btn-group mr-4" role="group" aria-label="First group">
+
+                                        <button type="button" class="btn btn-secondary">Left</button>
+
+                                </div>
+                            </div> --}}
+                    </div>
+                </div>
+            </div>
+
+            @endforeach
+
+
+        </div>
+        {{-- <div class="row">
 
 
 
@@ -59,47 +141,47 @@
                                     @foreach ($stu as $s)
                                     <tr>
                                         <td> {{$s->name.'  '.$s->lastname}}</td>
-                                        <td> {{$s->address}}</td>
-                                        <td> {{$s->tel}}</td>
-                                        <td> {{$s->bankAccountName}}</td>
-                                        <td> {{$s->bankName}}</td>
-                                        <td> {{$s->bankNumber}}</td>
+        <td> {{$s->address}}</td>
+        <td> {{$s->tel}}</td>
+        <td> {{$s->bankAccountName}}</td>
+        <td> {{$s->bankName}}</td>
+        <td> {{$s->bankNumber}}</td>
 
-                                        <td>
-                                            <img src="{{asset('storage/images/'.$s->picture)}}" width="50">
-                                        </td>
-
-
-
-                                        <td>
-                                            <a href=" {{route('nontification.create',['id'=>$s->id])}} " class="btn btn-outline-success btn-sm">เพิ่มคำขอบคุณ</a> |
-                                            <a href="{{route('student.edit',['id'=>$s->id])}}"
-                                                class="btn btn-info btn-sm">
-                                                <li class="fa fa-pencil text-white"></li>
-                                            </a> |
-                                            <form action="{{route('student.destroy',['id'=>$s->id])}}" method="POST"
-                                                class="d-inline" onsubmit="return confirm('ต้องการลบข้อมูล?')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-danger btn-sm">
-                                                    <li class="fa fa-trash text-white"></li>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- content here --}}
+        <td>
+            <img src="{{asset('storage/images/'.$s->picture)}}" width="50">
+        </td>
 
 
-        </div>
+
+        <td>
+            <a href=" {{route('nontification.create',['id'=>$s->id])}} "
+                class="btn btn-outline-success btn-sm">เพิ่มคำขอบคุณ</a> |
+            <a href="{{route('student.edit',['id'=>$s->id])}}" class="btn btn-info btn-sm">
+                <li class="fa fa-pencil text-white"></li>
+            </a> |
+            <form action="{{route('student.destroy',['id'=>$s->id])}}" method="POST" class="d-inline"
+                onsubmit="return confirm('ต้องการลบข้อมูล?')">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-danger btn-sm">
+                    <li class="fa fa-trash text-white"></li>
+                </button>
+            </form>
+        </td>
+        </tr>
+
+        @endforeach
+        </tbody>
+        </table>
+</div> --}}
+</div>
+</div>
+</div>
+
+
+
+
+</div>
 
 
 

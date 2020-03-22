@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -35,7 +36,13 @@ class HomeController extends Controller
 
         } else {
             //return view('welcome');//รัเทินไปหน้าโดเนชั่นอินเด็ก
-            return redirect()->route('donation.index');
+            if(auth()->user()->status == 'ban'){
+                Auth::logout();
+                return  redirect()->route('donation.index')->with('alert', 'คุณถูกระงับการใช้งาน กรุณาติดต่อผู้ดูแลระบบ!');
+            }else {
+                return redirect()->route('donation.index');
+            }
+
             //return redirect()->route('donation.index');
         }
     }

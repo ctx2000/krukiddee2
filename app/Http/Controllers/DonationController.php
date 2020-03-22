@@ -9,7 +9,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StudentRequest;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Validator;
 class DonationController extends Controller
 {
     /**
@@ -47,6 +48,14 @@ class DonationController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'price'=>['required', 'numeric'],
+            'description'=>['required'],
+        ],[
+            'price.numeric' => 'กรอกตัวเลขเท่านั้น',
+            'price.required' => 'กรอกข้อมูล',
+            'description.required'=>'กรอกข้อมูล'
+        ]);
 
         $donate = new Donation();
         if(auth()->user()){
@@ -98,8 +107,10 @@ class DonationController extends Controller
      */
     public function edit($id)
     {
+        $id = Crypt::decrypt($id);
         $stu = Student::where('id','=',$id)->first();
        // return $stu;
+
         return view('donate',[
             'stu' => $stu
         ]);

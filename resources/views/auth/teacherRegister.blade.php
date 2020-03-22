@@ -116,7 +116,11 @@
                                 <div class="custom-file">
 
                                     <input type="file" class="" id="picture" name="pic_id_card">
-
+                                    @if ($errors->has('pic_id_card'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('pic_id_card') }}</strong>
+                                </span>
+                                @endif
                                 </div>
                             </div>
                         </div>

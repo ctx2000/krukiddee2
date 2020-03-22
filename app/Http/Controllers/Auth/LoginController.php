@@ -32,8 +32,8 @@ class LoginController extends Controller
         } else if(auth()->user()->isTeacher()) {
             return '/teacher/dashboard';
         }else{
-
             return '/home';
+
         }
     }
 

@@ -10,6 +10,8 @@ use App\Student;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Freshbitsweb\Laratables\Laratables;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -40,6 +42,75 @@ class AdminController extends Controller
         ]);
 
     }
+    public function editMember($id){
+        $id = Crypt::decrypt($id);
+        $user = User::where('id','=',$id)->first();
+        return view('admin/editMember',[
+            'user'=>$user
+        ]);
+    }
+    public function memberUpdate(Request $request){
+        $user=User::find($request->id);
+        if($request->password==$user->password){
+            $password = $user->password;
+        }else{
+            $password = $request->password;
+        }
+        DB::table('users')
+            ->where('id', $request->id)
+            ->update([
+                'name' => $request->name,
+                'lastname'=>$request->lastname,
+                'email'=>$request->email,
+                'tel'=>$request->tel,
+                'Address'=>$request->Address,
+                'password'=>$password
+            ]);
+            return redirect()->route('admin.member');
+    }
+    public function memberBaned(Request $request){
+        $id = Crypt::decrypt($request->id);
+        DB::table('users')
+            ->where('id', $id)
+            ->update(['status' => 'ban','cause'=>$request->cause]);
+            return back();
+    }
+    public function memberUnban($id){
+        $id = Crypt::decrypt($id);
+        DB::table('users')
+            ->where('id', $id)
+            ->update(['status' => '']);
+            return back();
+    }
+    public function memberAbout($id){
+        $ids = Crypt::decrypt($id);
+        $user = User::where('id','=',$ids)->first();
+
+
+        $donate = DB::table('users')->join('donations','donations.user_id','=','users.id')->join('students',function ($join) use($ids){
+            $join->on('donations.student_id','=','students.id')
+            ->where('users.id','=',$ids);
+        })->orderBy('students.id')->select('donations.*','students.*')->get();
+        $count = DB::table('donations')->join('students','students.id','=','donations.student_id')->where('donations.user_id','=',$ids)->distinct()->count();
+        $price = DB::table('users')->join('donations','donations.user_id','=','users.id')->join('students',function ($join) use($ids){
+            $join->on('donations.student_id','=','students.id')
+            ->where('users.id','=',$ids);
+        })->orderBy('students.id')->select('donations.price')->get();
+        $sum=0;
+        foreach ($price as $d) {
+            $sum=$d->price+$sum;
+        }
+
+        return view('admin/tool/aboutMember',[
+            'user' => $user,
+            'donate' => $donate,
+            'count' => $count,
+            'sum' => $sum
+
+            //'sum' => $sum,
+
+        ]);
+    }
 
     public function teacher(){
         $teacher = User::where('type','=',3)->paginate(5);
@@ -48,6 +119,7 @@ class AdminController extends Controller
         ]);
     }
     public function searchTeacher(request $request){
+
         $like = $request->search;
         //$teacher = User::where('email','LIKE','%'.$like.'%')->get();
         $teacher = User::where('type','=',3)
@@ -70,6 +142,92 @@ class AdminController extends Controller
             'teacher'=>$teacher
         ]);
     }
+    public function aboutTeacher($id){
+        $ids = Crypt::decrypt($id);
+        $teacher = User::where('id','=',$ids)->first();
+        $student = Student::where('user_id','=',$ids)->get();
+        $count = Student::where('user_id','=',$ids)->count();
+        $donate = DB::table('users')->join('students','users.id','=','students.user_id')->join('donations',function ($join) use($ids){
+            $join->on('donations.student_id','=','students.id')
+            ->where('users.id','=',$ids);
+        })->select('donations.price')->get();
+        $sum=0;
+        foreach ($donate as $d) {
+            $sum=$d->price+$sum;
+        }
+        return view('admin/tool/aboutTeacher',[
+            'teacher' => $teacher,
+            'student' => $student,
+            'sum' => $sum,
+            'count' => $count
+        ]);
+
+
+    }
+    public function addTeacher(){
+        return view('admin/addTeacher');
+    }
+    public function storeTeacher(request $request){
+        $request->validate([
+            'name'=>['required',  'max:255'],
+            'lastname'=>['required','max:255'],
+            'email'=>['required','E-mail','max:255'],
+            'tel'=>['required','numeric','digits:10'],
+            'id_card'=>['required','numeric','digits:13'],
+            'address'=>['required',  'max:255'],
+            'schoolName'=>['required',  'max:255'],
+            'password'=>['required',  'max:255'],
+        ],[
+            'name.required'=> 'กรุณากรอกชื่อ',
+            'lastname.required'=> 'กรุณากรอกนามสกุล',
+            'tel.digits' => 'หมายเลขโทรศัพท์ห้ามเกิน10ตัว',
+            'tel.numeric' => 'กรอกตัวเลขเท่านั้น',
+            'tel.required' => 'กรุณากรอกหมายเลขโทรศัพท์',
+            'address.required'=> 'กรุณากรอกที่อยู่โรงเรียน',
+            'schoolName.required'=> 'กรุณากรอกชื่อโรงเรียน',
+
+            'email.required' => 'กรุณากรอกอีเมล์',
+            'email.E-mail' => 'กรุณากรอกอีเมล์',
+            'id_card.required' => 'กรุณากรอกหมายเลขโทรศัพท์',
+            'id_card.digits'=>'เลขบัตรประชาชน13หลัก',
+            'id_card.numeric'=>'กรอกตัวเลขเท่านั้น',
+            'password.required'=> 'กรุณากรอกรหัสผ่าน',
+        ]);
+        $teacher = new User();
+        $teacher->name = $request->name;
+        $teacher->lastname = $request->lastname;
+        $teacher->email  = $request->email;
+        $teacher->tel = $request->tel;
+        $teacher->id_card = $request->id_card;
+        $teacher->schoolName = $request->schoolName;
+        $teacher->address = $request->address;
+        $teacher->type = '3';
+        $teacher->password = Hash::make($request->password);
+        if($request->hasFile('picture')){
+            //random file name
+            //$newFileName = str_random(40);
+            $newFileName = uniqid().'.'.$request->picture->extension();
+
+            //upload file
+            $request->picture->storeAs('id_card',$newFileName,'public');
+            $teacher->pic_id_card = $newFileName;
+
+            //resize
+            // $path = Storage::disk('public')->path('images/resize/');
+            // Image::make($request->picture->getRealPath(),$newFileName)->resize(120,null,function($contraint){
+            //     $contraint->aspectRatio();
+            // })->save($path.$newFileName);
+        }
+        $teacher->save();
+
+    }
+    public function editTeacher($id){
+        $id = Crypt::decrypt($id);
+        $user = User::where('id','=',$id)->first();
+        return view('admin.editTeacher',[
+            'user'=>$user
+        ]);
+    }
 
 
     public function student(){
@@ -84,8 +242,7 @@ class AdminController extends Controller
             'teacher'=>$teacher
         ]);
     }
-    public function studentStore(Request $request)
-    {
+    public function studentStore(Request $request){
         $student = new Student();
         $student->name = $request->name;
         $student->lastname = $request->lastname;
@@ -143,37 +300,33 @@ class AdminController extends Controller
             'donate'=>$donate
         ]);
     }
-    public function addTeacher(){
-        return view('admin/addTeacher');
+    public function studentEdit($id){
+        $student = Student::where('id',$id)->first();
+        $oldTeacher = User::where('id','=',$student->user_id)->first();
+        $teacher = User::where('type','=',3)->get();
+        return view('admin.tool.editStudent',[
+            'student'=>$student,
+            'oldTeacher'=>$oldTeacher,
+            'teacher'=>$teacher
+
+        ]);
     }
-    public function storeTeacher(request $request){
-        $teacher = new User();
-        $teacher->name = $request->name;
-        $teacher->lastname = $request->lastname;
-        $teacher->email  = $request->email;
-        $teacher->tel = $request->tel;
-        $teacher->id_card = $request->id_card;
-        $teacher->address = $request->address;
-        $teacher->type = '3';
-        $teacher->password = Hash::make($request->password);
-        if($request->hasFile('picture')){
-            //random file name
-            //$newFileName = str_random(40);
-            $newFileName = uniqid().'.'.$request->picture->extension();
-
-            //upload file
-            $request->picture->storeAs('id_card',$newFileName,'public');
-            $teacher->pic_id_card = $newFileName;
-
-            //resize
-            // $path = Storage::disk('public')->path('images/resize/');
-            // Image::make($request->picture->getRealPath(),$newFileName)->resize(120,null,function($contraint){
-            //     $contraint->aspectRatio();
-            // })->save($path.$newFileName);
-        }
-        $teacher->save();
+    public function studentUpdate(Request $request){
 
     }
+    public function studentBan(Request $request){
+        DB::table('students')
+            ->where('id', $request->id)
+            ->update(['status' => 'ban','cause'=>$request->cause]);
+            return back();
+    }
+    public function studentUnban(Request $request){
+        DB::table('students')
+            ->where('id', $request->id)
+            ->update(['status' => 'open','cause'=>'','closeDonate'=>$request->closeDonate]);
+            return back();
+    }
+
 
 
 

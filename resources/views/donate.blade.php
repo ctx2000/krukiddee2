@@ -1,7 +1,7 @@
 @extends('layouts.memberNav')
 
 @section('content')
-<div class="content-wrapper">
+<div class="">
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -31,19 +31,36 @@
                             <h3>บริจาคให้ : {{$stu->name}} </h3>
                         </div>
                         <div class="card-body">
-                            {{-- คอนเท้น --}}
 
-                            <form action=" {{route('donation.store')}} " method="POST" enctype="multipart/form-data">
+                            {{-- คอนเท้น --}}
+                            {{-- {!! Form::model($student, ['novalidate','route' => ['student.update',$student->id], 'method'
+                            => 'put', 'files' => true,'class'=> ($errors->any()) ? 'was-validated' :
+                            'needs-validation']) !!} --}}
+                            <form novalidate class="{{ ($errors->any()) ? 'was-validated' : 'needs-validation' }}"
+                                action=" {{route('donation.store')}} " method="POST" enctype="multipart/form-data">
 
                                 @csrf
+                                <div class="form-group">
+                                    <label for="description">จำนวนเงินบริจาค</label>
+                                    {{-- {{ Form::text('price', null, ['class'=>'form-control']) }} --}}
+                                    <input type="text" id="price" name="price" class="form-control{{ $errors->has('price') ? ' is-invalid' : '' }}"  required autofocus>
+                                    @if ($errors->has('price'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('price') }}</strong>
+                                    </span>
+                                @endif
+                                </div>
 
-                                <label for="description">จำนวนเงินบริจาค</label>
-                                {{ Form::number('price', null, ['class'=>'form-control','min'=>0]) }}
-                                <label for="description">รายละเอียดของนักเรียน</label>
-                                <textarea class="form-control" name="description" id="exampleFormControlTextarea1"
-                                    rows="3"></textarea>
+                                <label for="description">เพิ่มความคืดเห็น</label>
+                                <textarea class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}"  name="description" id="exampleFormControlTextarea1"
+                                    rows="3"required autofocus ></textarea>
+                                    @if ($errors->has('description'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('description') }}</strong>
+                                    </span>
+                                @endif
 
-                                <input type="file" class="form-control" id="picture" name="picture">
+                                <input type="file" class="form-control" id="picture" name="picture" required autofocus>
 
                                 <input type="hidden" name="student_id" value="{{$stu->id}}">
 

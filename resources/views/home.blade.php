@@ -1,7 +1,7 @@
 @extends('layouts.memberNav')
 
 @section('content')
-<div class="content-wrapper">
+<div class="">
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">

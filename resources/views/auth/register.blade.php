@@ -94,7 +94,7 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
-                        <input id="schoolname" type="hidden"  name="schoolname" value="">
+
                         <div class="form-group row mb-3">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
@@ -104,6 +104,10 @@
                             </div>
                         </div>
                         <input id="type" type="hidden"  name="type" value="1">
+                        <input id="schoolname" type="hidden"  name="schoolname" value="0">
+                        <input id="pic_id_card" type="hidden"  name="pic_id_card" value="0">
+                        <input id="id_card" type="hidden"  name="id_card" value="0">
+
 
 
                         <div class="form-group row mb-0">

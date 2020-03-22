@@ -52,9 +52,22 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
 
+            'lastname' => ['required', 'string', 'max:255'],
+
+            'tel' => ['required', 'numeric', 'digits:10'],
+
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
 
+            'address' => ['required', 'string', 'max:255'],
+
+            'schoolname'=> ['required', 'string', 'max:255'],
+
+            'id_card'=> ['required', 'numeric', 'digits:13'],
+
+
             'password' => ['required', 'string', 'min:6', 'confirmed'],
+
+
         ]);
     }
 
@@ -69,24 +82,20 @@ class RegisterController extends Controller
         if(isset($data['id_card'])){
             $id_card = $data['id_card'];
         }else{
-            $id_card = 'x';
+            $id_card = '0';
         }
-        if(isset($data['pic_id_card'])){
+        if(isset($data['pic_id_card'])&& $data['pic_id_card']!='0'){
             //random file name
-            //$newFileName = str_random(40);
+
             $newFileName = uniqid().'.'.$data['pic_id_card']->extension();
 
             //upload file
             $data['pic_id_card']->storeAs('id_card',$newFileName,'public');
 
 
-            //resize
-            // $path = Storage::disk('public')->path('images/resize/');
-            // Image::make($request->picture->getRealPath(),$newFileName)->resize(120,null,function($contraint){
-            //     $contraint->aspectRatio();
-            // })->save($path.$newFileName);
+
         }else {
-            $newFileName = 'x';
+            $newFileName = '0';
         }
 
         return User::create([
