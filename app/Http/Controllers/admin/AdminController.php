@@ -50,12 +50,36 @@ class AdminController extends Controller
         ]);
     }
     public function memberUpdate(Request $request){
+        $request->validate([
+            'name'=>['required',  'max:255'],
+            'lastname'=>['required','max:255'],
+            'email'=>['required','E-mail','max:255'],
+            'tel'=>['required','numeric','digits:10'],
+
+            'address'=>['required',  'max:255'],
+
+            'password'=>['required',  'max:255'],
+        ],[
+            'name.required'=> 'กรุณากรอกชื่อ',
+            'lastname.required'=> 'กรุณากรอกนามสกุล',
+            'tel.digits' => 'หมายเลขโทรศัพท์ห้ามเกิน10ตัว',
+            'tel.numeric' => 'กรอกตัวเลขเท่านั้น',
+            'tel.required' => 'กรุณากรอกหมายเลขโทรศัพท์',
+            'address.required'=> 'กรุณากรอกที่อยู่โรงเรียน',
+
+
+            'email.required' => 'กรุณากรอกอีเมล์',
+            'email.E-mail' => 'กรุณากรอกอีเมล์',
+
+            'password.required'=> 'กรุณากรอกรหัสผ่าน',
+        ]);
         $user=User::find($request->id);
         if($request->password==$user->password){
             $password = $user->password;
         }else{
             $password = $request->password;
         }
+
         DB::table('users')
             ->where('id', $request->id)
             ->update([
@@ -219,6 +243,7 @@ class AdminController extends Controller
             // })->save($path.$newFileName);
         }
         $teacher->save();
+        return redirect()->route('admin.teacher');
 
     }
     public function editTeacher($id){
@@ -227,6 +252,53 @@ class AdminController extends Controller
         return view('admin.editTeacher',[
             'user'=>$user
         ]);
+    }
+    public function updateTeacher(Request $request){
+        $request->validate([
+            'name'=>['required',  'max:255'],
+            'lastname'=>['required','max:255'],
+            'email'=>['required','E-mail','max:255'],
+            'tel'=>['required','numeric','digits:10'],
+            'id_card'=>['required','numeric','digits:13'],
+            'address'=>['required',  'max:255'],
+            'schoolName'=>['required',  'max:255'],
+            'password'=>['required',  'max:255'],
+        ],[
+            'name.required'=> 'กรุณากรอกชื่อ',
+            'lastname.required'=> 'กรุณากรอกนามสกุล',
+            'tel.digits' => 'หมายเลขโทรศัพท์ห้ามเกิน10ตัว',
+            'tel.numeric' => 'กรอกตัวเลขเท่านั้น',
+            'tel.required' => 'กรุณากรอกหมายเลขโทรศัพท์',
+            'address.required'=> 'กรุณากรอกที่อยู่โรงเรียน',
+            'schoolName.required'=> 'กรุณากรอกชื่อโรงเรียน',
+
+            'email.required' => 'กรุณากรอกอีเมล์',
+            'email.E-mail' => 'กรุณากรอกอีเมล์',
+            'id_card.required' => 'กรุณากรอกหมายเลขโทรศัพท์',
+            'id_card.digits'=>'เลขบัตรประชาชน13หลัก',
+            'id_card.numeric'=>'กรอกตัวเลขเท่านั้น',
+            'password.required'=> 'กรุณากรอกรหัสผ่าน',
+        ]);
+        $user=User::find($request->id);
+        if($request->password==$user->password){
+            $password = $user->password;
+        }else{
+            $password = $request->password;
+        }
+
+        DB::table('users')
+            ->where('id', $request->id)
+            ->update([
+                'name' => $request->name,
+                'lastname'=>$request->lastname,
+                'email'=>$request->email,
+                'tel'=>$request->tel,
+                'Address'=>$request->Address,
+                'schoolname' => $request->schoolname,
+                'id_card' => $request->id_card,
+                'password'=>$password
+            ]);
+            return redirect()->route('admin.teacher');
     }
 
 
@@ -312,7 +384,90 @@ class AdminController extends Controller
         ]);
     }
     public function studentUpdate(Request $request){
+        $request->validate([
+            'name'=>['required',  'max:255'],
+            'lastname'=>['required','max:255'],
+            'grade'=>['required','max:255'],
+            'age'=>['required','numeric','max:255'],
+            'birthday'=>['required','max:255'],
+            'tel'=>['required','numeric','digits:10'],
+            'id_card'=>['required','numeric','digits:13'],
+            'address'=>['required',  'max:255'],
+            'level'=>['required',  'max:255'],
+            'closeDonate'=>['required',  'max:255'],
+            'maxDonate'=>['required','numeric',  'max:255'],
+            'bank_of'=>['required',  'max:255'],
+            'bankName'=>['required',  'max:255'],
+            'bankAccountName'=>['required',  'max:255'],
+            'bankNumber'=>['required','numeric',  'max:255'],
+            'description'=>['required',  'max:255'],
 
+        ],[
+            'name.required'=> 'กรุณากรอกชื่อ',
+            'lastname.required'=> 'กรุณากรอกนามสกุล',
+            'tel.digits' => 'หมายเลขโทรศัพท์ห้ามเกิน10ตัว',
+            'tel.numeric' => 'กรอกตัวเลขเท่านั้น',
+            'tel.required' => 'กรุณากรอกหมายเลขโทรศัพท์',
+            'address.required'=> 'กรุณากรอกที่อยู่นักเรียน',
+            'age.required'=> 'กรุณากรอกอายุ',
+            'age.numeric' => 'กรอกตัวเลขเท่านั้น',
+            'birthday.required' => 'กรุณากรอกวันเกิด',
+            'closeDonate.required' => 'กรุณากรอกข้อมูล',
+            'maxDonate.required' => 'กรุณากรอกข้อมูล',
+            'maxDonate.numeric' => 'กรอกตัวเลขเท่านั้น',
+            'bank_of.required' => 'กรุณากรอกข้อมูล',
+            'bankName.required' => 'กรุณากรอกข้อมูล',
+            'bankAccountName.required' => 'กรุณากรอกข้อมูล',
+            'bankNumber.required' => 'กรุณากรอกข้อมูล',
+            'bankNumber.numeric' => 'กรอกตัวเลขเท่านั้น',
+            'description.required' => 'กรุณากรอกข้อมูล',
+            'id_card.required' => 'กรุณากรอกหมายเลขโทรศัพท์',
+            'id_card.digits'=>'เลขบัตรประชาชน13หลัก',
+            'id_card.numeric'=>'กรอกตัวเลขเท่านั้น',
+
+        ]);
+        if($request->hasFile('picture')){
+            //random file name
+            //$newFileName = str_random(40);
+            $newFileName = uniqid().'.'.$request->picture->extension();
+
+            //upload file
+            $request->picture->storeAs('id_card',$newFileName,'public');
+            $teacher->pic_id_card = $newFileName;
+
+            //resize
+            // $path = Storage::disk('public')->path('images/resize/');
+            // Image::make($request->picture->getRealPath(),$newFileName)->resize(120,null,function($contraint){
+            //     $contraint->aspectRatio();
+            // })->save($path.$newFileName);
+        }else{
+            $x  = Student::where('id','=',$request->id)->first();
+            $newFileName = $x->picture;
+        }
+        DB::table('students')
+            ->where('id', $request->id)
+            ->update([
+                'name' => $request->name,
+                'lastname' => $request->lastname,
+                'grade' => $request->grade,
+                'age' => $request->age,
+                'birthday' => $request->birthday,
+                'id_card' => $request->id_card,
+                'tel' => $request->tel,
+                'address' => $request->address,
+                'level' => $request->level,
+                'closeDonate' => $request->closeDonate,
+                'maxDonate' => $request->maxDonate,
+                'bank_of' => $request->bank_of,
+                'bankName' => $request->bankName,
+                'bankAccountName' => $request->bankAccountName,
+                'bankNumber' => $request->bankNumber,
+                'user_id' => $request->user_id,
+                'description' => $request->description,
+                'picture' => $newFileName
+
+                ]);
+                return redirect()->route('admin.student');
     }
     public function studentBan(Request $request){
         DB::table('students')

@@ -70,12 +70,44 @@
                                 <div class="invalid-feedback">{{ $errors->first('tel') }}</div>
                                 @endif
                             </div>
-                            <div class="form-group">
-                                <label for="Address">ที่อยู่</label>
-                                {{ Form::text('Address', null,['class'=>'form-control ','required']) }}
+
+
+
+                                <div class="form-group ">
+                                    <label for="id_card">เลขบัตรประชาชน</label>
+                                    {{ Form::text('id_card', null, ['class'=>'form-control','required']) }}
+                                    @if ($errors->has('id_card'))
+                                    <div class="invalid-feedback">{{ $errors->first('id_card') }}</div>
+                                    @endif
+                                </div>
+
+                                <div class="form-group ">
+                                    <label for="schoolName">ชื่อโรงเรียน</label>
+                                    {{ Form::text('schoolname', null, ['class'=>'form-control','required']) }}
+                                    @if ($errors->has('schoolname'))
+                                    <div class="invalid-feedback">{{ $errors->first('schoolname') }}</div>
+                                    @endif
+                                </div>
+
+
+
+                            <div class="form-group ">
+                                <label for="Address">ที่อยู่โรงเรียน</label>
+                                {{ Form::text('Address', null, ['class'=>'form-control','required']) }}
                                 @if ($errors->has('Address'))
                                 <div class="invalid-feedback">{{ $errors->first('Address') }}</div>
                                 @endif
+                            </div>
+
+                            <div class="form-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="picture" name="picture" required>
+                                    @if ($errors->has('picture'))
+                                    <div class="invalid-feedback">{{ $errors->first('picture') }}</div>
+                                    @endif
+                                    <label class="custom-file-label"
+                                        for="validatedCustomFile">เลือกภาพใบกระกอบวิชาชีพ</label>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="password">รหัสผ่าน</label>

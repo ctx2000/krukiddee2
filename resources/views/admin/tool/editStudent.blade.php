@@ -43,27 +43,42 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="name">ชื่อ</label>
-                                    {{ Form::text('name', null, ['class'=>'form-control']) }}
+                                    {{ Form::text('name', null, ['class'=>'form-control','required']) }}
+                                    @if ($errors->has('name'))
+                                    <div class="invalid-feedback">{{ $errors->first('name') }}</div>
+                                    @endif
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="lastname">นามสกุล</label>
-                                    {{ Form::text('lastname', null, ['class'=>'form-control']) }}
+                                    {{ Form::text('lastname', null, ['class'=>'form-control','required']) }}
+                                    @if ($errors->has('lastname'))
+                                    <div class="invalid-feedback">{{ $errors->first('lastname') }}</div>
+                                    @endif
                                 </div>
 
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label for="grade">ชั้นเรียน</label>
-                                    {{ Form::text('grade', null, ['class'=>'form-control']) }}
+                                    {{ Form::text('grade', null, ['class'=>'form-control','required']) }}
+                                    @if ($errors->has('grade'))
+                                    <div class="invalid-feedback">{{ $errors->first('grade') }}</div>
+                                    @endif
                                 </div>
 
                                 <div class="form-group col-md-4">
                                     <label for="age">อายุ</label>
-                                    {{ Form::text('age', null, ['class'=>'form-control']) }}
+                                    {{ Form::text('age', null, ['class'=>'form-control','required']) }}
+                                    @if ($errors->has('age'))
+                                    <div class="invalid-feedback">{{ $errors->first('age') }}</div>
+                                    @endif
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="birthday">วันเกิด</label>
-                                    {{ Form::date('birthday', null,['class'=>'form-control']) }}
+                                    {{ Form::date('birthday', null,['class'=>'form-control','required']) }}
+                                    @if ($errors->has('birthday'))
+                                    <div class="invalid-feedback">{{ $errors->first('birthday') }}</div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-row">
@@ -71,15 +86,24 @@
 
                                 <div class="form-group col-md-3">
                                     <label for="id_card">เลขบัตรประชาชน</label>
-                                    {{ Form::text('id_card', null, ['class'=>'form-control']) }}
+                                    {{ Form::text('id_card', null, ['class'=>'form-control','required']) }}
+                                    @if ($errors->has('id_card'))
+                                    <div class="invalid-feedback">{{ $errors->first('id_card') }}</div>
+                                    @endif
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="tel">หมายเลขโทรศัพท์นักเรียน(ถ้ามี)</label>
-                                    {{ Form::text('tel', null, ['class'=>'form-control']) }}
+                                    {{ Form::text('tel', null, ['class'=>'form-control','required']) }}
+                                    @if ($errors->has('tel'))
+                                    <div class="invalid-feedback">{{ $errors->first('tel') }}</div>
+                                    @endif
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="address">ที่อยู่</label>
-                                    {{ Form::text('address', null, ['class'=>'form-control']) }}
+                                    {{ Form::text('address', null, ['class'=>'form-control','required']) }}
+                                    @if ($errors->has('address'))
+                                    <div class="invalid-feedback">{{ $errors->first('address') }}</div>
+                                    @endif
                                 </div>
 
                             </div>
@@ -87,21 +111,33 @@
 
                                 <div class="form-group col-md-4">
                                     <label for="tel">ระดับความเร่งด่วน</label>
-                                    {{ Form::select('level',['1'=>'ไม่เร่งด่วน','2'=>'เร่งด่วนเล็กน้อย','3'=>'เร่งด่วน','4'=>'เร่งด่วนมาก'], null, ['class'=>'form-control','placeholder' => 'เลือกระดับความเร่งด่วนในการรับบริจาค..']) }}
+                                    {{ Form::select('level',['1'=>'ไม่เร่งด่วน','2'=>'เร่งด่วนเล็กน้อย','3'=>'เร่งด่วน','4'=>'เร่งด่วนมาก'], null, ['class'=>'form-control','placeholder' => 'เลือกระดับความเร่งด่วนในการรับบริจาค..','required']) }}
+                                    @if ($errors->has('level'))
+                                    <div class="invalid-feedback">{{ $errors->first('level') }}</div>
+                                    @endif
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label for="tel">วันที่ปิดรับบริจาค</label>
-                                    {{ Form::date('closeDonate', \Carbon\Carbon::now(),['class'=>'form-control']) }}
+                                    <label for="closeDonate">วันที่ปิดรับบริจาค</label>
+                                    {{ Form::date('closeDonate', \Carbon\Carbon::now(),['class'=>'form-control','required']) }}
+                                    @if ($errors->has('closeDonate'))
+                                    <div class="invalid-feedback">{{ $errors->first('closeDonate') }}</div>
+                                    @endif
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label for="tel">จำนวนเงินสูงสุด</label>
-                                    {{ Form::number('maxDonate', null, ['class'=>'form-control','min'=>0]) }}
+                                    <label for="maxDonate">จำนวนเงินสูงสุด</label>
+                                    {{ Form::number('maxDonate', null, ['class'=>'form-control','min'=>0,'required']) }}
+                                    @if ($errors->has('maxDonate'))
+                                    <div class="invalid-feedback">{{ $errors->first('maxDonate') }}</div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-3">
                                     <label for="bank_of">บัญชีของ : </label>
-                                    {{ Form::text('bank_of', null, ['class'=>'form-control']) }}
+                                    {{ Form::text('bank_of', null, ['class'=>'form-control','required']) }}
+                                    @if ($errors->has('bank_of'))
+                                    <div class="invalid-feedback">{{ $errors->first('bank_of') }}</div>
+                                    @endif
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="bankName">เลือกธนาคาร</label>
@@ -110,16 +146,25 @@
                                         , 'ธนาคารเพื่อการเกษตรและสหกรณ์' => 'ธนาคารเพื่อการเกษตรและสหกรณ์', 'ธนาคารทหารไทย' => 'ธนาคารทหารไทย',
                                          'ธนาคารเกียรตินาคิน' => 'ธนาคารเกียรตินาคิน', 'ธนาคารซีไอเอ็มบีไทย' => 'ธนาคารซีไอเอ็มบีไทย', 'ธนาคารธนชาต' => 'ธนาคารธนชาต',
                                           'ธนาคารออมสิน' => 'ธนาคารออมสิน', '	ธนาคารอาคารสงเคราะห์' => '	ธนาคารอาคารสงเคราะห์', 'ธนาคารอิสลามแห่งประเทศไทย' => 'ธนาคารอิสลามแห่งประเทศไทย'
-                                    ], null, ['class'=>'form-control','placeholder' => 'เลือกธนาคาร...']) }}
+                                    ], null, ['class'=>'form-control','placeholder' => 'เลือกธนาคาร...','required']) }}
+                                    @if ($errors->has('bankName'))
+                                    <div class="invalid-feedback">{{ $errors->first('bankName') }}</div>
+                                    @endif
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="bankAccountName">ชื่อบัญชีธนาคาร</label>
-                                    {{ Form::text('bankAccountName', null, ['class'=>'form-control']) }}
+                                    {{ Form::text('bankAccountName', null, ['class'=>'form-control','required']) }}
+                                    @if ($errors->has('bankAccountName'))
+                                    <div class="invalid-feedback">{{ $errors->first('bankAccountName') }}</div>
+                                    @endif
                                 </div>
 
                                 <div class="form-group col-md-3">
                                     <label for="bankNumber">เลขที่บัญชี</label>
-                                    {{ Form::text('bankNumber', null, ['class'=>'form-control']) }}
+                                    {{ Form::text('bankNumber', null, ['class'=>'form-control','required']) }}
+                                    @if ($errors->has('bankNumber'))
+                                    <div class="invalid-feedback">{{ $errors->first('bankNumber') }}</div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-row ">
@@ -141,7 +186,10 @@
                                 <div class="form-group col-md-6">
                                     <label for="description">รายละเอียดของนักเรียน</label>
 
-                                    {{ Form::textarea('description', null, ['id'=>'exampleFormControlTextarea1','rows'=>'2','class'=>'form-control']) }}
+                                    {{ Form::textarea('description', null, ['id'=>'exampleFormControlTextarea1','rows'=>'2','class'=>'form-control','required']) }}
+                                    @if ($errors->has('description'))
+                                    <div class="invalid-feedback">{{ $errors->first('description') }}</div>
+                                    @endif
 
                                 </div>
                             </div>
@@ -151,6 +199,7 @@
                                     <label class="custom-file-label" for="validatedCustomFile">เลือกภาพนักเรียน</label>
                                 </div>
                             </div>
+                        <input type="hidden" name="id" value="{{$student->id}}">
 
                             <button type="submit" class="btn btn-primary">ยืนยันการแก้ไขข้อมูล</button>
                             {!! Form::close() !!}
