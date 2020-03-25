@@ -93,6 +93,7 @@
 
                             </div>
                         </div>
+                        <input id="type" type="hidden" name="type" value="3">
                         <div class="col-lg-12 col-md-12 col-12">
                             <button type="submit" class="wpo-accountBtn">สมัครสมาชิกครู</button>
                         </div>

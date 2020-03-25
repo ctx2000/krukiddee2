@@ -52,6 +52,10 @@
                                     <button class="btn btn-default reveal2" type="button"><i class="glyphicon glyphicon-eye-open"></i></button>
                                 </span>
                             </div>
+                            <input id="type" type="hidden"  name="type" value="1">
+                        <input id="schoolname" type="hidden"  name="schoolname" value="0">
+                        <input id="pic_id_card" type="hidden"  name="pic_id_card" value="0">
+                        <input id="id_card" type="hidden"  name="id_card" value="0">
                             <div class="col-lg-12 col-md-12 col-12">
                                 <button type="submit" class="wpo-accountBtn">  สมัครสมาชิก</button>
                             </div>
