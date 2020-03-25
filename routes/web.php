@@ -101,8 +101,9 @@ Route::resource('/member/index', 'member\MemberContentController')->middleware('
 
 Route::resource('/donation', 'DonationController');
 
-Route::get('/member/history','DonationController@history')->name('donation.history')->middleware('auth');
-
+Route::get('/history','DonationController@history')->name('donation.history')->middleware('auth');
+Route::get('/cause/{id}','DonationController@cause')->name('donation.cause');
+Route::get('/donate/level/{level}','DonationController@donateLevel')->name('donation.donateLevel');
 Route::get('/home', 'HomeController@index')->name('home');
 
 // //ralatable

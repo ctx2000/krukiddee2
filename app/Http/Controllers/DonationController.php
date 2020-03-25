@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Student;
 use App\Donation;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -20,13 +21,23 @@ class DonationController extends Controller
      */
     public function index()
     {
-        $student = Student::where('status','=','open')->orderBy('level','desc')->get();
+        $sumDo = Donation::count();
+        $sumTea = User::where('type','3')->count();
+        $sumUser = User::where('type','1')->count();
+        $sumStu = Student::count();
+        $max = Student::where([['level','=',4],['status','=','open']])->take(6)->get();
+        $student = Student::where([['status','=','open'],['level','!=',4]])->orderBy('level','desc')->get();
         //return $student;
         // return view('home',[//รีเทินไปเวลคัม
         //     'student' => $student
         // ]);
         return view('welcome',[//รีเทินไปเวลคัม
-            'student' => $student
+            'student' => $student,
+            'max' => $max,
+            'sumDo'=>$sumDo,
+            'sumTea'=>$sumTea,
+            'sumUser'=>$sumUser,
+            'sumStu'=>$sumStu
         ]);
     }
 
@@ -50,11 +61,11 @@ class DonationController extends Controller
     {
         $request->validate([
             'price'=>['required', 'numeric'],
-            'description'=>['required'],
+
         ],[
             'price.numeric' => 'กรอกตัวเลขเท่านั้น',
             'price.required' => 'กรอกข้อมูล',
-            'description.required'=>'กรอกข้อมูล'
+
         ]);
 
         $donate = new Donation();
@@ -84,7 +95,12 @@ class DonationController extends Controller
         }
 
         $donate->save();
-        return redirect()->route('donation.index');
+        $old = Student::where('id',$request->student_id)->select('totalDonate')->first();
+        $sum = $old->totalDonate + $donate->price;
+        $total = DB::table('students')->where('id', $request->student_id)->update([
+            'totalDonate' =>$sum
+        ]);
+        return back();
 
     }
 
@@ -150,11 +166,22 @@ class DonationController extends Controller
         // $student = DB::table('students')->join('donations','students.id','=','donations.student_id')
         // ->select('students.*')->get();
 
-        //return $stu;
+        // $sumStu = DB::table('students')->join('donations',function ($join){
+        //     $join->on('students.id','=','donations.student_id')
+        //     ->where('donations.user_id','=',auth()->user()->id);
+        // })->select('students.*')->distinct()->count();
+        $sum=0;
+            foreach($stu as $s){
+                $sum = $sum+1;
+            }
+        $sumDo = Donation::where('user_id',auth()->user()->id)->count();
+        // return $sum;
 
         return view('history',[
             'donation' => $donation,
-            'stu' => $stu
+            'stu' => $stu,
+            'sumStu'=>$sum,
+            'sumDo'=>$sumDo
         ]);
 
         //$donation = Donation::where('user_id','=',auth()->user()->id)->get();
@@ -163,5 +190,22 @@ class DonationController extends Controller
         //$student = Student::where('id','=',);
 
         //2foreatch น่าจะได้
+    }
+    public function cause($id){
+        $id = Crypt::decrypt($id);
+        $max = Student::where([['level','=',4],['status','=','open']])->take(6)->get();
+        $student = Student::where('id',$id)->first();
+        $sum = Donation::where('student_id',$id)->count();
+        return view('cause',[
+            's'=>$student,
+            'sum'=>$sum,
+            'max'=>$max
+        ]);
+    }
+    public function donateLevel($level){
+        $donate = Student::where('level',$level)->get();
+        return view('donateLevel',[
+            'donate' => $donate
+        ]);
     }
 }

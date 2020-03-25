@@ -51,7 +51,7 @@
                                 @endif
                                 </div>
 
-                                <label for="description">เพิ่มความคืดเห็น</label>
+                                <label for="description">เพิ่มความคิดเห็น</label>
                                 <textarea class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}"  name="description" id="exampleFormControlTextarea1"
                                     rows="3"required autofocus ></textarea>
                                     @if ($errors->has('description'))

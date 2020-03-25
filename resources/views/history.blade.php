@@ -1,20 +1,20 @@
 @extends('layouts.memberNav')
 
 @section('content')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js" ></script>
 <div class="">
+
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Dashboard</h1>
+                    <h1 class="m-0 text-dark">ประวัติการบริจาค</h1>
+                    <h5>บริจาคไปแล้วทั้งหมด : {{$sumDo}}ครั้ง </h5>
+                    <h5>บริจาคไปแล้ว : {{$sumStu}}คน </h5>
                 </div>
                 <!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v2</li>
-                    </ol>
-                </div>
+
                 <!-- /.col -->
             </div>
             <!-- /.row -->
@@ -28,22 +28,34 @@
                 <div class="col-md-10">
                     <div class="card">
                         <div class="card-header">
-                            <h3>หัวข้อ </h3>
+                            <h3>ประวัติการบริจาค</h3>
                         </div>
                         <div class="card-body">
                             {{-- คอนเท้น --}}
                             @foreach ($stu as $s)
-                            {{$s->name.''.$s->lastname}}
-                            <table class="table">
+                            ชื่อนักเรียน : {{$s->name.''.$s->lastname}}
+                            <table class="table table-striped">
+                                <thead class="thead-light">
                                 <tr>
-                                    <th>ราคา</th>
+
+                                    <th>จำนวนเงินที่บริจาค</th>
+                                    <th>ความคิดเห็น</th>
+                                    <th>รูป</th>
+                                    <th>สถานะ</th>
                                 </tr>
+                            </thead>
                                 @foreach ($donation as $d)
                                 @if ($s->id == $d->student_id )
 
 
                                 <tr>
                                     <td>{{$d->price}}</td>
+                                    <td>{{$d->description}}</td>
+                                    <td><div class="bigGallPic" id="bigGallDiv" onclick="this.style.display='none'"></div>
+                                        <a href="{{asset('storage/receipt/'.$d->picture)}}" data-toggle="lightbox" data-title="" data-footer="">
+                                            <img class="img-fluid" src="{{asset('storage/receipt/'.$d->picture)}}" width="50" height="50" alt="">
+                                        </a></td>
+                                    <td>{{$d->status}}</td>
                                 </tr>
                                 @endif
                                 @endforeach
@@ -58,6 +70,11 @@
     </section>
 </div>
 
-
+<script>
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox();
+            });
+</script>
 
 @endsection
