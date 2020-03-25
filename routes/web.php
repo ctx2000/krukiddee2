@@ -68,6 +68,8 @@ Route::get('/admin/student/edit/{id}', 'admin\adminController@studentEdit')->nam
 Route::post('/admin/student/update', 'admin\adminController@studentUpdate')->name('admin.studentUpdate')->middleware('admin');
 Route::post('/admin/student/ban', 'admin\adminController@studentBan')->name('admin.studentBan')->middleware('admin');
 Route::post('/admin/student/unBan', 'admin\adminController@studentUnban')->name('admin.studentUnban')->middleware('admin');
+Route::get('/admin/student/about/{id}', 'admin\adminController@aboutStudent')->name('admin.aboutStudent')->middleware('admin');
+
 
 
 
@@ -88,7 +90,7 @@ Route::get('/admin/teacher/edit/{id}', 'admin\adminController@editTeacher')->nam
 //teacher
 Route::get('/teacher/show','teacher\TeacherController@show')->middleware('teacher')->name('teacher.show');
 
-Route::get('/teacher/checked/{id}/check/{check}', 'teacher\TeacherController@checkedReciept')->name('teacher.checkedReciept')->middleware('teacher');
+Route::get('/teacher/checked/{id}/check/{check}', 'teacher\TeacherController@checkedReciept')->name('teacher.checkedReciept');
 
 Route::get('/teacher/news','teacher\TeacherController@checkReciept')->middleware('teacher')->name('teacher.checkReciept');
 

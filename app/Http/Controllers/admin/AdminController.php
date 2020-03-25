@@ -481,7 +481,23 @@ class AdminController extends Controller
             ->update(['status' => 'open','cause'=>'','closeDonate'=>$request->closeDonate]);
             return back();
     }
-
+    public function aboutStudent($id){
+        $student = Student::find($id);
+        $teacher = User::where('id',$student->user_id)->first();
+        $donate = Donation::where('student_id',$id)->get();
+        $count = Donation::where('student_id',$id)->count();
+        $sum=0;
+        foreach ($donate as $d) {
+            $sum=$sum+$d->price;
+        }
+        return view('admin/tool/aboutStudent',[
+            'student'=>$student,
+            'teacher'=>$teacher,
+            'donate'=>$donate,
+            'count'=>$count,
+            'sum'=>$sum
+        ]);
+    }
 
 
 

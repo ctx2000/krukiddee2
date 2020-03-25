@@ -1,5 +1,7 @@
 @extends('layouts/adminNav')
 @section('content')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -33,12 +35,33 @@
 
                 <table class="table">
                     <tr>
-                        <th>ชื่อ</th>
+                        <th>ชื่อ นามสกุล</th>
+                        <th>ที่อยู่</th>
+                        <th>ชั้นเรียน</th>
+                        <th>อายุ</th>
+
+                        <th>โทรศัพท์</th>
+                        <th>รูป</th>
                         <th>ตัวเลือก</th>
                     </tr>
                     @foreach ($student as $s)
                     <tr>
-                        <td>{{$s->name}}</td>
+                        <td>{{$s->name.' '.$s->lastname}}</td>
+                        <td>{{$s->address}}</td>
+                        <td>{{$s->grade}}</td>
+                        <td>{{$s->age}}</td>
+
+                        <td>{{$s->tel}}</td>
+                        <td>
+                            <div class="bigGallPic" id="bigGallDiv" onclick="this.style.display='none'">
+                            </div>
+                            <a href="{{asset('storage/receipt/'.$s->picture)}}" data-toggle="lightbox"
+                                data-title="" data-footer="">
+                                <img class="img-fluid" src="{{asset('storage/images/'.$s->picture)}}"
+                                    width="50" height="50" alt="">
+                            </a>
+                        </td>
+
                         <td>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-secondary btn-sm"><i
@@ -67,7 +90,7 @@
                                     <a class="dropdown-item" href="#">
                                         <li class="	fas fa-trash-alt"></li> ลบผู้ใช้
                                     </a>
-                                    <a class="dropdown-item" href="">
+                                <a class="dropdown-item" href="{{route('admin.aboutStudent',['id'=>$s->id])}}">
                                         <li class="	fas fa-list-ul"></li> ดูข้อมูล
                                     </a>
 
@@ -156,6 +179,12 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox();
+            });
+</script>
 <script>
     $('.cause').click(function(){
 // get data from edit btn
