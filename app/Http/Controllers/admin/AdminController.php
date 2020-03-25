@@ -56,16 +56,16 @@ class AdminController extends Controller
             'email'=>['required','E-mail','max:255'],
             'tel'=>['required','numeric','digits:10'],
 
-            'address'=>['required',  'max:255'],
+            'Address'=>['required',  'max:255'],
 
             'password'=>['required',  'max:255'],
         ],[
             'name.required'=> 'กรุณากรอกชื่อ',
             'lastname.required'=> 'กรุณากรอกนามสกุล',
-            'tel.digits' => 'หมายเลขโทรศัพท์ห้ามเกิน10ตัว',
+            'tel.digits' => 'กรอกหมายเลขโทรศัพท์10ตัว',
             'tel.numeric' => 'กรอกตัวเลขเท่านั้น',
             'tel.required' => 'กรุณากรอกหมายเลขโทรศัพท์',
-            'address.required'=> 'กรุณากรอกที่อยู่โรงเรียน',
+            'Address.required'=> 'กรุณากรอกที่อยู่โรงเรียน',
 
 
             'email.required' => 'กรุณากรอกอีเมล์',
@@ -395,11 +395,11 @@ class AdminController extends Controller
             'address'=>['required',  'max:255'],
             'level'=>['required',  'max:255'],
             'closeDonate'=>['required',  'max:255'],
-            'maxDonate'=>['required','numeric',  'max:255'],
+            'maxDonate'=>['required','numeric'],
             'bank_of'=>['required',  'max:255'],
             'bankName'=>['required',  'max:255'],
             'bankAccountName'=>['required',  'max:255'],
-            'bankNumber'=>['required','numeric',  'max:255'],
+            'bankNumber'=>['required','numeric'],
             'description'=>['required',  'max:255'],
 
         ],[

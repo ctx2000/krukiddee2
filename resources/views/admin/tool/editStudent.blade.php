@@ -14,6 +14,7 @@
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active">Dashboard v2</li>
+
                     </ol>
                 </div>
                 <!-- /.col -->
@@ -33,6 +34,15 @@
                     <div class="card">
                         <div class="card-header">
                             <h3>เพิ่มข้อมูลนักเรียน </h3>
+                            @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
                         </div>
 
                         <div class="card-body">
@@ -171,43 +181,47 @@
                                 {{-- <div class="form-group col-md-3">
                                     <label for="description">ครูปัจจุบัน</label>
 
-                                <input type="text" value="{{$oldTeacher->name.' '.$oldTeacher->lastname}}" class="form-control" readonly>
+                                <input type="text" value="{{$oldTeacher->name.' '.$oldTeacher->lastname}}"
+                                class="form-control" readonly>
 
-                                </div> --}}
-                                <div class="form-group col-md-6">
-                                    <label for="user_id">เลือกครู</label>
-                                    <select id="user_id" name="user_id" class="form-control" placeholder="เลือกครู...">
-                                    <option value="{{$oldTeacher->id}}"  selected>{{$oldTeacher->name.' '.$oldTeacher->lastname}} โรงเรียน{{$oldTeacher->schoolname}}</option>
-                                        @foreach ($teacher as $t)
-                                    <option  value="{{ $t->id }}">{{ $t->name.' '.$t->lastname }}----โรงเรียน{{$t->schoolname}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="description">รายละเอียดของนักเรียน</label>
-
-                                    {{ Form::textarea('description', null, ['id'=>'exampleFormControlTextarea1','rows'=>'2','class'=>'form-control','required']) }}
-                                    @if ($errors->has('description'))
-                                    <div class="invalid-feedback">{{ $errors->first('description') }}</div>
-                                    @endif
-
-                                </div>
+                            </div> --}}
+                            <div class="form-group col-md-6">
+                                <label for="user_id">เลือกครู</label>
+                                <select id="user_id" name="user_id" class="form-control" placeholder="เลือกครู...">
+                                    <option value="{{$oldTeacher->id}}" selected>
+                                        {{$oldTeacher->name.' '.$oldTeacher->lastname}}
+                                        โรงเรียน{{$oldTeacher->schoolname}}</option>
+                                    @foreach ($teacher as $t)
+                                    <option value="{{ $t->id }}">
+                                        {{ $t->name.' '.$t->lastname }}----โรงเรียน{{$t->schoolname}}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <div class="form-group">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="picture" name="picture">
-                                    <label class="custom-file-label" for="validatedCustomFile">เลือกภาพนักเรียน</label>
-                                </div>
+                            <div class="form-group col-md-6">
+                                <label for="description">รายละเอียดของนักเรียน</label>
+
+                                {{ Form::textarea('description', null, ['id'=>'exampleFormControlTextarea1','rows'=>'2','class'=>'form-control','required']) }}
+                                @if ($errors->has('description'))
+                                <div class="invalid-feedback">{{ $errors->first('description') }}</div>
+                                @endif
+
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="picture" name="picture">
+                                <label class="custom-file-label" for="validatedCustomFile">เลือกภาพนักเรียน</label>
+                            </div>
+                        </div>
                         <input type="hidden" name="id" value="{{$student->id}}">
 
-                            <button type="submit" class="btn btn-primary">ยืนยันการแก้ไขข้อมูล</button>
-                            {!! Form::close() !!}
-                        </div>
+                        <button type="submit" class="btn btn-primary">ยืนยันการแก้ไขข้อมูล</button>
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>
-            <!-- /.container-fluid -->
+        </div>
+        <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
 </div>

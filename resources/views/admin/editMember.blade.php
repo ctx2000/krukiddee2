@@ -34,7 +34,16 @@
                 <div class="col-md-5">
                     <div class="card">
                         <div class="card-header">
-                        <h3 class="card-title">แก้ไขข้อมูลสมาชิก : {{$user->name}}</h3>
+                            <h3 class="card-title">แก้ไขข้อมูลสมาชิก : {{$user->name}}</h3>
+                            @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
                         </div>
 
                         <div class="card-body">
@@ -84,7 +93,7 @@
                                 <div class="invalid-feedback">{{ $errors->first('password') }}</div>
                                 @endif
                             </div>
-                        <input type="hidden" value="{{$user->id}}" name="id">
+                            <input type="hidden" value="{{$user->id}}" name="id">
                             <button type="submit" class="btn btn-primary">แก้ไขข้อมูลสมาชิก</button>
                             {!! Form::close() !!}
                         </div>

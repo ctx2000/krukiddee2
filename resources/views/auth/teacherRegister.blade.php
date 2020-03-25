@@ -5,12 +5,15 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-lg-9">
-            <form class="wpo-accountWrapper" action="#">
+
+            <form novalidate class="wpo-accountWrapper" method="POST" action="{{ route('register') }}"
+                enctype="multipart/form-data">
+                @csrf
 
                 <div class="wpo-accountForm form-style">
                     <div class="fromTitle">
                         <h2>สมัครสมาชิก</h2>
-                        <p>หากคุณมีสถานะเป็นครูและต้องการร่วมบริจาค</p>
+                        <p>หากคุณเป็นครูและต้องการร่วมกับเรา</p>
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-12">
