@@ -39,7 +39,10 @@ class HomeController extends Controller
             if(auth()->user()->status == 'ban'){
                 Auth::logout();
                 return  redirect()->route('donation.index')->with('alert', 'คุณถูกระงับการใช้งาน กรุณาติดต่อผู้ดูแลระบบ!');
-            }else {
+            }else if(auth()->user()->type == '2'){
+                Auth::logout();
+                return  redirect()->route('donation.index')->with('alert', 'กรุณารอตรวจสอบข้อมูล!');
+            } else {
                 return redirect()->route('donation.index');
             }
 

@@ -84,19 +84,22 @@ Route::post('/admin/teacher/store', 'admin\adminController@storeTeacher')->name(
 Route::get('/admin/teacher/accept', 'admin\adminController@acceptTeacher')->name('admin.acceptTeacher')->middleware('admin');
 Route::get('/admin/teacher/about/{id}', 'admin\adminController@aboutTeacher')->name('admin.aboutTeacher')->middleware('admin');
 Route::get('/admin/teacher/edit/{id}', 'admin\adminController@editTeacher')->name('admin.editTeacher')->middleware('admin');
+Route::get('/admin/teacher/allow/{id}', 'admin\adminController@allowTeacher')->name('admin.allowTeacher')->middleware('admin');
+Route::post('/admin/teacher/update', 'admin\adminController@teacherUpdate')->name('admin.teacherUpdate')->middleware('admin');
 
 
 
 //teacher
+
+
 Route::get('/teacher/show','teacher\TeacherController@show')->middleware('teacher')->name('teacher.show');
-
 Route::get('/teacher/checked/{id}/check/{check}', 'teacher\TeacherController@checkedReciept')->name('teacher.checkedReciept');
-
 Route::get('/teacher/news','teacher\TeacherController@checkReciept')->middleware('teacher')->name('teacher.checkReciept');
-
 Route::get('/teacher/edit','teacher\TeacherController@edit')->middleware('teacher')->name('teacher.edit');
+Route::post('/teacher/update', 'teacher\TeacherController@update')->name('teacher.update')->middleware('teacher');
 
 Route::resource('/teacher/student', 'teacher\StudentController')->middleware('teacher');
+
 
 //member
 Route::resource('/member/index', 'member\MemberContentController')->middleware('auth');

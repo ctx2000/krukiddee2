@@ -55,7 +55,7 @@
                         <td>
                             <div class="bigGallPic" id="bigGallDiv" onclick="this.style.display='none'">
                             </div>
-                            <a href="{{asset('storage/receipt/'.$s->picture)}}" data-toggle="lightbox"
+                            <a href="{{asset('storage/images/'.$s->picture)}}" data-toggle="lightbox"
                                 data-title="" data-footer="">
                                 <img class="img-fluid" src="{{asset('storage/images/'.$s->picture)}}"
                                     width="50" height="50" alt="">

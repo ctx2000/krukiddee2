@@ -161,10 +161,19 @@ class AdminController extends Controller
         // return $like;
     }
     public function acceptTeacher(){
-        $teacher = User::where('type','=',2)->get();
+        $teacher = User::where('type','=',2)->paginate(5);
         return view('admin/acceptTeacher',[
             'teacher'=>$teacher
         ]);
+    }
+    public function allowTeacher($id){
+        $id = Crypt::decrypt($id);
+        DB::table('users')->where('id','=',$id)
+        ->update([
+            'type' => 3,
+
+        ]);
+        return back();
     }
     public function aboutTeacher($id){
         $ids = Crypt::decrypt($id);

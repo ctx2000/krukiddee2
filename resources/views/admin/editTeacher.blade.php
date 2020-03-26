@@ -38,7 +38,7 @@
                         </div>
 
                         <div class="card-body">
-                            {!! Form::model($user, ['novalidate','route' => ['admin.memberUpdate'], 'method'
+                            {!! Form::model($user, ['novalidate','route' => ['admin.teacherUpdate'], 'method'
                             =>
                             'post', 'files' => true,'class'=> ($errors->any()) ? 'was-validated' : 'needs-validation'])
                             !!}
