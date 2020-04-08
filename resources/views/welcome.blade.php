@@ -3,66 +3,35 @@
 @section('content')
 <section class="hero hero-style-3">
     <div class="hero-slider">
+        @foreach ($slide as $s)
         <div class="slide">
             <div class="container">
-                <img src="assets/images/slider/slide-4.jpg" alt class="slider-bg">
+                <img src="{{asset('storage/cover/'.$s->picture)}}" alt class="slider-bg">
                 <div class="row">
                     <div class="col col-md-6 slide-caption">
                         <div class="slide-title">
-                            <h2>Let’s be Kind for <span>Children</span></h2>
+                            <h2>{{$s->titleBig}}</h2>
+
+
+
+                            {{-- <h2>Let’s be Kind for <span>Children</span></h2> --}}
                         </div>
                         <div class="slide-subtitle">
-                            <p>High Quality Charity Theme in Envato Market.</p>
-                            <p>You Can Satisfied Yourself By Helping.</p>
+                            <p>{{$s->titlesmall1}}</p>
+                            <p>{{$s->titlesmall2}}</p>
                         </div>
-                        <div class="btns">
-                            <a href="causes-single.php" class="theme-btn">Donate Now</a>
-                            <a href="causes.php" class="theme-btn-s2">Know More</a>
-                        </div>
+                        {{-- <div class="btns">
+                            <a href="{{route('admin.slideBigEdit',['id'=>$s->id])}}"
+                                class="theme-btn">แก้ไขสไลด์นี้</a>
+                            <a href="causes-single.php" class="theme-btn-s2">ลบสไลด์นี้</a>
+
+                        </div> --}}
                     </div>
                 </div>
             </div>
         </div>
-        <div class="slide">
-            <div class="container">
-                <img src="assets/images/slider/slide-3.jpg" alt class="slider-bg">
-                <div class="row">
-                    <div class="col col-md-6 slide-caption">
-                        <div class="slide-title">
-                            <h2>Let’s be Kind for <span>Children</span></h2>
-                        </div>
-                        <div class="slide-subtitle">
-                            <p>High Quality Charity Theme in Envato Market.</p>
-                            <p>You Can Satisfied Yourself By Helping.</p>
-                        </div>
-                        <div class="btns">
-                            <a href="causes-single.php" class="theme-btn">Donate Now</a>
-                            <a href="causes.php" class="theme-btn-s2">Know More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="slide">
-            <div class="container">
-                <img src="assets/images/slider/slide-1.jpg" alt class="slider-bg">
-                <div class="row">
-                    <div class="col col-md-6 slide-caption">
-                        <div class="slide-title">
-                            <h2>Let’s be Kind for <span>Children</span></h2>
-                        </div>
-                        <div class="slide-subtitle">
-                            <p>High Quality Charity Theme in Envato Market.</p>
-                            <p>You Can Satisfied Yourself By Helping.</p>
-                        </div>
-                        <div class="btns">
-                            <a href="causes-single.php" class="theme-btn">Donate Now</a>
-                            <a href="causes.php" class="theme-btn-s2">Know More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
+
     </div>
 </section>
 
@@ -85,7 +54,8 @@
                 <div class="wpo-case-single">
                     <div class="wpo-case-item">
                         <div class="wpo-case-img">
-                            <img src="{{asset('storage/images/'.$m->picture)}}"style="  width: 100%;  max-height: 190px; height: auto;"alt="">
+                            <img src="{{asset('storage/images/'.$m->picture)}}"
+                                style="  width: 100%;  max-height: 190px; height: auto;" alt="">
                         </div>
                         <div class="wpo-case-content">
                             <div class="wpo-case-text-top">
@@ -100,8 +70,9 @@
                                             $id= Crypt::encrypt($id);
                                             $per = ($m->totalDonate/$m->maxDonate)*100;
                                         ?>
-                                            <div class="progress-bar" role="progressbar" style="width: {{$per}}%"
-                                                aria-valuenow="{{$per}}" aria-valuemin="0" aria-valuemax="100">
+                                            <div class="progress-bar" role="progressbar"
+                                                style="width: {{$per}}%;max-width: 100%;" aria-valuenow="{{$per}}"
+                                                aria-valuemin="0" aria-valuemax="100">
                                                 <div class="progress-value"><span>{{$per}}</span>%</div>
                                             </div>
                                         </div>
@@ -176,7 +147,8 @@
                 <div class="col-md-4 col-sm-6 custom-grid col-12">
                     <div class="wpo-case-item">
                         <div class="wpo-case-img">
-                            <img src="{{asset('storage/images/'.$s->picture)}}"  style="  width: 100%;  max-height: 190px; height: auto;" alt="">
+                            <img src="{{asset('storage/images/'.$s->picture)}}"
+                                style="  width: 100%;   max-height: 190px; height: auto;" alt="">
                         </div>
                         <div class="wpo-case-content">
                             <div class="wpo-case-text-top">
@@ -191,8 +163,9 @@
                                             $id= Crypt::encrypt($id);
                                             $per = ($s->totalDonate/$s->maxDonate)*100;
                                         ?>
-                                            <div class="progress-bar" role="progressbar" style="width: {{$per}}%"
-                                                aria-valuenow="{{$per}}" aria-valuemin="0" aria-valuemax="100">
+                                            <div class="progress-bar" role="progressbar"
+                                                style="width: {{$per}}%;max-width: 100%;" aria-valuenow="{{$per}}"
+                                                aria-valuemin="0" aria-valuemax="100">
                                                 <div class="progress-value"><span>{{$per}}</span>%</div>
                                             </div>
                                         </div>
@@ -206,7 +179,7 @@
                             <div class="case-btn">
 
                                 <ul>
-                                <li><a href="{{route('donation.cause',['id'=>$id])}}">ดูข้อมูลเพิ่มเติม</a></li>
+                                    <li><a href="{{route('donation.cause',['id'=>$id])}}">ดูข้อมูลเพิ่มเติม</a></li>
                                     <li><a href="{{route('donation.cause',['id'=>$id])}}">บริจาค</a></li>
                                 </ul>
                             </div>
@@ -278,8 +251,16 @@
                 </div>
             </div>
         </div> <!-- end container -->
+        @if (session('alert'))
+        <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
+        <script src="{{asset('js/sweetalert2.min.js')}}"></script>
+        <script>
+            Swal.fire('ไม่สามารถเข้าสู่ระบบได้!',"{{session('alert')}}",'info');
+        </script>
+        @endif
     </section>
+</div>
 
 
 
-    @endsection
+@endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Student;
 use App\Donation;
 use App\User;
+use App\Slide;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -31,13 +32,15 @@ class DonationController extends Controller
         // return view('home',[//รีเทินไปเวลคัม
         //     'student' => $student
         // ]);
+        $cover = Slide::orderBy('level')->get();
         return view('welcome',[//รีเทินไปเวลคัม
             'student' => $student,
             'max' => $max,
             'sumDo'=>$sumDo,
             'sumTea'=>$sumTea,
             'sumUser'=>$sumUser,
-            'sumStu'=>$sumStu
+            'sumStu'=>$sumStu,
+            'slide'=>$cover
         ]);
     }
 
@@ -81,17 +84,15 @@ class DonationController extends Controller
         if($request->hasFile('picture')){
             //random file name
             //$newFileName = str_random(40);
-            $newFileName = uniqid().'.'.$request->picture->extension();
 
-            //upload file
-            $request->picture->storeAs('receipt',$newFileName,'public');
+            $file_image = $request->file('picture');
+            $newFileName = uniqid().'.'.$file_image->getClientOriginalExtension();
+
+            $file_image->move(public_path('storage/receipt'), $newFileName);
+
+
             $donate->picture = $newFileName;
 
-            //resize
-            // $path = Storage::disk('public')->path('images/resize/');
-            // Image::make($request->picture->getRealPath(),$newFileName)->resize(120,null,function($contraint){
-            //     $contraint->aspectRatio();
-            // })->save($path.$newFileName);
         }
 
         $donate->save();
@@ -100,7 +101,7 @@ class DonationController extends Controller
         $total = DB::table('students')->where('id', $request->student_id)->update([
             'totalDonate' =>$sum
         ]);
-        return back();
+        return back()->with('feedback','บริจาคสำเร็จ');
 
     }
 
@@ -197,14 +198,14 @@ class DonationController extends Controller
         $student = Student::where('id',$id)->first();
         $sum = Donation::where('student_id',$id)->count();
         return view('cause',[
-            's'=>$student,
+            // 's'=>$student,
             'sum'=>$sum,
             'max'=>$max
-        ]);
+        ])->with('s',$student);
     }
     public function donateLevel($level){
         $donate = Student::where('level',$level)->get();
-        return view('donateLevel',[
+        return view('DonateLevel',[
             'donate' => $donate
         ]);
     }

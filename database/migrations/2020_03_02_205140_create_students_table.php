@@ -17,12 +17,15 @@ class CreateStudentsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('lastname');
-            $table->string('address');
-            $table->string('tel',10);
+            $table->string('address',200);
+            $table->string('district',50)->nullable();
+            $table->string('province',50)->nullable();
+            $table->string('tel',15);
             $table->string('bankAccountName');
             $table->string('bankName');
             $table->string('bankNumber');
-            $table->text('description');
+            $table->text('description1')->nullable();
+            $table->text('description2')->nullable();
             $table->string('picture');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');

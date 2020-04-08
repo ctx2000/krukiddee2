@@ -1,193 +1,86 @@
-@extends('layouts.memberNav')
-
+@extends('layouts/teacherNav')
 @section('content')
-<div class="">
-    <div class="content-header">
+{{-- การใส่css หน้าcause ไม่ยาก แค่บอกให้คนกรอก กรอกตามที่css จะแสดงผลได้ในหน้าcause จบ normal คือแท็ก <p> h1-6 เลิอกเลย --}}
 
+<link href="{{asset('css/summernote-bs4.css')}}" rel="stylesheet">
+<script src="{{asset('js/summernote-bs4.js')}}"></script>
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Dashboard</h1>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard v2</li>
+                    </ol>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
         <!-- /.container-fluid -->
     </div>
     <section class="content">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
-
-                <div class="col-md">
-                    <div id="carouselExampleCaptions" class="carousel slide my-3" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                          <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-                          <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-                          <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                          <div class="carousel-item active">
-                            <img src="http://placehold.it/900x350" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                              <h5>First slide label</h5>
-                              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">เพิ่มรายละเอียดนักเรียน</h3>
+                            @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
                             </div>
-                          </div>
-                          <div class="carousel-item">
-                            <img src="http://placehold.it/900x350" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                              <h5>Second slide label</h5>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                          </div>
-                          <div class="carousel-item">
-                            <img src="http://placehold.it/900x350" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                              <h5>Third slide label</h5>
-                              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                            </div>
-                          </div>
+                            @endif
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                          <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                          <span class="sr-only">Next</span>
-                        </a>
-                      </div>
-                </div>
-            </div>
-            <div class="container-fluid">
-
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-10">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3>หัวข้อ </h3>
-                            </div>
-                            <div class="card-body">
-                                {{-- คอนเท้น --}}
-                                <div class="row">
-
-                                <div class="col-lg-6 col-md-6 mb-4">
-                                    <div class="card h-100">
-                                        <a href="#"><img class="card-img-top" src="" alt=""></a>
-                                        <div class="card-body">
-                                            <h4 class="card-title">
-                                                <a href="#">ชื่อ</a>
-                                            </h4>
-                                            <h5>เทส</h5>
-                                            <p class="card-text">เทส</p>
-                                        </div>
-                                        <div class="card-footer">
-
-                                            <div class="btn-toolbar justify-content-between" role="toolbar"
-                                                aria-label="Toolbar with button groups">
-                                                <div class="btn-group mr-1" role="group" aria-label="First group">
-
-                                                    <a href=" #" class="btn btn-outline-danger">เพิ่มคำขอบคุณ</a>
-
-                                                </div>
-
-
-
-                                                <div class="input-group">
-                                                    <div class="btn-group" role="group" aria-label="3 group">
-                                                        <a class="btn btn-outline-info" href="#">
-
-                                                            <li style="color: #0f5e52;" class="fa fa-pencil "></li>
-
-                                                        </a>
-
-                                                    </div>
-                                                    <div class="btn-group" role="group" aria-label="First group">
-                                                        <form action="#" method="POST" class="d-inline"
-                                                            onsubmit="return confirm('ต้องการลบข้อมูล?')">
-                                                            @csrf
-                                                            @method('DELETE')
-
-                                                            <button class="btn btn-outline-secondary ">
-
-                                                                <li style=" color: #545c5b;" class="fa fa-trash "></li>
-
-                                                            </button>
-
-                                                        </form>
-
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
+                        <div class="card-body">
+                            <form action="{{route('teacher.addDesc')}}" method="POST">
+                                @csrf
+                                <div class="form-group ">
+                                    <label for="Address">ที่อยู่โรงเรียน</label>
+                                    {{ Form::text('Address', null, ['class'=>'form-control','required']) }}
+                                    @if ($errors->has('Address'))
+                                    <div class="invalid-feedback">{{ $errors->first('Address') }}</div>
+                                    @endif
+                                </div>
+                                <div class="form-group">
+                                    <label for="Address">อธิบายเกี่ยวกับตัวนักเรียน</label>
+                                    <textarea name="desc"
+                                        class="summernote form-control">ความเป็นอยู่,ภาระ,สถานะครอบครัว เป็นต้น</textarea>
                                 </div>
 
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 mb-4"></div>
-                                <div class="col-lg-6 col-md-6 mb-4">
-                                    <div class="card h-100">
-                                        <a href="#"><img class="card-img-top" src="" alt=""></a>
-                                        <div class="card-body">
-                                            <h4 class="card-title">
-                                                <a href="#">ชื่อ</a>
-                                            </h4>
-                                            <h5>เทส</h5>
-                                            <p class="card-text">เทส</p>
-                                        </div>
-                                        <div class="card-footer">
-
-                                            <div class="btn-toolbar justify-content-between" role="toolbar"
-                                                aria-label="Toolbar with button groups">
-                                                <div class="btn-group mr-1" role="group" aria-label="First group">
-
-                                                    <a href=" #" class="btn btn-outline-danger">เพิ่มคำขอบคุณ</a>
-
-                                                </div>
-
-
-
-                                                <div class="input-group">
-                                                    <div class="btn-group" role="group" aria-label="3 group">
-                                                        <a class="btn btn-outline-info" href="#">
-
-                                                            <li style="color: #0f5e52;" class="fa fa-pencil "></li>
-
-                                                        </a>
-
-                                                    </div>
-                                                    <div class="btn-group" role="group" aria-label="First group">
-                                                        <form action="#" method="POST" class="d-inline"
-                                                            onsubmit="return confirm('ต้องการลบข้อมูล?')">
-                                                            @csrf
-                                                            @method('DELETE')
-
-                                                            <button class="btn btn-outline-secondary ">
-
-                                                                <li style=" color: #545c5b;" class="fa fa-trash "></li>
-
-                                                            </button>
-
-                                                        </form>
-
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
+                                <div class="form-group">
+                                    <label for="Address">ที่อยู่โรงเรียน</label>
+                                    <textarea name="desc2"
+                                        class="summernote form-control">ระบุความต้องการของนักเรียน เช่น ต้องการซ่อมที่พัก,ต้องการอาหารแห้ง หรือทุนการศึกษา เป็นต้น</textarea>
                                 </div>
-
-                            </div>
-
-                            </div>
+                                <div class="form-group text-right">
+                                    <button type="submit" class="btn btn-primary">ต่อไป</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
-    </section>
 </div>
+</section>
+<script>
+    $(document).ready(function() {
+$('.summernote').summernote({
+    height: 190,
+});
 
-
-
+});
+</script>
 @endsection

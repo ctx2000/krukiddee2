@@ -34,7 +34,7 @@
                                             $id= Crypt::encrypt($id);
                                             $per = ($s->totalDonate/$s->maxDonate)*100;
                                         ?>
-                                            <div class="progress-bar" role="progressbar" style="width: {{$per}}%"
+                                            <div class="progress-bar" role="progressbar" style="width: {{$per}}%;max-width: 100%;"
                                                 aria-valuenow="{{$per}}" aria-valuemin="0" aria-valuemax="100">
                                                 <div class="progress-value"><span>{{$per}}</span>%</div>
                                             </div>

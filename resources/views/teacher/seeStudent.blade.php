@@ -191,4 +191,11 @@
 <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+<link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
+<script src="{{asset('js/sweetalert2.min.js')}}"></script>
+@if (session('feedback'))
+<script>
+    Swal.fire('ผลการทำงาน',"{{session('feedback')}}",'success');
+</script>
+@endif
 @endsection

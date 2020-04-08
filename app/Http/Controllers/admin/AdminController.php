@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Donation;
 use App\Student;
+use App\Slide;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Freshbitsweb\Laratables\Laratables;
@@ -35,6 +36,47 @@ class AdminController extends Controller
             'total'=>$total
         ]);
     }
+    public function search(request $request){
+        $like = $request->search;
+        //$teacher = User::where('email','LIKE','%'.$like.'%')->get();
+        $teacher = User::where('type','=',3)
+                    ->where(function ($query)use ($like) {
+                        $query->where('name', 'LIKE', '%'.$like.'%')
+                        ->orWhere('email', 'LIKE', '%'.$like.'%')
+                        ->orWhere('lastname','LIKE', '%'.$like.'%')
+                        ->orWhere('address','LIKE', '%'.$like.'%')
+                        ->orWhere('schoolname','LIKE', '%'.$like.'%')
+                        ->orWhere('tel','LIKE', '%'.$like.'%');
+        })->paginate(10);
+        $member = User::where('type','=',1)
+        ->where(function ($query)use ($like) {
+            $query->where('name', 'LIKE', '%'.$like.'%')
+            ->orWhere('email', 'LIKE', '%'.$like.'%')
+            ->orWhere('lastname','LIKE', '%'.$like.'%')
+            ->orWhere('address','LIKE', '%'.$like.'%')
+            ->orWhere('tel','LIKE', '%'.$like.'%');
+        })->paginate(10);
+        $student = Student::where('name', 'LIKE', '%'.$like.'%')
+            ->orWhere('lastname','LIKE', '%'.$like.'%')
+            ->orWhere('address','LIKE', '%'.$like.'%')
+            ->orWhere('grade','LIKE', '%'.$like.'%')
+            ->orWhere('age','LIKE', '%'.$like.'%')
+            ->orWhere('id_card','LIKE', '%'.$like.'%')
+            ->orWhere('tel','LIKE', '%'.$like.'%')
+            ->orWhere('bankAccountName','LIKE', '%'.$like.'%')
+            ->orWhere('bankName','LIKE', '%'.$like.'%')
+            ->orWhere('bankNumber','LIKE', '%'.$like.'%')
+            ->orWhere('bank_of','LIKE', '%'.$like.'%')
+            ->orWhere('closeDonate','LIKE', '%'.$like.'%')
+            ->orWhere('level','LIKE', '%'.$like.'%')->paginate(10);
+
+        return view('admin/tool/search',[
+            'teacher'=>$teacher,
+            'member'=>$member,
+            'student'=>$student
+        ]);
+    }
+
     public function member(){
         $user = User::where('type','=',1)->paginate(10);
         return view('admin/memberAll',[
@@ -78,6 +120,7 @@ class AdminController extends Controller
             $password = $user->password;
         }else{
             $password = $request->password;
+            $password = Hash::make($password);
         }
 
         DB::table('users')
@@ -97,14 +140,14 @@ class AdminController extends Controller
         DB::table('users')
             ->where('id', $id)
             ->update(['status' => 'ban','cause'=>$request->cause]);
-            return back();
+            return back()->with('feedback','แบนผู้ใช้สำเร็จ');
     }
     public function memberUnban($id){
         $id = Crypt::decrypt($id);
         DB::table('users')
             ->where('id', $id)
             ->update(['status' => '']);
-            return back();
+            return back()->with('feedback','ยกเลิกการแบนสำเร็จ');
     }
     public function memberAbout($id){
         $ids = Crypt::decrypt($id);
@@ -173,7 +216,7 @@ class AdminController extends Controller
             'type' => 3,
 
         ]);
-        return back();
+        return redirect()->route('admin.teacher')->with('feedback','อนุมัติผู้ใช้งานสำเร็จ');
     }
     public function aboutTeacher($id){
         $ids = Crypt::decrypt($id);
@@ -239,10 +282,10 @@ class AdminController extends Controller
         if($request->hasFile('picture')){
             //random file name
             //$newFileName = str_random(40);
-            $newFileName = uniqid().'.'.$request->picture->extension();
+            $file_image = $request->file('picture');
+            $newFileName = uniqid().'.'.$file_image->getClientOriginalExtension();
 
-            //upload file
-            $request->picture->storeAs('id_card',$newFileName,'public');
+            $file_image->move(public_path('storage/id_card'), $newFileName);
             $teacher->pic_id_card = $newFileName;
 
             //resize
@@ -262,15 +305,15 @@ class AdminController extends Controller
             'user'=>$user
         ]);
     }
-    public function updateTeacher(Request $request){
+    public function teacherUpdate(Request $request){
         $request->validate([
             'name'=>['required',  'max:255'],
             'lastname'=>['required','max:255'],
             'email'=>['required','E-mail','max:255'],
             'tel'=>['required','numeric','digits:10'],
             'id_card'=>['required','numeric','digits:13'],
-            'address'=>['required',  'max:255'],
-            'schoolName'=>['required',  'max:255'],
+            'Address'=>['required',  'max:255'],
+            'schoolname'=>['required',  'max:255'],
             'password'=>['required',  'max:255'],
         ],[
             'name.required'=> 'กรุณากรอกชื่อ',
@@ -278,8 +321,8 @@ class AdminController extends Controller
             'tel.digits' => 'หมายเลขโทรศัพท์ห้ามเกิน10ตัว',
             'tel.numeric' => 'กรอกตัวเลขเท่านั้น',
             'tel.required' => 'กรุณากรอกหมายเลขโทรศัพท์',
-            'address.required'=> 'กรุณากรอกที่อยู่โรงเรียน',
-            'schoolName.required'=> 'กรุณากรอกชื่อโรงเรียน',
+            'Address.required'=> 'กรุณากรอกที่อยู่โรงเรียน',
+            'schoolname.required'=> 'กรุณากรอกชื่อโรงเรียน',
 
             'email.required' => 'กรุณากรอกอีเมล์',
             'email.E-mail' => 'กรุณากรอกอีเมล์',
@@ -293,6 +336,7 @@ class AdminController extends Controller
             $password = $user->password;
         }else{
             $password = $request->password;
+            $password = Hash::make($password);
         }
 
         DB::table('users')
@@ -324,43 +368,58 @@ class AdminController extends Controller
         ]);
     }
     public function studentStore(Request $request){
-        $student = new Student();
-        $student->name = $request->name;
-        $student->lastname = $request->lastname;
-        $student->address = $request->address;
-        $student->tel = $request->tel;
-        $student->bankAccountName = $request->bankAccountName;
-        $student->bankName = $request->bankName;
-        $student->bankNumber = $request->bankNumber;
-        $student->description = $request->description;
-        $student->level = $request->level;
-        $student->closeDonate = $request->closeDonate;
-        $student->maxDonate = $request->maxDonate;
-        $student->grade = $request->grade;
-        $student->age = $request->age;
-        $student->birthday = $request->birthday;
-        $student->id_card = $request->id_card;
-        $student->bank_of = $request->bank_of;
-        $student->user_id = $request->user_id;
+        if (!isset($request->description1)) {
 
-        if($request->hasFile('picture')){
-            //random file name
-            //$newFileName = str_random(40);
-            $newFileName = uniqid().'.'.$request->picture->extension();
 
-            //upload file
-            $request->picture->storeAs('images',$newFileName,'public');
-            $student->picture = $newFileName;
+            $student = new Student();
+            $student->name = $request->name;
+            $student->lastname = $request->lastname;
+            $student->address = $request->address;
+            $student->tel = $request->tel;
+            $student->bankAccountName = $request->bankAccountName;
+            $student->bankName = $request->bankName;
+            $student->bankNumber = $request->bankNumber;
+            // $student->description = $request->description;
+            $student->level = $request->level;
+            $student->closeDonate = $request->closeDonate;
+            $student->maxDonate = $request->maxDonate;
+            $student->grade = $request->grade;
+            $student->age = $request->age;
+            $student->birthday = $request->birthday;
+            $student->id_card = $request->id_card;
+            $student->bank_of = $request->bank_of;
+            $student->district = $request->district;
+            $student->province = $request->province;
+            $student->user_id = auth()->user()->id;
 
-            //resize
-            // $path = Storage::disk('public')->path('images/resize/');
-            // Image::make($request->picture->getRealPath(),$newFileName)->resize(120,null,function($contraint){
-            //     $contraint->aspectRatio();
-            // })->save($path.$newFileName);
-        }
+                if($request->hasFile('picture')){
+                //random file name
+                $file_image = $request->file('picture');
+                $newFileName = uniqid().'.'.$file_image->getClientOriginalExtension();
 
-        $student->save();
-        return redirect()->route('admin.student');
+                $file_image->move(public_path('storage/images'), $newFileName);
+                    $student->picture = $newFileName;
+
+                }
+
+                $student->save();
+
+                return view('admin/addDesc',[
+                    'id'=>$student->id
+                ]);
+            }else{
+
+                DB::table('students')
+                ->where('id', $request->id)
+                ->update([
+                    'description1'=>$request->description1,
+                    'description2'=>$request->description2
+
+                ]);
+                // dd($request->description2);
+                return redirect()->route('admin.student')->with('feedback','เพิ่มนักเรียนสำเร็จ');
+            }
+
 
     }
     public function checkReciept(){
@@ -409,7 +468,7 @@ class AdminController extends Controller
             'bankName'=>['required',  'max:255'],
             'bankAccountName'=>['required',  'max:255'],
             'bankNumber'=>['required','numeric'],
-            'description'=>['required',  'max:255'],
+            'description'=>['required'],
 
         ],[
             'name.required'=> 'กรุณากรอกชื่อ',
@@ -438,10 +497,10 @@ class AdminController extends Controller
         if($request->hasFile('picture')){
             //random file name
             //$newFileName = str_random(40);
-            $newFileName = uniqid().'.'.$request->picture->extension();
+            $file_image = $request->file('picture');
+            $newFileName = uniqid().'.'.$file_image->getClientOriginalExtension();
 
-            //upload file
-            $request->picture->storeAs('id_card',$newFileName,'public');
+            $file_image->move(public_path('storage/id_card'), $newFileName);
             $teacher->pic_id_card = $newFileName;
 
             //resize
@@ -507,7 +566,56 @@ class AdminController extends Controller
             'sum'=>$sum
         ]);
     }
+    public function edit(){
+        $user = User::find(auth()->user()->id);
+        return view('admin/tool/edit',[
+            'user'=>$user
+        ]);
+    }
+    public function deleteUser($id){
+        $id = Crypt::decrypt($id);
+        DB::table('users')->where('id', '=', $id)->delete();
 
+        return redirect()->route('admin.dashboard')->with('feedback','ลบผู้ใช้สำเร็จ');
+        }
+
+        public function deleteStudent($id){
+
+        DB::table('students')->where('id', '=', $id)->delete();
+        return back();
+    }
+
+
+
+    public function slideBig(){
+        $slide = Slide::orderBy('level','asc')->get();
+        return view('admin/tool/slideBig',[
+            'slide'=>$slide
+        ]);
+    }
+    public function slideStore(Request $request){
+        $slide = new Slide();
+        if($request->hasFile('picture')){
+
+            $file_image = $request->file('picture');
+            $newFileName = uniqid().'.'.$file_image->getClientOriginalExtension();
+
+            $file_image->move(public_path('storage/cover'), $newFileName);
+            $slide->picture = $newFileName;
+        }
+        $slide->titleBig = $request->titleBig;
+        $slide->titlesmall1 = $request->titlesmall1;
+        $slide->titlesmall2 = $request->titlesmall2;
+        $slide->level = $request->level;
+        $slide->save();
+        return back();
+    }
+    public function slideBigEdit($id){
+        $slide = Slide::find($id);
+        return view('admin/tool/slideBigEdit',[
+            's'=>$slide
+        ]);
+    }
 
 
 }

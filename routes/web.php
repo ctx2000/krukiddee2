@@ -19,7 +19,7 @@ Route::get('/','DonationController@index');
 //     redirect()->route('donation.index');//รัเทอนไปโดเนชั่น
 // });
 Route::get('/teacherRegister', function(){
-    return view('auth/teacherRegister');
+    return view('auth/TeacherRegister');
 })->name('teacherRegister');
 
 
@@ -49,43 +49,53 @@ Route::group(['prefix' => 'admin'], function(){
 //Route for teacher
 Route::group(['prefix' => 'teacher'], function(){
     Route::group(['middleware' => ['teacher']], function(){
-        Route::get('/dashboard', 'teacher\teacherController@index')->name('teacher.dashboard');;
+        Route::get('/dashboard', 'teacher\TeacherController@index')->name('teacher.dashboard');;
 
     });
 });
 //admin
-Route::get('/admin/member/all', 'admin\adminController@member')->name('admin.member')->middleware('admin');
-Route::get('/admin/member/edit/{id}', 'admin\adminController@editMember')->name('admin.editMember')->middleware('admin');
-Route::post('/admin/member/update', 'admin\adminController@memberUpdate')->name('admin.memberUpdate')->middleware('admin');
-Route::post('/admin/member/ban', 'admin\adminController@memberBaned')->name('admin.memberBaned')->middleware('admin');
-Route::get('/admin/member/unban/{id}', 'admin\adminController@memberUnban')->name('admin.memberUnban')->middleware('admin');
-Route::get('/admin/member/about/{id}', 'admin\adminController@memberAbout')->name('admin.memberAbout')->middleware('admin');
 
-Route::get('/admin/student/all', 'admin\adminController@student')->name('admin.student')->middleware('admin');
-Route::get('/admin/addStudent', 'admin\adminController@addStudent')->name('admin.addStudent')->middleware('admin');
-Route::post('/admin/studentStore', 'admin\adminController@studentStore')->name('admin.studentStore')->middleware('admin');
-Route::get('/admin/student/edit/{id}', 'admin\adminController@studentEdit')->name('admin.studentEdit')->middleware('admin');
-Route::post('/admin/student/update', 'admin\adminController@studentUpdate')->name('admin.studentUpdate')->middleware('admin');
-Route::post('/admin/student/ban', 'admin\adminController@studentBan')->name('admin.studentBan')->middleware('admin');
-Route::post('/admin/student/unBan', 'admin\adminController@studentUnban')->name('admin.studentUnban')->middleware('admin');
-Route::get('/admin/student/about/{id}', 'admin\adminController@aboutStudent')->name('admin.aboutStudent')->middleware('admin');
+Route::get('/admin/edit', 'admin\AdminController@edit')->name('admin.edit')->middleware('admin');
+Route::post('/admin/update', 'admin\AdminController@update')->name('admin.update')->middleware('admin');
+Route::get('/admin/user/delete/{id}', 'admin\AdminController@deleteUser')->name('admin.deleteUser')->middleware('admin');
+Route::get('/admin/student/delete/{id}', 'admin\AdminController@deleteStudent')->name('admin.deleteStudent')->middleware('admin');
+Route::post('/admin/search', 'admin\AdminController@search')->name('admin.search')->middleware('admin');
+Route::get('/admin/slideBig', 'admin\AdminController@slideBig')->name('admin.slideBig')->middleware('admin');
+Route::get('/admin/slideBig/edit/{id}', 'admin\AdminController@slideBigEdit')->name('admin.slideBigEdit')->middleware('admin');
+Route::post('/admin/slideBig/store', 'admin\AdminController@slideStore')->name('admin.slideStore')->middleware('admin');
+
+Route::get('/admin/member/all', 'admin\AdminController@member')->name('admin.member')->middleware('admin');
+Route::get('/admin/member/edit/{id}', 'admin\AdminController@editMember')->name('admin.editMember')->middleware('admin');
+Route::post('/admin/member/update', 'admin\AdminController@memberUpdate')->name('admin.memberUpdate')->middleware('admin');
+Route::post('/admin/member/ban', 'admin\AdminController@memberBaned')->name('admin.memberBaned')->middleware('admin');
+Route::get('/admin/member/unban/{id}', 'admin\AdminController@memberUnban')->name('admin.memberUnban')->middleware('admin');
+Route::get('/admin/member/about/{id}', 'admin\AdminController@memberAbout')->name('admin.memberAbout')->middleware('admin');
+
+Route::get('/admin/student/all', 'admin\AdminController@student')->name('admin.student')->middleware('admin');
+Route::get('/admin/addStudent', 'admin\AdminController@addStudent')->name('admin.addStudent')->middleware('admin');
+Route::post('/admin/studentStore', 'admin\AdminController@studentStore')->name('admin.studentStore')->middleware('admin');
+Route::get('/admin/student/edit/{id}', 'admin\AdminController@studentEdit')->name('admin.studentEdit')->middleware('admin');
+Route::post('/admin/student/update', 'admin\AdminController@studentUpdate')->name('admin.studentUpdate')->middleware('admin');
+Route::post('/admin/student/ban', 'admin\AdminController@studentBan')->name('admin.studentBan')->middleware('admin');
+Route::post('/admin/student/unBan', 'admin\AdminController@studentUnban')->name('admin.studentUnban')->middleware('admin');
+Route::get('/admin/student/about/{id}', 'admin\AdminController@aboutStudent')->name('admin.aboutStudent')->middleware('admin');
 
 
 
 
 
-Route::get('/admin/checkReciept', 'admin\adminController@checkReciept')->name('admin.checkReciept')->middleware('admin');
-Route::get('/admin/allReciept', 'admin\adminController@allReciept')->name('admin.allReciept')->middleware('admin');
+Route::get('/admin/checkReciept', 'admin\AdminController@checkReciept')->name('admin.checkReciept')->middleware('admin');
+Route::get('/admin/allReciept', 'admin\AdminController@allReciept')->name('admin.allReciept')->middleware('admin');
 
-Route::get('/admin/teacher/all', 'admin\adminController@teacher')->name('admin.teacher')->middleware('admin');
-Route::get('/admin/teacher/add', 'admin\adminController@addTeacher')->name('admin.addTeacher')->middleware('admin');
-Route::post('/admin/teacher/search', 'admin\adminController@searchTeacher')->name('admin.searchTeacher')->middleware('admin');
-Route::post('/admin/teacher/store', 'admin\adminController@storeTeacher')->name('admin.storeTeacher')->middleware('admin');
-Route::get('/admin/teacher/accept', 'admin\adminController@acceptTeacher')->name('admin.acceptTeacher')->middleware('admin');
-Route::get('/admin/teacher/about/{id}', 'admin\adminController@aboutTeacher')->name('admin.aboutTeacher')->middleware('admin');
-Route::get('/admin/teacher/edit/{id}', 'admin\adminController@editTeacher')->name('admin.editTeacher')->middleware('admin');
-Route::get('/admin/teacher/allow/{id}', 'admin\adminController@allowTeacher')->name('admin.allowTeacher')->middleware('admin');
-Route::post('/admin/teacher/update', 'admin\adminController@teacherUpdate')->name('admin.teacherUpdate')->middleware('admin');
+Route::get('/admin/teacher/all', 'admin\AdminController@teacher')->name('admin.teacher')->middleware('admin');
+Route::get('/admin/teacher/add', 'admin\AdminController@addTeacher')->name('admin.addTeacher')->middleware('admin');
+Route::post('/admin/teacher/search', 'admin\AdminController@searchTeacher')->name('admin.searchTeacher')->middleware('admin');
+Route::post('/admin/teacher/store', 'admin\AdminController@storeTeacher')->name('admin.storeTeacher')->middleware('admin');
+Route::get('/admin/teacher/accept', 'admin\AdminController@acceptTeacher')->name('admin.acceptTeacher')->middleware('admin');
+Route::get('/admin/teacher/about/{id}', 'admin\AdminController@aboutTeacher')->name('admin.aboutTeacher')->middleware('admin');
+Route::get('/admin/teacher/edit/{id}', 'admin\AdminController@editTeacher')->name('admin.editTeacher')->middleware('admin');
+Route::get('/admin/teacher/allow/{id}', 'admin\AdminController@allowTeacher')->name('admin.allowTeacher')->middleware('admin');
+Route::post('/admin/teacher/update', 'admin\AdminController@teacherUpdate')->name('admin.teacherUpdate')->middleware('admin');
 
 
 
@@ -112,10 +122,11 @@ Route::get('/donate/level/{level}','DonationController@donateLevel')->name('dona
 Route::get('/home', 'HomeController@index')->name('home');
 
 // //ralatable
-// Route::get('/admin/member/all', 'admin\adminController@member')->name('admin.member')->middleware('admin');
-// Route::get('/admin/member/ajax', 'admin\adminController@memberAjax')->name('admin.memberAjax')->middleware('admin');
+// Route::get('/admin/member/all', 'admin\AdminController@member')->name('admin.member')->middleware('admin');
+// Route::get('/admin/member/ajax', 'admin\AdminController@memberAjax')->name('admin.memberAjax')->middleware('admin');
 
 //test
 Route::get('/test', function () {
     return view('test');
 });
+Route::post('/teacher/desc', 'teacher\TeacherController@addDesc')->name('teacher.addDesc')->middleware('teacher');

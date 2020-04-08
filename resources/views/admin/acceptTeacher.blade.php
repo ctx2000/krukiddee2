@@ -64,7 +64,7 @@
                                 <tr>
                                     <td>{{$t->name}}</td>
                                     <td>{{$t->lastname}}</td>
-                                    <td>{{$t->status}}</td>
+                                    <td>รออนุมัติ</td>
                                     <td>
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-secondary btn-sm"><i
@@ -86,10 +86,12 @@
                                                 </a>
 
 
-                                                <a class="dropdown-item" href="#">
+                                                <a class="dropdown-item"
+                                                    href="{{route('admin.deleteUser',['id'=>$id])}}">
                                                     <li class="	fas fa-trash-alt"></li> ลบผู้ใช้
                                                 </a>
-                                                <a class="dropdown-item" href="{{route('admin.aboutTeacher',['id'=>$id])}}">
+                                                <a class="dropdown-item"
+                                                    href="{{route('admin.aboutTeacher',['id'=>$id])}}">
                                                     <li class="	fas fa-list-ul"></li> ดูข้อมูล
                                                 </a>
 

@@ -26,6 +26,7 @@
     "dependencies": {
         "admin-lte": "^3.0.2",
         "material-dashboard": "^2.1.0",
-        "startbootstrap-sb-admin-2": "^4.0.7"
+        "startbootstrap-sb-admin-2": "^4.0.7",
+        "sweetalert2": "^9.10.7"
     }
 }

@@ -22,6 +22,31 @@
                                         โรงเรียน : {{$teacher->schoolname}}</h2>
                                     <h6 class="d-block"> นักเรียนทั้งหมด : {{$count}} คน</h6>
                                     <h6 class="d-block"> ยอดบริจาครวม : {{number_format($sum)}} บาท</h6>
+                                    @php
+                                    $id = Crypt::encrypt($teacher->id);
+                                    @endphp
+                                    @if ($teacher->type == 2)
+                                    <a href="{{route('admin.allowTeacher',['id'=>$id])}}"
+                                        class="btn btn-success">ข้อมูลถูกต้อง</a>
+                                    <a href="{{route('admin.deleteUser',['id'=>$id])}}"
+                                        class="btn btn-danger delete-confirm">ลบข้อมูลผู้ใช้</a>
+                                    @endif
+                                    @if ($teacher->type == 3)
+                                    @if ($teacher->status=='ban')
+                                    <a class="btn btn-success"
+                                        href="{{route('admin.memberUnban',['id'=>$id])}}">
+                                        <li class="	far fa-calendar-check"></li> ปลดแบน
+                                    </a>
+                                    @else
+
+                                    <a class="btn btn-info cause" href="#" data-name="{{$teacher->name}}"
+                                        data-id="{{$id}}">
+                                        <li class="fas fa-ban"></li> แบนผู้ใช้
+                                    </a>
+                                    @endif
+                                    <a href="{{route('admin.deleteUser',['id'=>$id])}}"
+                                        class="btn btn-danger delete-confirm"><li class="	fas fa-trash-alt"></li> ลบข้อมูลผู้ใช้</a>
+                                    @endif
                                 </div>
                                 <div class="ml-auto">
                                     <input type="button" class="btn btn-primary d-none" id="btnDiscard"
@@ -112,7 +137,7 @@
 
                                 @foreach ($student as $s)
                                 <tr>
-                                    <td> <a href="#"> {{$s->name.' '.$s->lastname}}</a></td>
+                                    <td> <a href="{{route('admin.aboutStudent',['id'=>$s->id])}}"> {{$s->name.' '.$s->lastname}}</a></td>
                                     <td>{{$s->grade}}</td>
                                     <td>{{$s->age}}</td>
                                     <td>{{$s->birthday}}</td>
@@ -136,4 +161,80 @@
 
 </div>
 </div>
+<link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
+<script src="{{asset('js/sweetalert2.min.js')}}"></script>
+@if (session('feedback'))
+<script>
+    Swal.fire('ผลการทำงาน',"{{session('feedback')}}",'success');
+</script>
+@endif
+<script>
+    $('.delete-confirm').on('click', function (e) {
+    event.preventDefault();
+    const url = $(this).attr('href');
+    swal.fire({
+        title: 'ต้องการลบผู้ใช้งานนี้หรือไม่?',
+        text: 'การลบข้อมูลจะไม่สามารถกู้คืนได้',
+        icon: 'warning',
+        showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'ยืนยัน'
+    }).then((result) => {
+  if (result.value) {
+            window.location.href = url;
+        }
+    });
+});
+</script>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">ระบุสาเหตุการแบนผู้ใช้</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form method="POST" action="{{route('admin.memberBaned')}}">
+                @csrf
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">แบนผู้ใช้:</label>
+                    <input type="text" class="form-control" id="name" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="message-text" class="col-form-label">สาเหตุ:</label>
+                    <textarea class="form-control" id="cause" name="cause"></textarea>
+                </div>
+                <input type="hidden" id="id" name="id">
+
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">ยืนยัน</button>
+            </form>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+$('.cause').click(function(){
+// get data from edit btn
+
+var name = $(this).attr('data-name');
+var id = $(this).attr('data-id');
+
+
+// set value to modal
+$("#name").val(name);
+$("#id").val(id);
+
+
+$('#myModal').modal('show');
+});
+</script>
 @endsection

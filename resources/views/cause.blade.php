@@ -1,22 +1,7 @@
 @extends('layouts.memberNav')
 
 @section('content')
-<div class="wpo-breadcumb-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="wpo-breadcumb-wrap">
-                    <h2>Single Causes</h2>
-                    <ul>
-                        <li><a href="index.php">Home</a></li>
-                        <li><span>Causes</span></li>
-                        <li><span>Ensure Education for every poor children</span></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <div class="wpo-case-details-area section-padding">
     <div class="container">
@@ -50,7 +35,7 @@
                                             $per = ($s->totalDonate/$s->maxDonate)*100;
                                         ?>
                                                             <div class="progress-bar" role="progressbar"
-                                                                style="width: {{$per}}%" aria-valuenow="{{$per}}"
+                                                                style="width: {{$per}}%; max-width: 100%;" aria-valuenow="{{$per}}"
                                                                 aria-valuemin="0" aria-valuemax="100">
                                                                 <div class="progress-value"><span>{{$per}}</span>%</div>
 
@@ -65,8 +50,11 @@
                                                     </li>
                                                     <li><span>มีผู้บริจาคไปแล้ว:</span> {{$sum}}ครั้ง</li>
                                                 </ul>
-                                                <div class="case-b-text">
-                                                    <p>{{$s->description}}</p>
+                                                <div class="case-bb-text">
+                                                    <h3>ข้อมูลนักเรียน</h3>
+                                                    {!! $s->description1 !!}
+
+
                                                     {{-- <p>These cases are perfectly simple and easy to distinguish. In a
                                                         free hour, when our power of choice is untrammelled and when
                                                         nothing prevents our being able to do what we like best, every
@@ -78,20 +66,9 @@
                                                         principle of selection: he rejects pleasures.</p> --}}
                                                 </div>
                                                 <div class="case-bb-text">
-                                                    <h3>We want to ensure the education for the kids.</h3>
-                                                    <p>These cases are perfectly simple and easy to distinguish. In a
-                                                        free hour, when our power of choice is untrammelled and when
-                                                        nothing prevents our being able to do what we like best, every
-                                                        pleasure.</p>
-                                                    <ul>
-                                                        <li>The wise man therefore always holds in these matters.</li>
-                                                        <li>In a free hour, when our power of choice and when nothing.
-                                                        </li>
-                                                        <li>Else he endures pains to avoid worse pains.</li>
-                                                        <li>We denounce with righteous indignation and dislike men.
-                                                        </li>
-                                                        <li>Which is the same as saying through.</li>
-                                                    </ul>
+                                                    <h3>สิ่งที่นักเรียนต้องการรับบริจาคอื่นๆ</h3>
+                                                    {!! $s->description2 !!}
+
                                                 </div>
                                             </div>
                                         </div>
@@ -272,7 +249,7 @@
                             <div class="post">
                                 <div class="img-holder">
                                      {{-- style="  width: 100%;  max-height: 600px; height: auto;" --}}
-                        <img src="{{asset('storage/images/'.$s->picture)}}" style="  width: 100%;  max-height: 70px; height: auto;" alt="">
+                        <img src="{{asset('storage/images/'.$m->picture)}}" style="  width: 100%;  max-height: 70px; height: auto;" alt="">
                                 </div>
                                 <div class="details">
                                     <h4><a
@@ -304,4 +281,13 @@
         </div>
     </div>
 </div>
+
+@if (session('feedback'))
+<link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
+<script src="{{asset('js/sweetalert2.min.js')}}"></script>
+<script>
+    Swal.fire("{{session('feedback')}}",'ขอบคุณที่ร่วมบริจาคกับเรา','success');
+</script>
+@endif
+
 @endsection

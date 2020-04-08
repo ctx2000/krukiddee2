@@ -4,7 +4,7 @@ namespace App\Providers;
 use View;
 use Auth;
 use Illuminate\Support\ServiceProvider;
-use App\nontification;
+use App\Nontification;
 use App\user;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

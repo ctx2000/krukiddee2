@@ -31,29 +31,39 @@
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
-                    <div class="card">
+                    <div class="card border-dark">
                         <div class="card-header">
                             <h3 class="card-title">ครูทั้งหมด &nbsp;</h3>
 
                             <form class="form-inline ml-3" method="POST" action="{{route('admin.searchTeacher')}}">
                                 @csrf
                                 <div class="input-group input-group-sm">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+                                  </div>
+                                  <input type="text" class="form-control" name="search" placeholder="ค้นหา" aria-label="search" aria-describedby="basic-addon1">
+                                </div>
+                              </form>
+                            {{-- <form class="form-inline ml-3" method="POST" action="{{route('admin.searchTeacher')}}">
+                                @csrf
+                                <div class="input-group input-group-sm">
                                     <input class="form-control " type="search" placeholder="Search..."
                                         aria-label="Search" name="search">
                                     <div class="input-group-append">
-                                        <button class="btn btn-success" type="submit">
+                                        <button class="btn btn-outline-secondary" type="submit">
                                             <i class="fa fa-search"></i>
                                         </button>
                                     </div>
                                 </div>
-                            </form>
+                            </form> --}}
                         </div>
-                        <div class="card-body">
+                        <div class="card-body text-dark">
 
                             <table class="table">
                                 <tr>
                                     <th>ชื่อ</th>
                                     <th>นามสกุล</th>
+                                    <th>อีเมล์</th>
                                     <th>สถานะ</th>
                                     <th>เครื่องมือ</th>
                                 </tr>
@@ -64,6 +74,7 @@
                                 <tr>
                                     <td>{{$t->name}}</td>
                                     <td>{{$t->lastname}}</td>
+                                    <td>{{$t->email}}</td>
                                     <td>{{$t->status}}</td>
                                     <td>
                                         <div class="btn-group">
@@ -92,10 +103,12 @@
                                                 </a>
                                                 @endif
 
-                                                <a class="dropdown-item" href="#">
+                                                <a class="dropdown-item delete-confirm"
+                                                    href="{{route('admin.deleteUser',['id'=>$id])}}">
                                                     <li class="	fas fa-trash-alt"></li> ลบผู้ใช้
                                                 </a>
-                                                <a class="dropdown-item" href="{{route('admin.aboutTeacher',['id'=>$id])}}">
+                                                <a class="dropdown-item"
+                                                    href="{{route('admin.aboutTeacher',['id'=>$id])}}">
                                                     <li class="	fas fa-list-ul"></li> ดูข้อมูล
                                                 </a>
 
@@ -171,4 +184,30 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+<link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
+<script src="{{asset('js/sweetalert2.min.js')}}"></script>
+@if (session('feedback'))
+<script>
+    Swal.fire('ผลการทำงาน',"{{session('feedback')}}",'success');
+</script>
+@endif
+<script>
+    $('.delete-confirm').on('click', function (e) {
+            event.preventDefault();
+            const url = $(this).attr('href');
+            swal.fire({
+                title: 'ต้องการลบผู้ใช้งานนี้หรือไม่?',
+                text: 'การลบข้อมูลจะไม่สามารถกู้คืนได้',
+                icon: 'warning',
+                showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'ยืนยัน'
+            }).then((result) => {
+          if (result.value) {
+                    window.location.href = url;
+                }
+            });
+        });
+</script>
 @endsection

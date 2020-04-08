@@ -95,7 +95,7 @@
                                                         </a>
                                                         @endif
 
-                                                        <a class="dropdown-item" href="#">
+                                                        <a class="dropdown-item" href="{{route('admin.deleteUser',['id'=>$id])}}">
                                                             <li class="	fas fa-trash-alt"></li> ลบผู้ใช้
                                                         </a>
                                                         <a class="dropdown-item" href="{{route('admin.memberAbout',['id'=>$id])}}">
@@ -207,7 +207,13 @@
 </div>
 <!-- /.content-wrapper -->
 
-
+<link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
+<script src="{{asset('js/sweetalert2.min.js')}}"></script>
+@if (session('feedback'))
+<script>
+    Swal.fire('ผลการทำงาน',"{{session('feedback')}}",'success');
+</script>
+@endif
 
 
 @endsection

@@ -93,5 +93,46 @@ class TeacherController extends Controller
             return redirect()->route('teacher.dashboard');
 
     }
+    public function addDesc(Request $request){
+        //dd($request->desc2);
+//         $detail=$request->messageInput;//รับค่าจาก messageInput
+// $dom = new \domdocument();
+// $dom->loadHtml('<?xml encoding="UTF-8">'.$detail);
+// //ดึงเอาส่วนที่เป็นรูปภาพมาจาก summernote
+// $images = $dom->getelementsbytagname('img');
+// //ลูปรูปภาพและทำการเข้ารหัสรูปภาพ
+// foreach($images as $k => $img){
+// $data = $img->getattribute('src');
+// list($type, $data) = explode(';', $data);
+// list(, $data)= explode(',', $data);
+// $data = base64_decode($data);
+// //ตั้งชื่อรูปภาพใหม่โดยอ้างอิงจากเวลา
+// $image_name= time().$k.'.png';
+// //อัพโหลดภาพไปยัง public
+// $path = public_path() .'/'. $image_name;
+// //ทำการอัพโหลดภาพ
+// file_put_contents($path, $data);
+// $img->removeattribute('src');
+// $img->setattribute('src', $image_name);
+// }
+// $detail = $dom->savehtml();
+// $summernote = new Summernote;
+// $summernote->content = $detail;
+// $summernote->save();
+// return view('display',compact('summernote'));
+//show
+// public function index()
+//    {
+//         $list=DB::table('summernotes')->get();
+//         return view('index')->with('list',$list);
+//     }
+// @foreach($list as $row)
+//         <div class="alert alert-info">
+//                 {!! $row->content !!}
+//         </div>
+// @endforeach
+        // return $request->desc."----------------------------".$request->desc2;
+        dd($request->desc);
+    }
 }
 

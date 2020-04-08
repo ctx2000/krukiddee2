@@ -141,6 +141,7 @@
             </div>
             <!-- /.sidebar -->
         </aside>
+        <script src="{{ asset('js/app.js') }}"></script>
         <div id="app">
         @yield('content')
     </div>
@@ -159,7 +160,7 @@
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
-    <script src="{{ asset('js/app.js') }}"></script>
+
 
 </body>
 

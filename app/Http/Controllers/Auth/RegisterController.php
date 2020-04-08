@@ -54,11 +54,11 @@ class RegisterController extends Controller
 
             'lastname' => ['required', 'string', 'max:255'],
 
-            'tel' => ['required', 'numeric', 'digits:10'],
+            'tel' => ['required', 'string', 'between:9,13'],
 
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
 
-            'address' => ['required', 'string', 'max:255'],
+            'Address' => ['required', 'string'],
 
             'schoolname'=> ['required', 'string', 'max:255'],
 
@@ -87,10 +87,10 @@ class RegisterController extends Controller
         if(isset($data['pic_id_card'])&& $data['pic_id_card']!='0'){
             //random file name
 
-            $newFileName = uniqid().'.'.$data['pic_id_card']->extension();
+            $file_image = $request->file('picture');
+            $newFileName = uniqid().'.'.$file_image->getClientOriginalExtension();
 
-            //upload file
-            $data['pic_id_card']->storeAs('id_card',$newFileName,'public');
+            $file_image->move(public_path('storage/id_card'), $newFileName);
 
 
 
@@ -104,7 +104,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'tel' => $data['tel'],
             'schoolname' => $data['schoolname'],
-            'address' => $data['address'],
+            'address' => $data['Address'],
             'pic_id_card' => $newFileName,
             'id_card' => $id_card,
 

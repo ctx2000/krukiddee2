@@ -18,10 +18,25 @@
 
                                 </div>
                                 <div class="userData ml-3">
+                                    @php
+                                    $id = Crypt::encrypt($user->id);
+                                    @endphp
                                     <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">
                                         ชื่อสมาชิก : {{$user->name}}</h2>
                                     <h6 class="d-block"> บริจาคไปแล้ว : {{$count}} ครั้ง</h6>
                                     <h6 class="d-block"> ยอดบริจาครวม : {{number_format($sum)}} บาท</h6>
+                                    @if ($user->status=='ban')
+                                    <a class="btn btn-success" href="{{route('admin.memberUnban',['id'=>$id])}}">
+                                        <li class="	far fa-calendar-check"></li> ปลดแบน
+                                    </a>
+                                    @else
+
+                                    <a class="btn btn-info cause" href="#" data-name="{{$user->name}}" data-id="{{$id}}">
+                                        <li class="fas fa-ban"></li> แบนผู้ใช้
+                                    </a>
+                                    @endif
+                                    <a href="{{route('admin.deleteUser',['id'=>$id])}}"
+                                        class="btn btn-danger delete-confirm">ลบข้อมูลผู้ใช้</a>
                                 </div>
                                 <div class="ml-auto">
                                     <input type="button" class="btn btn-primary d-none" id="btnDiscard"
@@ -111,9 +126,11 @@
                                 </tr>
                                 @foreach ($donate as $d)
                                 <tr>
-                                <td> <a href="#">{{$d->name.' '.$d->lastname}}</a> </td>
-                                <td>{{$d->price}}</td>
-                                <td>{{$d->description}}</td>
+                                    <td> <a
+                                            href="{{route('admin.aboutStudent',['id'=>$d->student_id])}}">{{$d->name.' '.$d->lastname}}</a>
+                                    </td>
+                                    <td>{{$d->price}}</td>
+                                    <td>{{$d->description}}</td>
                                 </tr>
                                 @endforeach
                             </table>
@@ -130,4 +147,79 @@
 
 </div>
 </div>
+<link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
+<script src="{{asset('js/sweetalert2.min.js')}}"></script>
+@if (session('feedback'))
+<script>
+    Swal.fire('ผลการทำงาน',"{{session('feedback')}}",'success');
+</script>
+@endif
+<script>
+    $('.delete-confirm').on('click', function (e) {
+    event.preventDefault();
+    const url = $(this).attr('href');
+    swal.fire({
+        title: 'ต้องการลบผู้ใช้งานนี้หรือไม่?',
+        text: 'การลบข้อมูลจะไม่สามารถกู้คืนได้',
+        icon: 'warning',
+        showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'ยืนยัน'
+    }).then((result) => {
+  if (result.value) {
+            window.location.href = url;
+        }
+    });
+});
+</script>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">ระบุสาเหตุการแบนผู้ใช้</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{route('admin.memberBaned')}}">
+                    @csrf
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">แบนผู้ใช้:</label>
+                        <input type="text" class="form-control" id="name" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">สาเหตุ:</label>
+                        <textarea class="form-control" id="cause" name="cause"></textarea>
+                    </div>
+                    <input type="hidden" id="id" name="id">
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">ยืนยัน</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.cause').click(function(){
+// get data from edit btn
+
+var name = $(this).attr('data-name');
+var id = $(this).attr('data-id');
+
+
+// set value to modal
+$("#name").val(name);
+$("#id").val(id);
+
+
+$('#myModal').modal('show');
+});
+</script>
 @endsection

@@ -87,7 +87,7 @@
                                     </a>
                                     @endif
 
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{route('admin.deleteStudent',['id'=>$s->id])}}">
                                         <li class="	fas fa-trash-alt"></li> ลบผู้ใช้
                                     </a>
                                 <a class="dropdown-item" href="{{route('admin.aboutStudent',['id'=>$s->id])}}">
@@ -179,6 +179,13 @@
         </div>
     </div>
 </div>
+<link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
+<script src="{{asset('js/sweetalert2.min.js')}}"></script>
+@if (session('feedback'))
+<script>
+    Swal.fire('ผลการทำงาน',"{{session('feedback')}}",'success');
+</script>
+@endif
 <script>
     $(document).on('click', '[data-toggle="lightbox"]', function(event) {
                 event.preventDefault();

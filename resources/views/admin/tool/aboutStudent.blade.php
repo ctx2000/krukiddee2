@@ -21,7 +21,10 @@
                                 </div>
                                 <div class="userData ml-3">
                                     <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">
-                                        โรงเรียน : {{$teacher->schoolname}}</h2>
+                                        @php
+                                        $id = Crypt::encrypt($teacher->id);
+                                        @endphp
+                                        ครูผู้ดูแล : <a href="{{route('admin.aboutTeacher',['id'=>$id])}}"> {{$teacher->name.' '.$teacher->lastname}}</a></h2>
                                     <h6 class="d-block"> รับบริจาคทั้งหมด : {{$count}} ครั้ง</h6>
                                     <h6 class="d-block"> ยอดบริจาครวม : {{number_format($sum)}} บาท</h6>
                                 </div>

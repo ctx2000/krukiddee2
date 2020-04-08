@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 3 | Dashboard</title>
+    <link rel="icon" href="{{asset('storage/cover/icon.ico')}}" type="image/x-icon" />
+    <title>Krukiddee</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -12,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
 
 </head>
 
@@ -31,23 +33,15 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="{{route('teacher.show')}}" class="nav-link">Contact</a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </li>
             </ul>
 
             <!-- SEARCH FORM -->
-            <form class="form-inline ml-3">
+        <form class="form-inline ml-3" method="POST" action="{{route('admin.search')}}">
+            @csrf
                 <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                        aria-label="Search">
+                    <input class="form-control form-control-navbar" type="search" placeholder="ค้นหา"
+                        aria-label="Search" name="search">
                     <div class="input-group-append">
                         <button class="btn btn-navbar" type="submit">
                             <i class="fa fa-search"></i>
@@ -71,7 +65,7 @@
                     </form>
                 </li>
                 <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell"></i>
                         <span class="badge badge-warning ">15</span>
@@ -96,7 +90,7 @@
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                     </div>
-                </li>
+                </li> --}}
 
             </ul>
         </nav>
@@ -120,7 +114,7 @@
                         {{-- <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"> --}}
                     </div>
                     <div class="info">
-                        <a href="{{route('teacher.edit')}}" class="d-block">{{ auth()->user()->name }} |
+                        <a href="{{route('admin.edit')}}" class="d-block">{{ auth()->user()->name }} |
                             <u>แก้ไข</u></a>
                     </div>
                 </div>
@@ -229,7 +223,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/UI/general.html" class="nav-link">
+                                    <a href="{{route('admin.slideBig')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>รูปสไลด์</p>
                                     </a>
@@ -250,8 +244,8 @@
             <!-- /.sidebar -->
         </aside>
         <script src="{{ asset('js/app.js') }}"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+        {{-- <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> --}}
 
             @yield('content')
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\teacher;
 
 use App\Student;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -44,6 +45,9 @@ class StudentController extends Controller
      */
     public function store(StudentRequest $request)
     {
+        if (!isset($request->description1)) {
+
+
         $student = new Student();
         $student->name = $request->name;
         $student->lastname = $request->lastname;
@@ -52,7 +56,7 @@ class StudentController extends Controller
         $student->bankAccountName = $request->bankAccountName;
         $student->bankName = $request->bankName;
         $student->bankNumber = $request->bankNumber;
-        $student->description = $request->description;
+        // $student->description = $request->description;
         $student->level = $request->level;
         $student->closeDonate = $request->closeDonate;
         $student->maxDonate = $request->maxDonate;
@@ -61,26 +65,38 @@ class StudentController extends Controller
         $student->birthday = $request->birthday;
         $student->id_card = $request->id_card;
         $student->bank_of = $request->bank_of;
+        $student->district = $request->district;
+        $student->province = $request->province;
         $student->user_id = auth()->user()->id;
 
-        if($request->hasFile('picture')){
+            if($request->hasFile('picture')){
             //random file name
-            //$newFileName = str_random(40);
-            $newFileName = uniqid().'.'.$request->picture->extension();
+            $file_image = $request->file('picture');
+            $newFileName = uniqid().'.'.$file_image->getClientOriginalExtension();
 
-            //upload file
-            $request->picture->storeAs('images',$newFileName,'public');
-            $student->picture = $newFileName;
+            $file_image->move(public_path('storage/images'), $newFileName);
+                $student->picture = $newFileName;
 
-            //resize
-            // $path = Storage::disk('public')->path('images/resize/');
-            // Image::make($request->picture->getRealPath(),$newFileName)->resize(120,null,function($contraint){
-            //     $contraint->aspectRatio();
-            // })->save($path.$newFileName);
+            }
+
+            $student->save();
+
+            return view('teacher/addDesc',[
+                'id'=>$student->id
+            ]);
+        }else{
+
+            DB::table('students')
+            ->where('id', $request->id)
+            ->update([
+                'description1'=>$request->description1,
+                'description2'=>$request->description2
+
+            ]);
+            // dd($request->description2);
+             return redirect()->route('student.index')->with('feedback','เพิ่มนักเรียนสำเร็จ');
         }
 
-        $student->save();
-        return redirect()->route('student.index');
 
     }
 
@@ -120,12 +136,15 @@ class StudentController extends Controller
         $student->name = $request->name;
         $student->lastname = $request->lastname;
         $student->address = $request->address;
+        $student->district = $request->district;
+        $student->province = $request->province;
         $student->grade = $request->grade;
         $student->tel = $request->tel;
         $student->bankAccountName = $request->bankAccountName;
         $student->bankName = $request->bankName;
         $student->bankNumber = $request->bankNumber;
-        $student->description = $request->description;
+        $student->description1 = $request->description1;
+        $student->description2 = $request->description2;
         $student->level = $request->level;
         $student->closeDonate = $request->closeDonate;
         $student->maxDonate = $request->maxDonate;
@@ -137,13 +156,10 @@ class StudentController extends Controller
         $student->user_id = auth()->user()->id;
 
         if($request->hasFile('picture')){
-            Storage::disk('public')->delete('images/'.$student->picture);
-            //random file name
-            //$newFileName = str_random(40);
-            $newFileName = uniqid().'.'.$request->picture->extension();
+            $file_image = $request->file('picture');
+            $newFileName = uniqid().'.'.$file_image->getClientOriginalExtension();
 
-            //upload file
-            $request->picture->storeAs('images',$newFileName,'public');
+            $file_image->move(public_path('storage/images'), $newFileName);
             $student->picture = $newFileName;
 
             //resize
@@ -154,7 +170,7 @@ class StudentController extends Controller
         }
 
         $student->save();
-        return redirect()->route('student.index');
+        return redirect()->route('student.index')->with('feedback','แก้ไขข้อมูลสำเร็จ');
     }
 
     /**

@@ -48,7 +48,7 @@
                     <div class="col col-md-6 col-sm-5 col-12">
                         <div class="contact-info">
                             <ul>
-
+                            <li><a href="#">{{auth()->user()->name}}</a></li>
                                 <li>
                                     <a class="" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
@@ -59,6 +59,7 @@
                                         @csrf
                                     </form>
                                 </li>
+
 
                             </ul>
                         </div>
@@ -115,6 +116,7 @@
 
                         <li><a href="about.html">เกี่ยวกับเรา</a></li>
 
+
                         {{-- <li class="menu-item-has-children">
                             <a class="nav-link" data-toggle="dropdown" href="#">
                                 <i class="fa fa-bell"></i>
@@ -147,22 +149,74 @@
                         </li>
                         <li><a href="about.html">เกี่ยวกับเรา</a></li>
 
+
                     </ul>
                     @endauth
 
                 </div><!-- end of nav-collapse -->
+                <div class="cart-search-contact">
+                    @auth
+                    <div class="mini-cart">
+                        <button class="cart-toggle-btn">
+                            <span class="cart-count">02</span>
+                            <i class="fa fa-bell-o" style="font-size:18px;"></i>
+                            </button>
+                        <div class="mini-cart-content">
+                            <div class="mini-cart-title">
+                                <p>Shopping Cart</p>
+                            </div>
+                            <div class="mini-cart-items">
+                                <div class="mini-cart-item clearfix">
+                                    <div class="mini-cart-item-image">
+                                        <a href="#"><img src="assets/images/shop/mini/img-1.jpg" alt="Hoodie with zipper"></a>
+                                    </div>
+                                    <div class="mini-cart-item-des">
+                                        <a href="#">Hoodie with zipper</a>
+                                        <span class="mini-cart-item-price">$25.15</span>
+                                        <span class="mini-cart-item-quantity">x 1</span>
+                                    </div>
+                                </div>
+                                <div class="mini-cart-item clearfix">
+                                    <div class="mini-cart-item-image">
+                                        <a href="#"><img src="assets/images/shop/mini/img-2.jpg" alt="Hoodie with zipper"></a>
+                                    </div>
+                                    <div class="mini-cart-item-des">
+                                        <a href="#">Hoodie with zipper</a>
+                                        <span class="mini-cart-item-price">$12.99</span>
+                                        <span class="mini-cart-item-quantity">x 2</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mini-cart-action clearfix">
+                                <span class="mini-checkout-price">$255.12</span>
+                                <a href="" class="theme-btn-s4">View Cart</a>
+                            </div>
+                        </div>
+                    </div>
 
+                    @endauth
+                    <div class="header-search-form-wrapper">
+                        <button class="search-toggle-btn"><i class="fi flaticon-magnifying-glass"></i></button>
+                        <div class="header-search-form">
+                            <form>
+                                <div>
+                                    <input type="text" class="form-control" placeholder="Search here...">
+                                    <button type="submit"><i class="fi flaticon-magnifying-glass"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div><!-- end of container -->
         </nav>
     </header>
+
     @yield('content')
     <!-- All JavaScript files
     ================================================== -->
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <!-- Plugins for this template -->
     <script src="{{ asset('js/jquery-plugin-collection.js') }}"></script>
-    <!-- Custom script for this template -->
     <script src="{{ asset('js/script.js') }}"></script>
 </body>
 
