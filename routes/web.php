@@ -129,4 +129,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/test', function () {
     return view('test');
 });
+Route::get('administrator/login', function () {
+    return view('pages.admin.auth.login');
+});
+Route::get('administrator/blank', function () {
+    return view('pages.admin.general.blank');
+});
+Route::get('administrator/member', function () {
+    return view('pages.admin.member.index');
+});
 Route::post('/teacher/desc', 'teacher\TeacherController@addDesc')->name('teacher.addDesc')->middleware('teacher');
