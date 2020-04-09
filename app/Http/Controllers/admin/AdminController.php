@@ -23,13 +23,17 @@ class AdminController extends Controller
         //$credentials = $request->only('email', 'password');
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'type' => 0]))
     	{
-            return view('pages.admin.general.blank');
-    		//return redirect()->route('admin.dashboard');
+
+    		return redirect()->route('admin.index');
         }else{
             Auth::logout();
             return view('pages/admin/auth/login');
         }
 
+    }
+    public function indexs(){
+
+        return view('pages.admin.general.blank');
     }
     public function index(){
         $user = User::where('type','=','1')->count();

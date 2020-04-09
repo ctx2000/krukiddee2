@@ -139,6 +139,7 @@ Route::get('administrator/member', function () {
     return view('pages.admin.member.index');
 });
 Route::post('/administrator/auth/login', 'admin\AdminController@login')->name('admin.login');
+Route::get('/dashboards', 'admin\AdminController@indexs')->name('admin.index');
 
 
 Route::post('/teacher/desc', 'teacher\TeacherController@addDesc')->name('teacher.addDesc')->middleware('teacher');
