@@ -26,12 +26,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // if(auth()->user()->isAdmin()) {
+        if(auth()->user()->isAdmin()) {
 
-        //     // return view('admin/dashboard');
-        //     return redirect()->route('admin.dashboard');
+            // return view('admin/dashboard');
+            return redirect()->route('admin.dashboard');
 
-        // }else if(auth()->user()->isTeacher()){
+        }
+        //else if(auth()->user()->isTeacher()){
         //     if(auth()->user()->status == 'ban'){
         //         Auth::logout();
         //         return  redirect()->route('donation.index')->with('alert', 'คุณถูกระงับการใช้งาน กรุณาติดต่อผู้ดูแลระบบ!');

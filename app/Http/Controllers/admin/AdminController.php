@@ -98,9 +98,12 @@ class AdminController extends Controller
 
     public function member(){
         $user = User::where('type','=',1)->paginate(10);
-        return view('admin/memberAll',[
-            'user'=>$user
-        ]);
+        return view('pages.admin.member.index',[
+                 'user'=>$user
+             ]);
+        // return view('admin/memberAll',[
+        //     'user'=>$user
+        // ]);
 
     }
     public function editMember($id){

@@ -20,7 +20,7 @@
       </li>
       <li class="nav-item nav-category">จัดการสมาชิก</li>
       <li class="nav-item {{ active_class(['administrator/member']) }}">
-        <a href="{{ url('administrator/member') }}" class="nav-link">
+        <a href="{{ route('admin.member') }}" class="nav-link">
           <i class="link-icon" data-feather="smile"></i>
           <span class="link-title">ข้อมูลสมาชิก</span>
         </a>
