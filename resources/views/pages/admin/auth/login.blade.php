@@ -15,17 +15,18 @@
             <div class="auth-form-wrapper px-4 py-5">
               <a href="#" class="noble-ui-logo d-block mb-2">Kru<span>Kiddee</span></a>
               <h5 class="text-muted font-weight-normal mb-4">ยินดีต้อนรับ! เข้าสู่ระบบด้วยอีเมลของคุณ.</h5>
-              <form class="forms-sample">
+            <form class="forms-sample" action="{{route('admin.login')}}" method="POST">
+                @csrf
                 <div class="form-group">
                   <label for="exampleInputEmail1">อีเมล</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                  <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">รหัสผ่าน</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" autocomplete="current-password" placeholder="Password">
+                  <input type="password" name="password" class="form-control" id="exampleInputPassword1" autocomplete="current-password" placeholder="Password">
                 </div>
                 <div class="mt-3">
-                  <a href="{{ url('/') }}" class="btn btn-primary btn-block mb-2 mb-md-0">เข้าสู่ระบบ</a>
+                  <button type="submit" class="btn btn-primary btn-block mb-2 mb-md-0">เข้าสู่ระบบ</button>
                 </div>
                 <a href="{{ url('/auth/register') }}" class="d-block mt-3 text-muted">เข้าสู่ระบบไม่ได้ ? <span class="text-primary">ลืมรหัสผ่าน</span></a>
               </form>

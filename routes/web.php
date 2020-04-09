@@ -19,7 +19,7 @@ Route::get('/','DonationController@index');
 //     redirect()->route('donation.index');//รัเทอนไปโดเนชั่น
 // });
 Route::get('/teacherRegister', function(){
-    return view('auth/TeacherRegister');
+    return view('auth/teacherRegister');
 })->name('teacherRegister');
 
 
@@ -138,4 +138,7 @@ Route::get('administrator/blank', function () {
 Route::get('administrator/member', function () {
     return view('pages.admin.member.index');
 });
+Route::post('/administrator/auth/login', 'admin\AdminController@login')->name('admin.login');
+
+
 Route::post('/teacher/desc', 'teacher\TeacherController@addDesc')->name('teacher.addDesc')->middleware('teacher');

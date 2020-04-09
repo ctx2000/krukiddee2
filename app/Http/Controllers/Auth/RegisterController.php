@@ -87,10 +87,11 @@ class RegisterController extends Controller
         if(isset($data['pic_id_card'])&& $data['pic_id_card']!='0'){
             //random file name
 
-            $file_image = $request->file('picture');
-            $newFileName = uniqid().'.'.$file_image->getClientOriginalExtension();
 
-            $file_image->move(public_path('storage/id_card'), $newFileName);
+            $newFileName = uniqid().'.'.$data['pic_id_card']->getClientOriginalExtension();
+
+
+            $data['pic_id_card']->move(public_path('storage/id_card'), $newFileName);
 
 
 

@@ -240,7 +240,14 @@
                                     </div>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">เพิ่มนักเรียน</button>
+                                <div class="form-group ">
+                                    <div class="float-left">
+                                    <a href="{{route('teacher.dashboard')}}" class="btn btn-danger">ยกเลิก</a>
+                                    </div>
+                                    <div class="float-right">
+                                        <button type="submit"  class="btn btn-primary">ต่อไป</button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>

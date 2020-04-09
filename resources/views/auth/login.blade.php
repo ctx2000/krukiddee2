@@ -130,7 +130,7 @@
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/jquery-plugin-collection.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
-    @if ($errors->any())
+    @if ($errors->any() || session('feedback') != null)
 
 
     <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">

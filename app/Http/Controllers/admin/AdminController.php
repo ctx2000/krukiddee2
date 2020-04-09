@@ -14,8 +14,23 @@ use Freshbitsweb\Laratables\Laratables;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 
+use Illuminate\Support\Facades\Auth;
+
+
 class AdminController extends Controller
 {
+    public function login(Request $request){
+        //$credentials = $request->only('email', 'password');
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'type' => 0]))
+    	{
+            return view('pages.admin.general.blank');
+    		//return redirect()->route('admin.dashboard');
+        }else{
+            Auth::logout();
+            return view('pages/admin/auth/login');
+        }
+
+    }
     public function index(){
         $user = User::where('type','=','1')->count();
         $teacher = User::where('type','=','3')->count();
