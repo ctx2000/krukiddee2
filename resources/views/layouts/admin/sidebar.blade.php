@@ -19,15 +19,15 @@
         </a>
       </li>
       <li class="nav-item nav-category">จัดการสมาชิก</li>
-      <li class="nav-item {{ active_class(['administrator/member']) }}">
+      <li class="nav-item {{ active_class(['admin/member/all']) }}">
         <a href="{{ route('admin.member') }}" class="nav-link">
           <i class="link-icon" data-feather="smile"></i>
           <span class="link-title">ข้อมูลสมาชิก</span>
         </a>
       </li>
       <li class="nav-item nav-category">จัดการครู</li>
-      <li class="nav-item {{ active_class(['apps/chat']) }}">
-        <a href="{{ url('/apps/chat') }}" class="nav-link">
+      <li class="nav-item {{ active_class(['admin/teacher/all']) }}">
+        <a href="{{ route('admin.teacher') }}" class="nav-link">
           <i class="link-icon" data-feather="book-open"></i>
           <span class="link-title">ข้อมูลครู</span>
         </a>

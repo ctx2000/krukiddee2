@@ -202,10 +202,13 @@ class AdminController extends Controller
     }
 
     public function teacher(){
-        $teacher = User::where('type','=',3)->paginate(5);
-        return view('admin/teacherAll',[
-            'teacher'=>$teacher
+        $user = User::where('type','=',3)->paginate(5);
+        return view('pages.admin.teacher.index',[
+            'user'=>$user
         ]);
+        // return view('admin/teacherAll',[
+        //     'teacher'=>$teacher
+        // ]);
     }
     public function searchTeacher(request $request){
 

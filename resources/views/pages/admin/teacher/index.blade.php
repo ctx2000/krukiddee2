@@ -32,6 +32,7 @@ Krukidee | ข้อมูลครู
                                 <th>ชื่อ-นามสกุล</th>
                                 <th>อีเมล</th>
                                 <th>โทรศัพท์</th>
+                                <th>โรงเรียน</th>
                                 <th>สถานะ</th>
                                 <th width=10 class="text-center">จัดการ</th>
                             </tr>
@@ -43,10 +44,17 @@ Krukidee | ข้อมูลครู
                                 $id = Crypt::encrypt($s->id);
                                 @endphp
                                 <td>{{$s->id}}</td>
-                                <td>{{$s->name}}</td>
+                                <td>{{$s->name." ".$s->lastname}}</td>
                                 <td>{{$s->email}}</td>
                                 <td>{{$s->tel}}</td>
-                                <td>{{$s->status}}</td>
+                                <td>{{$s->schoolname}}</td>
+                                <td>
+                                    @if ($s->status==null)
+                                        ปกติ
+                                    @else
+                                        ระงับการใข้งาน
+                                    @endif
+                                </td>
 
                                 <td>
                                     <div class="btn-group">
@@ -59,16 +67,25 @@ Krukidee | ข้อมูลครู
                                         </button>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item"
-                                                href="{{route('admin.memberAbout',['id'=>$id])}}"><i data-feather="eye"
+                                                href="{{route('admin.aboutTeacher',['id'=>$id])}}"><i data-feather="eye"
                                                     class="icon-sm mr-2"></i> <span class="">ดูข้อมูล</span></a>
-                                            <a class="dropdown-item" href="{{route('admin.editMember',['id'=>$id])}}"><i
+                                            <a class="dropdown-item" href="{{route('admin.editTeacher',['id'=>$id])}}"><i
                                                     data-feather="edit-2" class="icon-sm mr-2"></i> <span
                                                     class="">แก้ไข</span></a>
-                                            <a class="dropdown-item cause" id="cause" href="#" data-name="{{$s->name}}"
-                                                data-id="{{$id}}"><i data-feather="slash" class="icon-sm mr-2"></i>
-                                                <span class="">แบนผู้ใช้</span></a>
+                                                    @if ($s->status=='ban')
+                                                <a class="dropdown-item"
+                                                    href="{{route('admin.memberUnban',['id'=>$id])}}">
+                                                    <li class="	far fa-calendar-check"></li> ปลดแบน
+                                                </a>
+                                                @else
+                                                <a class="dropdown-item cause" id="cause" href="#" data-name="{{$s->name}}"
+                                                    data-id="{{$id}}"><i data-feather="slash" class="icon-sm mr-2"></i>
+                                                    <span class="">แบนผู้ใช้</span></a>
+                                                @endif
+
+
                                             <a class="dropdown-item"
-                                                href="{{route('admin.memberAbout',['id'=>$id])}}"><i
+                                                href="{{route('admin.deleteUser',['id'=>$id])}}"><i
                                                     data-feather="trash" class="icon-sm mr-2"></i> <span
                                                     class="">ลบข้อมูล</span></a>
                                         </div>
