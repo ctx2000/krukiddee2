@@ -119,7 +119,7 @@ class AdminController extends Controller
             'name'=>['required',  'max:255'],
             'lastname'=>['required','max:255'],
             'email'=>['required','E-mail','max:255'],
-            'tel'=>['required','numeric','digits:10'],
+            'tel'=>['required','numeric','digits:13'],
 
             'Address'=>['required',  'max:255'],
 
@@ -204,10 +204,13 @@ class AdminController extends Controller
     }
 
     public function teacher(){
-        $teacher = User::where('type','=',3)->paginate(5);
-        return view('admin/teacherAll',[
-            'teacher'=>$teacher
+        $user = User::where('type','=',3)->paginate(5);
+        return view('pages.admin.teacher.index',[
+            'user'=>$user
         ]);
+        // return view('admin/teacherAll',[
+        //     'teacher'=>$teacher
+        // ]);
     }
     public function searchTeacher(request $request){
 
@@ -392,6 +395,45 @@ class AdminController extends Controller
         ]);
     }
     public function studentStore(Request $request){
+        $request->validate([
+            'name'=>['required',  'max:255'],
+            'lastname'=>['required','max:255'],
+
+            'tel'=>['numeric','digits:13'],
+
+            'Address'=>['required',  'max:255'],
+            'bankAccountName'=>['required','max:255'],
+            'bankName'=>['required','max:255'],
+            'bankNumber'=>['numeric','required'],
+            'level'=>['required'],
+            'closeDonate'=>['required'],
+            'maxDonate'=>['numeric','required'],
+            'grade'=>['required','max:255'],
+            'age'=>['required','max:255'],
+            'birthday'=>['required'],
+            'bank_of'=>['required','max:255'],
+            'district'=>['required','max:255'],
+            'province'=>['required','max:255'],
+        ],[
+            'name.required'=> 'กรุณากรอกชื่อ',
+            'lastname.required'=> 'กรุณากรอกนามสกุล',
+            'tel.digits' => 'กรอกหมายเลขโทรศัพท์10ตัว',
+            'tel.numeric' => 'กรอกตัวเลขเท่านั้น',
+            'Address.required'=> 'กรุณากรอกข้อมูล',
+            'bankAccountName.required'=> 'กรุณากรอกข้อมูล',
+            'bankName.required'=> 'กรุณากรอกข้อมูล',
+            'bankNumber.required'=> 'กรุณากรอกข้อมูล',
+            'level.required'=> 'กรุณากรอกข้อมูล',
+            'closeDonate.required'=> 'กรุณากรอกข้อมูล',
+            'maxDonate.required'=> 'กรุณากรอกข้อมูล',
+            'grade.required'=> 'กรุณากรอกข้อมูล',
+            'age.required'=> 'กรุณากรอกข้อมูล',
+            'birthday.required'=> 'กรุณากรอกข้อมูล',
+            'bank_of.required'=> 'กรุณากรอกข้อมูล',
+            'district.required'=> 'กรุณากรอกข้อมูล',
+            'province.required'=> 'กรุณากรอกข้อมูล',
+
+        ]);
         if (!isset($request->description1)) {
 
 

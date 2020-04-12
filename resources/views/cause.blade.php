@@ -68,6 +68,11 @@
                                                 <div class="case-bb-text">
                                                     <h3>สิ่งที่นักเรียนต้องการรับบริจาคอื่นๆ</h3>
                                                     {!! $s->description2 !!}
+                                                    @php
+                                                        $age = \Carbon\Carbon::parse($s->birthday)->age;
+                                                    @endphp
+                                                    {{$age}}
+
 
                                                 </div>
                                             </div>
@@ -241,6 +246,8 @@
                         @foreach ($max as $m)
                         <?php $myDateTime = DateTime::createFromFormat('Y-m-d', $m->closeDonate);
                                     $formattedweddingdate = $myDateTime->format('d-m-Y');
+
+
                                     $id =[
                                                 'id' =>$m->id,
                                             ];
