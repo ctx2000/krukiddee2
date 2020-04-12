@@ -13,7 +13,7 @@ Krukidee | ข้อมูลสมาชิก
 <!-- Page content here -->
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">ข้อมูลสมาชิก</a></li>
+        <li class="breadcrumb-item"><a href="{{url('admin/member/all')}}">ข้อมูลสมาชิก</a></li>
         <li class="breadcrumb-item active" aria-current="page">ทั้งหมด</li>
     </ol>
 </nav>
@@ -32,21 +32,35 @@ Krukidee | ข้อมูลสมาชิก
                                 <th>ชื่อ-นามสกุล</th>
                                 <th>อีเมล</th>
                                 <th>โทรศัพท์</th>
-                                <th>สถานะ</th>
+                                <th width=10 class="text-center">สถานะ</th>
                                 <th width=10 class="text-center">จัดการ</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                            $number = 1;
+                            @endphp
                             @foreach ($user as $s)
                             <tr>
                                 @php
                                 $id = Crypt::encrypt($s->id);
                                 @endphp
-                                <td>{{$s->id}}</td>
+                                <!-- <td>{{$s->id}}</td> -->
+                                <td>{{$number++}}</td>
                                 <td>{{$s->name}}</td>
                                 <td>{{$s->email}}</td>
                                 <td>{{$s->tel}}</td>
-                                <td>{{$s->status}}</td>
+                                <td class="text-center">
+                                @if($s->status == '')
+                                  <span class="badge badge-pill badge-success" data-toggle="tooltip" data-placement="left" title="เปิดใช้งาน">
+                                    <i data-feather="user-check" class="icon-sm"></i>
+                                  </span>
+                                @else
+                                  <span class="badge badge-pill badge-danger" data-toggle="tooltip" data-placement="left" title="ปิดใช้งาน">
+                                    <i data-feather="user-x" class="icon-sm"></i>
+                                  </span>
+                                @endif
+                                </td>
 
                                 <td>
                                     <div class="btn-group">
@@ -58,19 +72,32 @@ Krukidee | ข้อมูลสมาชิก
                                             <span class="sr-only">Toggle Dropdown</span>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item"
-                                                href="{{route('admin.memberAbout',['id'=>$id])}}"><i data-feather="eye"
-                                                    class="icon-sm mr-2"></i> <span class="">ดูข้อมูล</span></a>
-                                            <a class="dropdown-item" href="{{route('admin.editMember',['id'=>$id])}}"><i
-                                                    data-feather="edit-2" class="icon-sm mr-2"></i> <span
-                                                    class="">แก้ไข</span></a>
-                                            <a class="dropdown-item cause" id="cause" href="#" data-name="{{$s->name}}"
-                                                data-id="{{$id}}"><i data-feather="slash" class="icon-sm mr-2"></i>
-                                                <span class="">แบนผู้ใช้</span></a>
-                                            <a class="dropdown-item"
-                                                href="{{route('admin.memberAbout',['id'=>$id])}}"><i
+                                            @if($s->status == '')
+                                            <a class="dropdown-item cause" id="cause" href="#" data-name="{{$s->name}}" data-id="{{$id}}">
+                                              <i data-feather="user-x" class="icon-sm mr-2"></i>
+                                              <span>แบนผู้ใช้</span>
+                                            </a>
+                                            @else
+                                            <a class="dropdown-item" href="#">
+                                              <i data-feather="user-check" class="icon-sm mr-2"></i>
+                                            <span>ปลดแบบผู้ใช้</span>
+                                            </a>
+                                            @endif
+                                            <a class="dropdown-item" href="{{route('admin.memberAbout',['id'=>$id])}}">
+                                              <i data-feather="eye" class="icon-sm mr-2"></i>
+                                              <span class="">ดูข้อมูล</span>
+                                            </a>
+                                            <a class="dropdown-item" href="{{route('admin.editMember',['id'=>$id])}}">
+                                              <i data-feather="edit-2" class="icon-sm mr-2"></i>
+                                              <span>แก้ไขข้อมูล</span>
+                                            </a>
+                                            <a class="dropdown-item" onclick="onDeleteMember({{$s->id}})" href="#"><i
                                                     data-feather="trash" class="icon-sm mr-2"></i> <span
                                                     class="">ลบข้อมูล</span></a>
+                                            <form id="delete-form-{{$s->id}}" action="{{route('admin.deleteUser', ['id'=>$id])}}" method="GET" style="display:none;">
+                                              @csrf
+                                              @method('DELETE')
+                                          </form>
                                         </div>
                                     </div>
                                 </td>
@@ -84,10 +111,10 @@ Krukidee | ข้อมูลสมาชิก
     </div>
 </div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">ระบุสาเหตุการแบนผู้ใช้</h5>
+                <h5 class="modal-title" id="exampleModalLabel">ระบุสาเหตุการแบนผู้ใช้งาน</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -101,36 +128,22 @@ Krukidee | ข้อมูลสมาชิก
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">สาเหตุ:</label>
-                        <textarea class="form-control" id="cause" name="cause"></textarea>
+                        <textarea type="text" class="form-control" id="cause" name="cause" placeholder="ระบุสาเหตุ" rows="5"></textarea>
                     </div>
                     <input type="hidden" id="id" name="id">
 
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
                 <button type="submit" class="btn btn-primary">ยืนยัน</button>
                 </form>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+
 
             </div>
         </div>
     </div>
 </div>
-<script>
-    $('.cause').click(function(){
-// get data from edit btn
 
-var name = $(this).attr('data-name');
-var id = $(this).attr('data-id');
-
-
-// set value to modal
-$("#name").val(name);
-$("#id").val(id);
-
-
-$('#myModal').modal('show');
-});
-</script>
 @endsection
 
 @push('plugin-scripts')
@@ -142,4 +155,38 @@ $('#myModal').modal('show');
 @push('custom-scripts')
 <!-- Custom js here -->
 {!! Html::script('admin/assets/js/data-table.js') !!}
+<script>
+    $('.cause').click(function(){
+      // get data from edit btn
+      var name = $(this).attr('data-name');
+      var id = $(this).attr('data-id');
+      // set value to modal
+      $("#name").val(name);
+      $("#id").val(id);
+
+      $('#myModal').modal('show');
+    });
+
+    function onDeleteMember(id) {
+        Swal.fire({
+          title: 'คุณต้องการลบใช่หรือไม่?',
+          text: "คุณจะไม่สามารถยกเลิกสิ่งนี้ได้!",
+          icon: 'error',
+          showCancelButton: true,
+          confirmButtonClass: 'ml-2',
+          confirmButtonText: 'ใช่, ฉันต้องการลบ!',
+          cancelButtonText: 'ยกเลิก',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.value) {
+            event.preventDefault();
+            document.getElementById('delete-form-'+id).submit();
+          } else if (
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            return;
+          }
+        })
+      }
+</script>
 @endpush

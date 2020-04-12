@@ -14,6 +14,7 @@
   <!-- plugin css -->
   {!! Html::style('admin/assets/fonts/feather-font/css/iconfont.css') !!}
   {!! Html::style('admin/assets/plugins/perfect-scrollbar/perfect-scrollbar.css') !!}
+  {!! Html::style('admin/assets/plugins/sweetalert2/sweetalert2.min.css') !!}
   <!-- end plugin css -->
 
   @stack('plugin-styles')
@@ -43,6 +44,8 @@
     {!! Html::script('admin/js/app.js') !!}
     {!! Html::script('admin/assets/plugins/feather-icons/feather.min.js') !!}
     {!! Html::script('admin/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js') !!}
+    {!! Html::script('/admin/assets/plugins/sweetalert2/sweetalert2.min.js') !!}
+    {!! Html::script('/admin/assets/plugins/promise-polyfill/polyfill.min.js') !!}
     <!-- end base js -->
 
     <!-- plugin js -->
@@ -54,5 +57,6 @@
     <!-- end common js -->
 
     @stack('custom-scripts')
+    @include('sweetalert::alert')
 </body>
 </html>

@@ -129,14 +129,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/test', function () {
     return view('test');
 });
-Route::get('administrator/login', function () {
-    return view('pages.admin.auth.login');
-});
 Route::get('administrator/blank', function () {
     return view('pages.admin.general.blank');
 });
-Route::get('administrator/member', function () {
-    return view('pages.admin.member.index');
+Route::get('administrator/edit', function () {
+    return view('pages.admin.member.edit');
+});
+Route::get('administrator/show', function () {
+    return view('pages.admin.member.show');
 });
 Route::post('/administrator/auth/login', 'admin\AdminController@login')->name('admin.login');
 Route::get('/dashboards', 'admin\AdminController@indexs')->name('admin.index');

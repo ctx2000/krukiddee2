@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\User;
 use App\Donation;
 use App\Student;
@@ -162,6 +163,7 @@ class AdminController extends Controller
         DB::table('users')
             ->where('id', $id)
             ->update(['status' => 'ban','cause'=>$request->cause]);
+             Alert::success('แบนผู้ใช้งานสำเร็จ', 'แบนผู้ใช้งานเรียบร้อยแล้ว');
             return back()->with('feedback','แบนผู้ใช้สำเร็จ');
     }
     public function memberUnban($id){
@@ -597,8 +599,9 @@ class AdminController extends Controller
     public function deleteUser($id){
         $id = Crypt::decrypt($id);
         DB::table('users')->where('id', '=', $id)->delete();
+        Alert::success('ลบข้อมูลสำเร็จ', 'ลบข้อมูลเรียบร้อยแล้ว');
+        return back()->with('feedback','ลบผู้ใช้สำเร็จ');
 
-        return redirect()->route('admin.dashboard')->with('feedback','ลบผู้ใช้สำเร็จ');
         }
 
         public function deleteStudent($id){
