@@ -78,7 +78,7 @@ Krukidee | ข้อมูลสมาชิก
                                               <span>แบนผู้ใช้</span>
                                             </a>
                                             @else
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="{{route('admin.memberUnban',['id'=>$id])}}">
                                               <i data-feather="user-check" class="icon-sm mr-2"></i>
                                             <span>ปลดแบบผู้ใช้</span>
                                             </a>

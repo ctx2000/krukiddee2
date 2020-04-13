@@ -396,15 +396,23 @@ class AdminController extends Controller
 
     public function student(){
         $student = Student::all();
-        return view('admin/studentAll',[
+
+        return view('pages\admin\student\index',[
             'student'=>$student
         ]);
+        // return view('admin/studentAll',[
+        //     'student'=>$student
+        // ]);
     }
     public function addStudent(){
         $teacher = User::where('type','=',3)->get();
-        return view('admin/addStudent',[
+
+        return view('pages\admin\student\insert',[
             'teacher'=>$teacher
         ]);
+        // return view('admin/addStudent',[
+        //     'teacher'=>$teacher
+        // ]);
     }
     public function studentStore(Request $request){
         $request->validate([
@@ -507,16 +515,24 @@ class AdminController extends Controller
         })->orderBy('donations.student_id','desc')->select('donations.*','students.name','students.lastname')->get();
 
         //return $student;
-         return view('admin/checkReciept',[
-             'student' => $student
-         ]);
+
+        return view('pages\admin\general\index',[
+            'student' => $student
+        ]);
+        //  return view('admin/checkReciept',[
+        //      'student' => $student
+        //  ]);
 
     }
     public function allReciept(){
-        $donate = Donation::all();
-        return view('admin/allReciept',[
+        $donate = Donation::where('status','true')->orWhere('status','false')->get();
+
+        return view('pages\admin\general\history',[
             'donate'=>$donate
         ]);
+        // return view('admin/allReciept',[
+        //     'donate'=>$donate
+        // ]);
     }
     public function studentEdit($id){
         $student = Student::where('id',$id)->first();
