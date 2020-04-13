@@ -32,13 +32,13 @@
           <span class="link-title">ข้อมูลครู</span>
         </a>
       </li>
-      <li class="nav-item {{ active_class(['apps/chat']) }}">
-        <a href="{{ url('/apps/chat') }}" class="nav-link">
+      <li class="nav-item {{ active_class(['admin/teacher/add']) }}">
+        <a href="{{ route('admin.addTeacher') }}" class="nav-link">
           <i class="link-icon" data-feather="book"></i>
           <span class="link-title">เพิ่มข้อมูลครู</span>
         </a>
       </li>
-      <li class="nav-item {{ active_class(['apps/chat']) }}">
+      <li class="nav-item {{ active_class(['admin/teacher/accept']) }}">
         <a href="{{ route('admin.acceptTeacher') }}" class="nav-link">
           <i class="link-icon" data-feather="toggle-right"></i>
           <span class="link-title">อนุมัติครู</span>

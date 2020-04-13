@@ -49,11 +49,15 @@ Krukidee | ข้อมูลครู
                                 <td>{{$s->tel}}</td>
                                 <td>{{$s->schoolname}}</td>
                                 <td>
-                                    @if ($s->status==null)
-                                        ปกติ
-                                    @else
-                                        ระงับการใข้งาน
-                                    @endif
+                                    @if($s->status == '')
+                                    <span class="badge badge-pill badge-success" data-toggle="tooltip" data-placement="left" title="เปิดใช้งาน">
+                                      <i data-feather="user-check" class="icon-sm"></i>
+                                    </span>
+                                  @else
+                                    <span class="badge badge-pill badge-danger" data-toggle="tooltip" data-placement="left" title="ปิดใช้งาน">
+                                      <i data-feather="user-x" class="icon-sm"></i>
+                                    </span>
+                                  @endif
                                 </td>
 
                                 <td>
@@ -75,7 +79,7 @@ Krukidee | ข้อมูลครู
                                                     @if ($s->status=='ban')
                                                 <a class="dropdown-item"
                                                     href="{{route('admin.memberUnban',['id'=>$id])}}">
-                                                    <li class="	far fa-calendar-check"></li> ปลดแบน
+                                                    <i data-feather="user-check" class="icon-sm mr-2"></i> ปลดแบน
                                                 </a>
                                                 @else
                                                 <a class="dropdown-item cause" id="cause" href="#" data-name="{{$s->name}}"

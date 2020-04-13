@@ -189,4 +189,9 @@ Krukidee | ข้อมูลสมาชิก
         })
       }
 </script>
+@if (session('feedback'))
+<script>
+    Swal.fire('ผลการทำงาน',"{{session('feedback')}}",'success');
+</script>
+@endif
 @endpush

@@ -127,7 +127,7 @@ class AdminController extends Controller
 
             'Address'=>['required',  'max:255'],
 
-            'password'=>['required'],
+            // 'password'=>['required'],
         ],[
             'name.required'=> 'กรุณากรอกชื่อ',
             'lastname.required'=> 'กรุณากรอกนามสกุล',
@@ -140,14 +140,18 @@ class AdminController extends Controller
             'email.required' => 'กรุณากรอกอีเมล์',
             'email.E-mail' => 'กรุณากรอกอีเมล์',
 
-            'password.required'=> 'กรุณากรอกรหัสผ่าน',
+            // 'password.required'=> 'กรุณากรอกรหัสผ่าน',
         ]);
         $user=User::find($request->id);
-        if($request->password==$user->password){
-            $password = $user->password;
-        }else{
+        if(isset($request->password)){
+
             $password = $request->password;
             $password = Hash::make($password);
+            DB::table('users')
+            ->where('id', $request->id)
+            ->update([
+                'password'=>$password
+            ]);
         }
 
         DB::table('users')
@@ -157,10 +161,9 @@ class AdminController extends Controller
                 'lastname'=>$request->lastname,
                 'email'=>$request->email,
                 'tel'=>$request->tel,
-                'Address'=>$request->Address,
-                'password'=>$password
+                'Address'=>$request->Address
             ]);
-            return redirect()->route('admin.member');
+            return redirect()->route('admin.member')->with('feedback','แก้ไขข้อมูลสมาชิกสำเร็จ');
     }
     public function memberBaned(Request $request){
         $id = Crypt::decrypt($request->id);
@@ -276,7 +279,8 @@ class AdminController extends Controller
 
     }
     public function addTeacher(){
-        return view('admin/addTeacher');
+        return view('pages\admin\teacher\insert');
+        //return view('admin/addTeacher');
     }
     public function storeTeacher(request $request){
         $request->validate([

@@ -75,10 +75,6 @@ Krukidee | อนุมัติครู
                                                 href="{{route('admin.editTeacher',['id'=>$id])}}"><i
                                                     data-feather="edit-2" class="icon-sm mr-2"></i> <span
                                                     class="">แก้ไข</span></a>
-
-
-
-
                                             <a class="dropdown-item" href="{{route('admin.deleteUser',['id'=>$id])}}"><i
                                                     data-feather="trash" class="icon-sm mr-2"></i> <span
                                                     class="">ลบข้อมูล</span></a>

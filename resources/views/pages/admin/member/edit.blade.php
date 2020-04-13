@@ -68,11 +68,8 @@ Krukidee | แก้ไขข้อมูลสมาชิก
                         </div><!-- Col -->
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label class="control-label">รหัสผ่าน</label>
-                                {{ Form::text('password',null,['class'=>'form-control '.($errors->has('password') ? ' is-invalid' : ''),'required']) }}
-                                @if ($errors->has('password'))
-                                <div class="invalid-feedback">{{ $errors->first('password') }}</div>
-                                @endif
+                                <label class="control-label">รหัสผ่านใหม่(หากเปลี่ยนรหัส)</label>
+                                <input type="text" class="form-control" name="password">
                             </div>
                         </div><!-- Col -->
                     </div><!-- Row -->
@@ -86,9 +83,6 @@ Krukidee | แก้ไขข้อมูลสมาชิก
                                 <div class="invalid-feedback">{{ $errors->first('tel') }}</div>
                                 @endif
                             </div>
-
-
-
                         </div><!-- Col -->
                     </div><!-- Row -->
                     <div class="row">
@@ -128,30 +122,31 @@ Krukidee | แก้ไขข้อมูลสมาชิก
         name: {
           required: true
         },
-        surname: {
+        lastname: {
           required: true
         },
         email: {
           required: true
         },
-        password: {
-          required: true,
-         // minlength: 6
-        },
-        phone: {
+        // password: {
+        //   required: true,
+        //  // minlength: 6
+        // },
+        tel: {
           required: true
+          minlength: 9
         },
         agree: "required"
       },
       messages: {
         name: "กรุณากรอกชื่อของคุณ",
-        surname: "กรุณากรอกนามสกุลของคุณ",
+        lastname: "กรุณากรอกนามสกุลของคุณ",
         email: "กรุณากรอกอีเมลของคุณ",
-        password: {
-          required: "กรุณากรอกรหัสผ่านของคุณ",
-          //minlength: "รหัสผ่านต้องมีความยาวไม่น้อยกว่า 6 ตัว"
-        },
-        phone: "กรุณากรอกเบอร์โทรศัพท์ของคุณ",
+        // password: {
+        //   required: "กรุณากรอกรหัสผ่านของคุณ",
+        //   //minlength: "รหัสผ่านต้องมีความยาวไม่น้อยกว่า 6 ตัว"
+        // },
+        tel: "กรุณากรอกเบอร์โทรศัพท์ของคุณ",
       },
       errorPlacement: function(label, element) {
         label.addClass('mt-2 text-danger');
