@@ -110,24 +110,28 @@ class AdminController extends Controller
     public function editMember($id){
         $id = Crypt::decrypt($id);
         $user = User::where('id','=',$id)->first();
-        return view('admin/editMember',[
+
+        return view('pages\admin\member\edit',[
             'user'=>$user
         ]);
+        // return view('admin/editMember',[
+        //     'user'=>$user
+        // ]);
     }
     public function memberUpdate(Request $request){
         $request->validate([
             'name'=>['required',  'max:255'],
             'lastname'=>['required','max:255'],
             'email'=>['required','E-mail','max:255'],
-            'tel'=>['required','numeric','digits:13'],
+            'tel'=>['required','numeric','digits_between:10,13'],
 
             'Address'=>['required',  'max:255'],
 
-            'password'=>['required',  'max:255'],
+            'password'=>['required'],
         ],[
             'name.required'=> 'กรุณากรอกชื่อ',
             'lastname.required'=> 'กรุณากรอกนามสกุล',
-            'tel.digits' => 'กรอกหมายเลขโทรศัพท์10ตัว',
+
             'tel.numeric' => 'กรอกตัวเลขเท่านั้น',
             'tel.required' => 'กรุณากรอกหมายเลขโทรศัพท์',
             'Address.required'=> 'กรุณากรอกที่อยู่โรงเรียน',
@@ -232,9 +236,13 @@ class AdminController extends Controller
     }
     public function acceptTeacher(){
         $teacher = User::where('type','=',2)->paginate(5);
-        return view('admin/acceptTeacher',[
-            'teacher'=>$teacher
+
+        return view('pages\admin\teacher\acceptTeacher',[
+            'user'=>$teacher
         ]);
+        // return view('admin/acceptTeacher',[
+        //     'teacher'=>$teacher
+        // ]);
     }
     public function allowTeacher($id){
         $id = Crypt::decrypt($id);

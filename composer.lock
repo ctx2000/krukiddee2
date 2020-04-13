@@ -4034,16 +4034,16 @@
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "v2.6.2",
+            "version": "v2.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "c4a653ed3f1ff900baa15b4130c8770b57285b62"
+                "reference": "df4c4d08a639be4ef5d6d1322868f9e477553679"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/c4a653ed3f1ff900baa15b4130c8770b57285b62",
-                "reference": "c4a653ed3f1ff900baa15b4130c8770b57285b62",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/df4c4d08a639be4ef5d6d1322868f9e477553679",
+                "reference": "df4c4d08a639be4ef5d6d1322868f9e477553679",
                 "shasum": ""
             },
             "require": {
@@ -4087,7 +4087,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2020-03-27T23:16:19+00:00"
+            "time": "2020-04-12T15:11:38+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",

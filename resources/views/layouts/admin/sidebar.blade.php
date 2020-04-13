@@ -39,7 +39,7 @@
         </a>
       </li>
       <li class="nav-item {{ active_class(['apps/chat']) }}">
-        <a href="{{ url('/apps/chat') }}" class="nav-link">
+        <a href="{{ route('admin.acceptTeacher') }}" class="nav-link">
           <i class="link-icon" data-feather="toggle-right"></i>
           <span class="link-title">อนุมัติครู</span>
         </a>
