@@ -124,7 +124,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 // //ralatable
 // Route::get('/admin/member/all', 'admin\AdminController@member')->name('admin.member')->middleware('admin');
 // Route::get('/admin/member/ajax', 'admin\AdminController@memberAjax')->name('admin.memberAjax')->middleware('admin');
-
+Route::get('test/home', function () {
+    return view('pages.user.home.index');
+});
+Route::get('/users', function () {
+    return view('pages.user.general.about');
+});
 //test
 Route::get('/test', function () {
     return view('test');
