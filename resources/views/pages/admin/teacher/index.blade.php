@@ -7,6 +7,7 @@ Krukidee | ข้อมูลครู
 @push('plugin-styles')
 <!-- Plugin css import here -->
 {!! Html::style('admin/assets/plugins/datatables-net/dataTables.bootstrap4.css') !!}
+{!! Html::script('admin/js/app.js') !!}
 @endpush
 
 @section('content')

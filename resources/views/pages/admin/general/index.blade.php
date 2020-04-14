@@ -7,6 +7,7 @@ Krukidee | ข้อมูลการบริจาค
 @push('plugin-styles')
 <!-- Plugin css import here -->
 {!! Html::style('admin/assets/plugins/datatables-net/dataTables.bootstrap4.css') !!}
+{!! Html::script('admin/js/app.js') !!}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
 
 @endpush

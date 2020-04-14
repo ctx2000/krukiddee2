@@ -419,9 +419,9 @@ class AdminController extends Controller
             'name'=>['required',  'max:255'],
             'lastname'=>['required','max:255'],
 
-            'tel'=>['numeric','digits:13'],
+            'tel'=>['numeric'],
 
-            'Address'=>['required',  'max:255'],
+            'address'=>['required',  'max:255'],
             'bankAccountName'=>['required','max:255'],
             'bankName'=>['required','max:255'],
             'bankNumber'=>['numeric','required'],
@@ -437,21 +437,21 @@ class AdminController extends Controller
         ],[
             'name.required'=> 'กรุณากรอกชื่อ',
             'lastname.required'=> 'กรุณากรอกนามสกุล',
-            'tel.digits' => 'กรอกหมายเลขโทรศัพท์10ตัว',
+            //'tel.digits' => 'กรอกหมายเลขโทรศัพท์10ตัว',
             'tel.numeric' => 'กรอกตัวเลขเท่านั้น',
-            'Address.required'=> 'กรุณากรอกข้อมูล',
-            'bankAccountName.required'=> 'กรุณากรอกข้อมูล',
-            'bankName.required'=> 'กรุณากรอกข้อมูล',
-            'bankNumber.required'=> 'กรุณากรอกข้อมูล',
-            'level.required'=> 'กรุณากรอกข้อมูล',
-            'closeDonate.required'=> 'กรุณากรอกข้อมูล',
-            'maxDonate.required'=> 'กรุณากรอกข้อมูล',
-            'grade.required'=> 'กรุณากรอกข้อมูล',
-            'age.required'=> 'กรุณากรอกข้อมูล',
-            'birthday.required'=> 'กรุณากรอกข้อมูล',
-            'bank_of.required'=> 'กรุณากรอกข้อมูล',
-            'district.required'=> 'กรุณากรอกข้อมูล',
-            'province.required'=> 'กรุณากรอกข้อมูล',
+            'address.required'=> 'กรุณากรอกข้อมูล 1',
+            'bankAccountName.required'=> 'กรุณากรอกข้อมูล 2',
+            'bankName.required'=> 'กรุณากรอกข้อมูล 3',
+            'bankNumber.required'=> 'กรุณากรอกข้อมูล 4',
+            'level.required'=> 'กรุณากรอกข้อมูล 5',
+            'closeDonate.required'=> 'กรุณากรอกข้อมูล 6',
+            'maxDonate.required'=> 'กรุณากรอกข้อมูล 7',
+            'grade.required'=> 'กรุณากรอกข้อมูล 8',
+            'age.required'=> 'กรุณากรอกข้อมูล 9',
+            'birthday.required'=> 'กรุณากรอกข้อมูล 10',
+            'bank_of.required'=> 'กรุณากรอกข้อมูล 11',
+            'district.required'=> 'กรุณากรอกข้อมูล 12',
+            'province.required'=> 'กรุณากรอกข้อมูล 13',
 
         ]);
         if (!isset($request->description1)) {
@@ -490,7 +490,7 @@ class AdminController extends Controller
 
                 $student->save();
 
-                return view('admin/addDesc',[
+                return view('pages\admin\student\desc',[
                     'id'=>$student->id
                 ]);
             }else{
@@ -552,7 +552,7 @@ class AdminController extends Controller
             'grade'=>['required','max:255'],
             'age'=>['required','numeric','max:255'],
             'birthday'=>['required','max:255'],
-            'tel'=>['required','numeric','digits:10'],
+            'tel'=>['required','numeric'],
             'id_card'=>['required','numeric','digits:13'],
             'address'=>['required',  'max:255'],
             'level'=>['required',  'max:255'],
@@ -562,12 +562,12 @@ class AdminController extends Controller
             'bankName'=>['required',  'max:255'],
             'bankAccountName'=>['required',  'max:255'],
             'bankNumber'=>['required','numeric'],
-            'description'=>['required'],
+            //'description'=>['required'],
 
         ],[
             'name.required'=> 'กรุณากรอกชื่อ',
             'lastname.required'=> 'กรุณากรอกนามสกุล',
-            'tel.digits' => 'หมายเลขโทรศัพท์ห้ามเกิน10ตัว',
+            //'tel.digits' => 'หมายเลขโทรศัพท์ห้ามเกิน10ตัว',
             'tel.numeric' => 'กรอกตัวเลขเท่านั้น',
             'tel.required' => 'กรุณากรอกหมายเลขโทรศัพท์',
             'address.required'=> 'กรุณากรอกที่อยู่นักเรียน',
@@ -582,7 +582,7 @@ class AdminController extends Controller
             'bankAccountName.required' => 'กรุณากรอกข้อมูล',
             'bankNumber.required' => 'กรุณากรอกข้อมูล',
             'bankNumber.numeric' => 'กรอกตัวเลขเท่านั้น',
-            'description.required' => 'กรุณากรอกข้อมูล',
+            //'description.required' => 'กรุณากรอกข้อมูล',
             'id_card.required' => 'กรุณากรอกหมายเลขโทรศัพท์',
             'id_card.digits'=>'เลขบัตรประชาชน13หลัก',
             'id_card.numeric'=>'กรอกตัวเลขเท่านั้น',

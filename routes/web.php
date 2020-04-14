@@ -126,8 +126,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('/admin/member/ajax', 'admin\AdminController@memberAjax')->name('admin.memberAjax')->middleware('admin');
 
 //test
-Route::get('/test', function () {
-    return view('test');
+Route::get('admin/student/test', function () {
+
+    return view('pages\admin\student\desc');
 });
 Route::get('administrator/blank', function () {
     return view('pages.admin.general.blank');

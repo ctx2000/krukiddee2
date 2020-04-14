@@ -41,7 +41,8 @@
   </div>
 
     <!-- base js -->
-    {!! Html::script('admin/js/app.js') !!}
+    {{-- {!! Html::script('admin/js/app.js') !!} --}}
+    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
     {!! Html::script('admin/assets/plugins/feather-icons/feather.min.js') !!}
     {!! Html::script('admin/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js') !!}
     {!! Html::script('/admin/assets/plugins/sweetalert2/sweetalert2.min.js') !!}
