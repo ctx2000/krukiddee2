@@ -131,8 +131,9 @@ Route::get('/users', function () {
     return view('pages.user.general.about');
 });
 //test
-Route::get('/test', function () {
-    return view('test');
+Route::get('admin/student/test', function () {
+
+    return view('pages\admin\student\desc');
 });
 Route::get('administrator/blank', function () {
     return view('pages.admin.general.blank');

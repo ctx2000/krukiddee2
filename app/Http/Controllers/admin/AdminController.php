@@ -110,24 +110,28 @@ class AdminController extends Controller
     public function editMember($id){
         $id = Crypt::decrypt($id);
         $user = User::where('id','=',$id)->first();
-        return view('admin/editMember',[
+
+        return view('pages\admin\member\edit',[
             'user'=>$user
         ]);
+        // return view('admin/editMember',[
+        //     'user'=>$user
+        // ]);
     }
     public function memberUpdate(Request $request){
         $request->validate([
             'name'=>['required',  'max:255'],
             'lastname'=>['required','max:255'],
             'email'=>['required','E-mail','max:255'],
-            'tel'=>['required','numeric','digits:13'],
+            'tel'=>['required','numeric','digits_between:10,13'],
 
             'Address'=>['required',  'max:255'],
 
-            'password'=>['required',  'max:255'],
+            // 'password'=>['required'],
         ],[
             'name.required'=> 'กรุณากรอกชื่อ',
             'lastname.required'=> 'กรุณากรอกนามสกุล',
-            'tel.digits' => 'กรอกหมายเลขโทรศัพท์10ตัว',
+
             'tel.numeric' => 'กรอกตัวเลขเท่านั้น',
             'tel.required' => 'กรุณากรอกหมายเลขโทรศัพท์',
             'Address.required'=> 'กรุณากรอกที่อยู่โรงเรียน',
@@ -136,14 +140,18 @@ class AdminController extends Controller
             'email.required' => 'กรุณากรอกอีเมล์',
             'email.E-mail' => 'กรุณากรอกอีเมล์',
 
-            'password.required'=> 'กรุณากรอกรหัสผ่าน',
+            // 'password.required'=> 'กรุณากรอกรหัสผ่าน',
         ]);
         $user=User::find($request->id);
-        if($request->password==$user->password){
-            $password = $user->password;
-        }else{
+        if(isset($request->password)){
+
             $password = $request->password;
             $password = Hash::make($password);
+            DB::table('users')
+            ->where('id', $request->id)
+            ->update([
+                'password'=>$password
+            ]);
         }
 
         DB::table('users')
@@ -153,10 +161,9 @@ class AdminController extends Controller
                 'lastname'=>$request->lastname,
                 'email'=>$request->email,
                 'tel'=>$request->tel,
-                'Address'=>$request->Address,
-                'password'=>$password
+                'Address'=>$request->Address
             ]);
-            return redirect()->route('admin.member');
+            return redirect()->route('admin.member')->with('feedback','แก้ไขข้อมูลสมาชิกสำเร็จ');
     }
     public function memberBaned(Request $request){
         $id = Crypt::decrypt($request->id);
@@ -232,9 +239,13 @@ class AdminController extends Controller
     }
     public function acceptTeacher(){
         $teacher = User::where('type','=',2)->paginate(5);
-        return view('admin/acceptTeacher',[
-            'teacher'=>$teacher
+
+        return view('pages\admin\teacher\acceptTeacher',[
+            'user'=>$teacher
         ]);
+        // return view('admin/acceptTeacher',[
+        //     'teacher'=>$teacher
+        // ]);
     }
     public function allowTeacher($id){
         $id = Crypt::decrypt($id);
@@ -268,7 +279,8 @@ class AdminController extends Controller
 
     }
     public function addTeacher(){
-        return view('admin/addTeacher');
+        return view('pages\admin\teacher\insert');
+        //return view('admin/addTeacher');
     }
     public function storeTeacher(request $request){
         $request->validate([
@@ -384,24 +396,32 @@ class AdminController extends Controller
 
     public function student(){
         $student = Student::all();
-        return view('admin/studentAll',[
+
+        return view('pages\admin\student\index',[
             'student'=>$student
         ]);
+        // return view('admin/studentAll',[
+        //     'student'=>$student
+        // ]);
     }
     public function addStudent(){
         $teacher = User::where('type','=',3)->get();
-        return view('admin/addStudent',[
+
+        return view('pages\admin\student\insert',[
             'teacher'=>$teacher
         ]);
+        // return view('admin/addStudent',[
+        //     'teacher'=>$teacher
+        // ]);
     }
     public function studentStore(Request $request){
         $request->validate([
             'name'=>['required',  'max:255'],
             'lastname'=>['required','max:255'],
 
-            'tel'=>['numeric','digits:13'],
+            'tel'=>['numeric'],
 
-            'Address'=>['required',  'max:255'],
+            'address'=>['required',  'max:255'],
             'bankAccountName'=>['required','max:255'],
             'bankName'=>['required','max:255'],
             'bankNumber'=>['numeric','required'],
@@ -417,21 +437,21 @@ class AdminController extends Controller
         ],[
             'name.required'=> 'กรุณากรอกชื่อ',
             'lastname.required'=> 'กรุณากรอกนามสกุล',
-            'tel.digits' => 'กรอกหมายเลขโทรศัพท์10ตัว',
+            //'tel.digits' => 'กรอกหมายเลขโทรศัพท์10ตัว',
             'tel.numeric' => 'กรอกตัวเลขเท่านั้น',
-            'Address.required'=> 'กรุณากรอกข้อมูล',
-            'bankAccountName.required'=> 'กรุณากรอกข้อมูล',
-            'bankName.required'=> 'กรุณากรอกข้อมูล',
-            'bankNumber.required'=> 'กรุณากรอกข้อมูล',
-            'level.required'=> 'กรุณากรอกข้อมูล',
-            'closeDonate.required'=> 'กรุณากรอกข้อมูล',
-            'maxDonate.required'=> 'กรุณากรอกข้อมูล',
-            'grade.required'=> 'กรุณากรอกข้อมูล',
-            'age.required'=> 'กรุณากรอกข้อมูล',
-            'birthday.required'=> 'กรุณากรอกข้อมูล',
-            'bank_of.required'=> 'กรุณากรอกข้อมูล',
-            'district.required'=> 'กรุณากรอกข้อมูล',
-            'province.required'=> 'กรุณากรอกข้อมูล',
+            'address.required'=> 'กรุณากรอกข้อมูล 1',
+            'bankAccountName.required'=> 'กรุณากรอกข้อมูล 2',
+            'bankName.required'=> 'กรุณากรอกข้อมูล 3',
+            'bankNumber.required'=> 'กรุณากรอกข้อมูล 4',
+            'level.required'=> 'กรุณากรอกข้อมูล 5',
+            'closeDonate.required'=> 'กรุณากรอกข้อมูล 6',
+            'maxDonate.required'=> 'กรุณากรอกข้อมูล 7',
+            'grade.required'=> 'กรุณากรอกข้อมูล 8',
+            'age.required'=> 'กรุณากรอกข้อมูล 9',
+            'birthday.required'=> 'กรุณากรอกข้อมูล 10',
+            'bank_of.required'=> 'กรุณากรอกข้อมูล 11',
+            'district.required'=> 'กรุณากรอกข้อมูล 12',
+            'province.required'=> 'กรุณากรอกข้อมูล 13',
 
         ]);
         if (!isset($request->description1)) {
@@ -470,7 +490,7 @@ class AdminController extends Controller
 
                 $student->save();
 
-                return view('admin/addDesc',[
+                return view('pages\admin\student\desc',[
                     'id'=>$student->id
                 ]);
             }else{
@@ -495,16 +515,24 @@ class AdminController extends Controller
         })->orderBy('donations.student_id','desc')->select('donations.*','students.name','students.lastname')->get();
 
         //return $student;
-         return view('admin/checkReciept',[
-             'student' => $student
-         ]);
+
+        return view('pages\admin\general\index',[
+            'student' => $student
+        ]);
+        //  return view('admin/checkReciept',[
+        //      'student' => $student
+        //  ]);
 
     }
     public function allReciept(){
-        $donate = Donation::all();
-        return view('admin/allReciept',[
+        $donate = Donation::where('status','true')->orWhere('status','false')->get();
+
+        return view('pages\admin\general\history',[
             'donate'=>$donate
         ]);
+        // return view('admin/allReciept',[
+        //     'donate'=>$donate
+        // ]);
     }
     public function studentEdit($id){
         $student = Student::where('id',$id)->first();
@@ -524,7 +552,7 @@ class AdminController extends Controller
             'grade'=>['required','max:255'],
             'age'=>['required','numeric','max:255'],
             'birthday'=>['required','max:255'],
-            'tel'=>['required','numeric','digits:10'],
+            'tel'=>['required','numeric'],
             'id_card'=>['required','numeric','digits:13'],
             'address'=>['required',  'max:255'],
             'level'=>['required',  'max:255'],
@@ -534,12 +562,12 @@ class AdminController extends Controller
             'bankName'=>['required',  'max:255'],
             'bankAccountName'=>['required',  'max:255'],
             'bankNumber'=>['required','numeric'],
-            'description'=>['required'],
+            //'description'=>['required'],
 
         ],[
             'name.required'=> 'กรุณากรอกชื่อ',
             'lastname.required'=> 'กรุณากรอกนามสกุล',
-            'tel.digits' => 'หมายเลขโทรศัพท์ห้ามเกิน10ตัว',
+            //'tel.digits' => 'หมายเลขโทรศัพท์ห้ามเกิน10ตัว',
             'tel.numeric' => 'กรอกตัวเลขเท่านั้น',
             'tel.required' => 'กรุณากรอกหมายเลขโทรศัพท์',
             'address.required'=> 'กรุณากรอกที่อยู่นักเรียน',
@@ -554,7 +582,7 @@ class AdminController extends Controller
             'bankAccountName.required' => 'กรุณากรอกข้อมูล',
             'bankNumber.required' => 'กรุณากรอกข้อมูล',
             'bankNumber.numeric' => 'กรอกตัวเลขเท่านั้น',
-            'description.required' => 'กรุณากรอกข้อมูล',
+            //'description.required' => 'กรุณากรอกข้อมูล',
             'id_card.required' => 'กรุณากรอกหมายเลขโทรศัพท์',
             'id_card.digits'=>'เลขบัตรประชาชน13หลัก',
             'id_card.numeric'=>'กรอกตัวเลขเท่านั้น',

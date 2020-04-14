@@ -33,26 +33,20 @@ Krukidee | แก้ไขข้อมูลสมาชิก
                 @endif
                 {!! Form::model($user, ['novalidate','route' => ['admin.memberUpdate'], 'method'
                 =>
-                'post', 'files' => true,'id'=>'editMemberForm','class'=> ($errors->any() ? '' : 'needs-validation')])
+                'post', 'files' => true,'class'=> ($errors->any()) ? 'was-validated' : 'needs-validation'])
                 !!}
                 <fieldset>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="control-label">ชื่อ</label>
-                                {{ Form::text('name', null,['class'=>'form-control '.($errors->has('name') ? ' is-invalid' : ''),'required']) }}
-                                @if ($errors->has('name'))
-                                <div class="invalid-feedback">{{ $errors->first('name') }}</div>
-                                @endif
+                                {{ Form::text('name', null,['class'=>'form-control ','required']) }}
                             </div>
                         </div><!-- Col -->
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="control-label">นามสกุล</label>
-                                {{ Form::text('lastname', null,['class'=>'form-control '.($errors->has('lastname') ? ' is-invalid' : ''),'required']) }}
-                                @if ($errors->has('lastname'))
-                                <div class="invalid-feedback">{{ $errors->first('lastname') }}</div>
-                                @endif
+                                {{ Form::text('lastname', null,['class'=>'form-control ','required']) }}
                             </div>
                         </div><!-- Col -->
                     </div><!-- Row -->
@@ -60,16 +54,13 @@ Krukidee | แก้ไขข้อมูลสมาชิก
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="control-label">อีเมล</label>
-                                {{ Form::email('email', null,['class'=>'form-control '.($errors->has('email') ? ' is-invalid' : ''),'required']) }}
-                                @if ($errors->has('email'))
-                                <div class="invalid-feedback">{{ $errors->first('email') }}</div>
-                                @endif
+                                {{ Form::email('email', null,['class'=>'form-control ','required']) }}
                             </div>
                         </div><!-- Col -->
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label class="control-label">รหัสผ่านใหม่(หากเปลี่ยนรหัส)</label>
-                                <input type="text" class="form-control" name="password">
+                                <label class="control-label">รหัสผ่าน</label>
+                                {{ Form::text('password',null,['class'=>'form-control']) }}
                             </div>
                         </div><!-- Col -->
                     </div><!-- Row -->
@@ -77,11 +68,7 @@ Krukidee | แก้ไขข้อมูลสมาชิก
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="control-label">เบอร์โทรศัพท์</label>
-                                {{ Form::text('tel', null,['class'=>'form-control'.($errors->has('tel') ? ' is-invalid' : '') ,'required']) }}
-                                {{-- <div class="invalid-feedback">asdadsadsa</div> --}}
-                                @if ($errors->has('tel'))
-                                <div class="invalid-feedback">{{ $errors->first('tel') }}</div>
-                                @endif
+                                {{ Form::number('tel', null,['class'=>'form-control ','required']) }}
                             </div>
                         </div><!-- Col -->
                     </div><!-- Row -->
@@ -89,10 +76,7 @@ Krukidee | แก้ไขข้อมูลสมาชิก
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="control-label">ที่อยู่</label>
-                                {{ Form::text('Address', null,['class'=>'form-control '.($errors->has('Address') ? ' is-invalid' : ''),'required']) }}
-                                @if ($errors->has('Address'))
-                                <div class="invalid-feedback">{{ $errors->first('Address') }}</div>
-                                @endif
+                                {{ Form::text('Address', null,['class'=>'form-control ','required']) }}
                             </div>
                         </div><!-- Col -->
                     </div><!-- Row -->
@@ -122,31 +106,30 @@ Krukidee | แก้ไขข้อมูลสมาชิก
         name: {
           required: true
         },
-        lastname: {
+        surname: {
           required: true
         },
         email: {
           required: true
         },
-        // password: {
-        //   required: true,
-        //  // minlength: 6
-        // },
-        tel: {
+        password: {
+          required: true,
+          minlength: 6
+        },
+        phone: {
           required: true
-          minlength: 9
         },
         agree: "required"
       },
       messages: {
         name: "กรุณากรอกชื่อของคุณ",
-        lastname: "กรุณากรอกนามสกุลของคุณ",
+        surname: "กรุณากรอกนามสกุลของคุณ",
         email: "กรุณากรอกอีเมลของคุณ",
-        // password: {
-        //   required: "กรุณากรอกรหัสผ่านของคุณ",
-        //   //minlength: "รหัสผ่านต้องมีความยาวไม่น้อยกว่า 6 ตัว"
-        // },
-        tel: "กรุณากรอกเบอร์โทรศัพท์ของคุณ",
+        password: {
+          required: "กรุณากรอกรหัสผ่านของคุณ",
+          minlength: "รหัสผ่านต้องมีความยาวไม่น้อยกว่า 6 ตัว"
+        },
+        phone: "กรุณากรอกเบอร์โทรศัพท์ของคุณ",
       },
       errorPlacement: function(label, element) {
         label.addClass('mt-2 text-danger');

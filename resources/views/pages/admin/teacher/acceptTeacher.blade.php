@@ -49,11 +49,9 @@ Krukidee | อนุมัติครู
                                 <td>{{$s->tel}}</td>
                                 <td>{{$s->schoolname}}</td>
                                 <td>
-                                    @if ($s->status==null)
-                                        ปกติ
-                                    @else
-                                        ระงับการใข้งาน
-                                    @endif
+                                    <span class="badge badge-pill badge-secondary" data-toggle="tooltip" data-placement="left" title="รออนุมัติ">
+                                        <i data-feather="user-plus" class="icon-sm"></i>
+                                      </span>
                                 </td>
 
                                 <td>
@@ -66,26 +64,18 @@ Krukidee | อนุมัติครู
                                             <span class="sr-only">Toggle Dropdown</span>
                                         </button>
                                         <div class="dropdown-menu">
+
                                             <a class="dropdown-item"
                                                 href="{{route('admin.aboutTeacher',['id'=>$id])}}"><i data-feather="eye"
                                                     class="icon-sm mr-2"></i> <span class="">ดูข้อมูล</span></a>
-                                            <a class="dropdown-item" href="{{route('admin.editTeacher',['id'=>$id])}}"><i
+                                            <a class="dropdown-item" href="{{route('admin.allowTeacher',['id'=>$id])}}">
+                                                <i data-feather="check" class="icon-sm mr-2"></i> อนุมัติ
+                                            </a>
+                                            <a class="dropdown-item"
+                                                href="{{route('admin.editTeacher',['id'=>$id])}}"><i
                                                     data-feather="edit-2" class="icon-sm mr-2"></i> <span
                                                     class="">แก้ไข</span></a>
-                                                    @if ($s->status=='ban')
-                                                <a class="dropdown-item"
-                                                    href="{{route('admin.memberUnban',['id'=>$id])}}">
-                                                    <li class="	far fa-calendar-check"></li> ปลดแบน
-                                                </a>
-                                                @else
-                                                <a class="dropdown-item cause" id="cause" href="#" data-name="{{$s->name}}"
-                                                    data-id="{{$id}}"><i data-feather="slash" class="icon-sm mr-2"></i>
-                                                    <span class="">แบนผู้ใช้</span></a>
-                                                @endif
-
-
-                                            <a class="dropdown-item"
-                                                href="{{route('admin.deleteUser',['id'=>$id])}}"><i
+                                            <a class="dropdown-item" href="{{route('admin.deleteUser',['id'=>$id])}}"><i
                                                     data-feather="trash" class="icon-sm mr-2"></i> <span
                                                     class="">ลบข้อมูล</span></a>
                                         </div>

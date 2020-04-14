@@ -6,6 +6,7 @@ Krukidee | ข้อมูลสมาชิก
 
 @push('plugin-styles')
 <!-- Plugin css import here -->
+{!! Html::script('admin/js/app.js') !!}
 {!! Html::style('admin/assets/plugins/datatables-net/dataTables.bootstrap4.css') !!}
 @endpush
 
@@ -78,7 +79,7 @@ Krukidee | ข้อมูลสมาชิก
                                               <span>แบนผู้ใช้</span>
                                             </a>
                                             @else
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="{{route('admin.memberUnban',['id'=>$id])}}">
                                               <i data-feather="user-check" class="icon-sm mr-2"></i>
                                             <span>ปลดแบบผู้ใช้</span>
                                             </a>
@@ -189,4 +190,9 @@ Krukidee | ข้อมูลสมาชิก
         })
       }
 </script>
+@if (session('feedback'))
+<script>
+    Swal.fire('ผลการทำงาน',"{{session('feedback')}}",'success');
+</script>
+@endif
 @endpush

@@ -32,42 +32,42 @@
           <span class="link-title">ข้อมูลครู</span>
         </a>
       </li>
-      <li class="nav-item {{ active_class(['apps/chat']) }}">
-        <a href="{{ url('/apps/chat') }}" class="nav-link">
+      <li class="nav-item {{ active_class(['admin/teacher/add']) }}">
+        <a href="{{ route('admin.addTeacher') }}" class="nav-link">
           <i class="link-icon" data-feather="book"></i>
           <span class="link-title">เพิ่มข้อมูลครู</span>
         </a>
       </li>
-      <li class="nav-item {{ active_class(['apps/chat']) }}">
-        <a href="{{ url('/apps/chat') }}" class="nav-link">
+      <li class="nav-item {{ active_class(['admin/teacher/accept']) }}">
+        <a href="{{ route('admin.acceptTeacher') }}" class="nav-link">
           <i class="link-icon" data-feather="toggle-right"></i>
           <span class="link-title">อนุมัติครู</span>
         </a>
       </li>
       <li class="nav-item nav-category">จัดการนักเรียน</li>
-      <li class="nav-item {{ active_class(['apps/chat']) }}">
-        <a href="{{ url('/apps/chat') }}" class="nav-link">
+      <li class="nav-item {{ active_class(['admin/student/all']) }}">
+        <a href="{{route('admin.student')}}" class="nav-link">
           <i class="link-icon" data-feather="users"></i>
           <span class="link-title">ข้อมูลนักเรียน</span>
         </a>
       </li>
-      <li class="nav-item {{ active_class(['apps/chat']) }}">
-        <a href="{{ url('/apps/chat') }}" class="nav-link">
+      <li class="nav-item {{ active_class(['admin/addStudent']) }}">
+        <a href="{{ route('admin.addStudent') }}" class="nav-link">
           <i class="link-icon" data-feather="user-plus"></i>
           <span class="link-title">เพิ่มข้อมูลนักเรียน</span>
         </a>
       </li>
       <li class="nav-item nav-category">จัดการการบริจาค</li>
-      <li class="nav-item {{ active_class(['apps/chat']) }}">
-        <a href="{{ url('/apps/chat') }}" class="nav-link">
+      <li class="nav-item {{ active_class(['admin/checkReciept']) }}">
+        <a href="{{ route('admin.checkReciept') }}" class="nav-link">
           <i class="link-icon" data-feather="trending-up"></i>
           <span class="link-title">ข้อมูลการบริจาค</span>
         </a>
       </li>
-      <li class="nav-item {{ active_class(['apps/chat']) }}">
-        <a href="{{ url('/apps/chat') }}" class="nav-link">
+      <li class="nav-item {{ active_class(['admin/allReciept']) }}">
+        <a href="{{ route('admin.allReciept') }}" class="nav-link">
           <i class="link-icon" data-feather="check-square"></i>
-          <span class="link-title">ตรวจสอบการบริจาค</span>
+          <span class="link-title">ประวัติการตรวจสอบ</span>
         </a>
       </li>
       <li class="nav-item nav-category">Docs</li>
