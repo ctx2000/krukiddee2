@@ -1,5 +1,5 @@
 @extends('layouts.admin.master')
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @push('title')
 Krukidee | แก้ไขข้อมูลนักเรียน
 @endpush
@@ -80,123 +80,58 @@ Krukidee | แก้ไขข้อมูลนักเรียน
 
 
                         </div>
-                        <div class="form-group">
-                            <label>Single select box using select 2</label>
-                            <select class="js-example-basic-single w-100">
-                                <option value="TX">Texas</option>
-                                <option value="NY">New York</option>
-                                <option value="FL">Florida</option>
-                                <option value="KN">Kansas</option>
-                                <option value="HW">Hawaii</option>
-                            </select>
-                        </div>
+
                         <div class="form-row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="address">ที่อยู่</label>
                                 {{ Form::text('address', null, ['class'=>'form-control','required']) }}
                             </div>
-                            <div class="form-group col-md-4">
-                                <label for="district">อำเภอ</label>
-                                {{ Form::text('district', null, ['class'=>'form-control','required']) }}
-                            </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="province">จังหวัด</label>
-                                <select class="js-example-basic-single w-100" name="province">
-                                    <option value="กรุงเทพมหานคร">กรุงเทพมหานคร</option>
-                                    <option value="กระบี่">กระบี่ </option>
-                                    <option value="กาญจนบุรี">กาญจนบุรี </option>
-                                    <option value="กาฬสินธุ์">กาฬสินธุ์ </option>
-                                    <option value="กำแพงเพชร">กำแพงเพชร </option>
-                                    <option value="ขอนแก่น">ขอนแก่น</option>
-                                    <option value="จันทบุรี">จันทบุรี</option>
-                                    <option value="ฉะเชิงเทรา">ฉะเชิงเทรา </option>
-                                    <option value="ชัยนาท">ชัยนาท </option>
-                                    <option value="ชัยภูมิ">ชัยภูมิ </option>
-                                    <option value="ชุมพร">ชุมพร </option>
-                                    <option value="ชลบุรี">ชลบุรี </option>
-                                    <option value="เชียงใหม่">เชียงใหม่ </option>
-                                    <option value="เชียงราย">เชียงราย </option>
-                                    <option value="ตรัง">ตรัง </option>
-                                    <option value="ตราด">ตราด </option>
-                                    <option value="ตาก">ตาก </option>
-                                    <option value="นครนายก">นครนายก </option>
-                                    <option value="นครปฐม">นครปฐม </option>
-                                    <option value="นครพนม">นครพนม </option>
-                                    <option value="นครราชสีมา">นครราชสีมา </option>
-                                    <option value="นครศรีธรรมราช">นครศรีธรรมราช </option>
-                                    <option value="นครสวรรค์">นครสวรรค์ </option>
-                                    <option value="นราธิวาส">นราธิวาส </option>
-                                    <option value="น่าน">น่าน </option>
-                                    <option value="นนทบุรี">นนทบุรี </option>
-                                    <option value="บึงกาฬ">บึงกาฬ</option>
-                                    <option value="บุรีรัมย์">บุรีรัมย์</option>
-                                    <option value="ประจวบคีรีขันธ์">ประจวบคีรีขันธ์ </option>
-                                    <option value="ปทุมธานี">ปทุมธานี </option>
-                                    <option value="ปราจีนบุรี">ปราจีนบุรี </option>
-                                    <option value="ปัตตานี">ปัตตานี </option>
-                                    <option value="พะเยา">พะเยา </option>
-                                    <option value="พระนครศรีอยุธยา">พระนครศรีอยุธยา </option>
-                                    <option value="พังงา">พังงา </option>
-                                    <option value="พิจิตร">พิจิตร </option>
-                                    <option value="พิษณุโลก">พิษณุโลก </option>
-                                    <option value="เพชรบุรี">เพชรบุรี </option>
-                                    <option value="เพชรบูรณ์">เพชรบูรณ์ </option>
-                                    <option value="แพร่">แพร่ </option>
-                                    <option value="พัทลุง">พัทลุง </option>
-                                    <option value="ภูเก็ต">ภูเก็ต </option>
-                                    <option value="มหาสารคาม">มหาสารคาม </option>
-                                    <option value="มุกดาหาร">มุกดาหาร </option>
-                                    <option value="แม่ฮ่องสอน">แม่ฮ่องสอน </option>
-                                    <option value="ยโสธร">ยโสธร </option>
-                                    <option value="ยะลา">ยะลา </option>
-                                    <option value="ร้อยเอ็ด">ร้อยเอ็ด </option>
-                                    <option value="ระนอง">ระนอง </option>
-                                    <option value="ระยอง">ระยอง </option>
-                                    <option value="ราชบุรี">ราชบุรี</option>
-                                    <option value="ลพบุรี">ลพบุรี </option>
-                                    <option value="ลำปาง">ลำปาง </option>
-                                    <option value="ลำพูน">ลำพูน </option>
-                                    <option value="เลย">เลย </option>
-                                    <option value="ศรีสะเกษ">ศรีสะเกษ</option>
-                                    <option value="สกลนคร">สกลนคร</option>
-                                    <option value="สงขลา">สงขลา </option>
-                                    <option value="สมุทรสาคร">สมุทรสาคร </option>
-                                    <option value="สมุทรปราการ">สมุทรปราการ </option>
-                                    <option value="สมุทรสงคราม">สมุทรสงคราม </option>
-                                    <option value="สระแก้ว">สระแก้ว </option>
-                                    <option value="สระบุรี">สระบุรี </option>
-                                    <option value="สิงห์บุรี">สิงห์บุรี </option>
-                                    <option value="สุโขทัย">สุโขทัย </option>
-                                    <option value="สุพรรณบุรี">สุพรรณบุรี </option>
-                                    <option value="สุราษฎร์ธานี">สุราษฎร์ธานี </option>
-                                    <option value="สุรินทร์">สุรินทร์ </option>
-                                    <option value="สตูล">สตูล </option>
-                                    <option value="หนองคาย">หนองคาย </option>
-                                    <option value="หนองบัวลำภู">หนองบัวลำภู </option>
-                                    <option value="อำนาจเจริญ">อำนาจเจริญ </option>
-                                    <option value="อุดรธานี">อุดรธานี </option>
-                                    <option value="อุตรดิตถ์">อุตรดิตถ์ </option>
-                                    <option value="อุทัยธานี">อุทัยธานี </option>
-                                    <option value="อุบลราชธานี">อุบลราชธานี</option>
-                                    <option value="อ่างทอง">อ่างทอง </option>
+                                {{Form::select('province',[],null,['id'=>'input_province','class'=>'js-example-basic-single','onchange'=>'showAmphoes()'])}}
+
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="district">อำเภอ</label>
+                                {{Form::select('district',[],null,['id'=>'input_amphoe','class'=>'js-example-basic-single','onchange'=>'showDistricts()'])}}
+
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="province">ตำบล</label>
+                            {{Form::select('province',[],null,['id'=>'input_district','class'=>'js-example-basic-single','onchange'=>'showZipcode()'])}}
+
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="district">รหัสไปรษณีย์</label>
+                                {{ Form::text('district', null, ['id'=>'input_zipcode','class'=>'form-control','disabled']) }}
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label for="user_id">เลือกครู</label>
+                                <select class="js-example-basic-single w-100" name="user_id" id="user_id">
+                                    @foreach ($teacher as $t)
+                                        <option value="{{ $t->id }}">
+                                            {{ $t->name.' '.$t->lastname }} โรงเรียน{{$t->schoolname}}</option>
+                                        @endforeach
+
                                 </select>
 
                             </div>
-                        </div>
-                        <div class="form-row">
-
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="tel">ระดับความเร่งด่วน</label>
-                                {{ Form::select('level',['1'=>'ไม่เร่งด่วน','2'=>'เร่งด่วนเล็กน้อย','3'=>'เร่งด่วน','4'=>'เร่งด่วนมาก'], null, ['class'=>'form-control','placeholder' => 'เลือกระดับความเร่งด่วนในการรับบริจาค..']) }}
+                                {{ Form::select('level',['1'=>'ไม่เร่งด่วน','2'=>'เร่งด่วนเล็กน้อย','3'=>'เร่งด่วน','4'=>'เร่งด่วนมาก'], null, ['class'=>'js-example-basic-single','placeholder' => 'เลือกระดับความเร่งด่วนในการรับบริจาค..']) }}
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="tel">วันที่ปิดรับบริจาค</label>
                                 {{ Form::date('closeDonate', \Carbon\Carbon::now(),['class'=>'form-control']) }}
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="tel">จำนวนเงินสูงสุด</label>
                                 {{ Form::number('maxDonate', null, ['class'=>'form-control','min'=>0]) }}
                             </div>
+
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-3">
@@ -210,7 +145,7 @@ Krukidee | แก้ไขข้อมูลนักเรียน
                             , 'ธนาคารเพื่อการเกษตรและสหกรณ์' => 'ธนาคารเพื่อการเกษตรและสหกรณ์', 'ธนาคารทหารไทย' => 'ธนาคารทหารไทย',
                              'ธนาคารเกียรตินาคิน' => 'ธนาคารเกียรตินาคิน', 'ธนาคารซีไอเอ็มบีไทย' => 'ธนาคารซีไอเอ็มบีไทย', 'ธนาคารธนชาต' => 'ธนาคารธนชาต',
                               'ธนาคารออมสิน' => 'ธนาคารออมสิน', '	ธนาคารอาคารสงเคราะห์' => '	ธนาคารอาคารสงเคราะห์', 'ธนาคารอิสลามแห่งประเทศไทย' => 'ธนาคารอิสลามแห่งประเทศไทย'
-                        ], null, ['class'=>'form-control','placeholder' => 'เลือกธนาคาร...']) }}
+                        ], null, ['class'=>'js-example-basic-single','placeholder' => 'เลือกธนาคาร...']) }}
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="bankAccountName">ชื่อบัญชีธนาคาร</label>
@@ -223,29 +158,21 @@ Krukidee | แก้ไขข้อมูลนักเรียน
                             </div>
                         </div>
                         <div class="form-row ">
-                            <div class="form-group col-md-6">
-                                <label for="user_id">เลือกครู</label>
-                                <select id="user_id" name="user_id" class="form-control" placeholder="เลือกครู...">
-                                    <option value="" disabled selected>เลือกครู...</option>
-                                    @foreach ($teacher as $t)
-                                    <option value="{{ $t->id }}">
-                                        {{ $t->name.' '.$t->lastname }}----โรงเรียน{{$t->schoolname}}</option>
-                                    @endforeach
-                                </select>
 
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="description">รายละเอียดของนักเรียน</label>
 
-                                {{ Form::textarea('description', null, ['id'=>'exampleFormControlTextarea1','rows'=>'2','class'=>'form-control']) }}
-
-                            </div>
                         </div>
                         <div class="form-group">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="picture" name="picture">
-                                <label class="custom-file-label" for="validatedCustomFile">เลือกภาพนักเรียน</label>
+                            <label class="">เลือกภาพนักเรียน : </label>
+                            <input id="file_upload" style="display:none" name="picture" type="file" multiple="false">
+                            @if ($errors->has('picture'))
+                            <div class="invalid-feedback">{{ $errors->first('picture') }}</div>
+                            @endif
+
+                            <div id="upload" class="btn btn-outline-info">
+                                <i data-feather="upload-cloud" class="icon-md mr-2"></i>เลือกภาพ
                             </div>
+
+                            <div id="thumbnail"></div>
                         </div>
 
                         <div class="form-group ">
@@ -271,6 +198,100 @@ Krukidee | แก้ไขข้อมูลนักเรียน
 @endpush
 
 @push('custom-scripts')
+{!! Html::script('admin/assets/plugins/select2/select2.min.js') !!}
+{!! Html::script('admin/assets/js/select2.js') !!}
+<script>
+    $(document).ready(function(){
+
+      showProvinces();
+    });
+</script>
+<script>
+    function ajax(url, callback){
+          $.ajax({
+            "url" : url,
+            "type" : "GET",
+            "dataType" : "json",
+          })
+          .done(callback); //END AJAX
+        }
+</script>
+<script>
+    function showProvinces(){
+              //PARAMETERS
+              var url = "{{ url('/') }}/api/province";
+              var callback = function(result){
+                $("#input_province").empty();
+                for(var i=0; i<result.length; i++){
+                  $("#input_province").append(
+                    $('<option></option>')
+                      .attr("value", ""+result[i].province_code)
+                      .html(""+result[i].province)
+                  );
+                }
+                showAmphoes();
+              };
+              //CALL AJAX
+              ajax(url,callback);
+            }
+            function showAmphoes(){
+  //INPUT
+  var province_code = $("#input_province").val();
+  //PARAMETERS
+  var url = "{{ url('/') }}/api/province/"+province_code+"/amphoe";
+  var callback = function(result){
+    //console.log(result);
+    $("#input_amphoe").empty();
+    for(var i=0; i<result.length; i++){
+      $("#input_amphoe").append(
+        $('<option></option>')
+          .attr("value", ""+result[i].amphoe_code)
+          .html(""+result[i].amphoe)
+      );
+    }
+    showDistricts();
+  };
+  //CALL AJAX
+  ajax(url,callback);
+}
+function showDistricts(){
+  //INPUT
+  var province_code = $("#input_province").val();
+  var amphoe_code = $("#input_amphoe").val();
+  //PARAMETERS
+  var url = "{{ url('/') }}/api/province/"+province_code+"/amphoe/"+amphoe_code+"/district";
+  var callback = function(result){
+    //console.log(result);
+    $("#input_district").empty();
+    for(var i=0; i<result.length; i++){
+      $("#input_district").append(
+        $('<option></option>')
+          .attr("value", ""+result[i].district_code)
+          .html(""+result[i].district)
+      );
+    }
+    showZipcode();
+  };
+  //CALL AJAX
+  ajax(url,callback);
+}
+function showZipcode(){
+  //INPUT
+  var province_code = $("#input_province").val();
+  var amphoe_code = $("#input_amphoe").val();
+  var district_code = $("#input_district").val();
+  //PARAMETERS
+  var url = "{{ url('/') }}/api/province/"+province_code+"/amphoe/"+amphoe_code+"/district/"+district_code;
+  var callback = function(result){
+    //console.log(result);
+    for(var i=0; i<result.length; i++){
+      $("#input_zipcode").val(result[i].zipcode);
+    }
+  };
+  //CALL AJAX
+  ajax(url,callback);
+}
+</script>
 <!-- Custom js here -->
 <script type="text/javascript">
     $(function() {

@@ -22,11 +22,10 @@ Krukidee | หน้าหลัก
                 <div class="form-group">
                     <label>Single select box using select 2</label>
                     <select class="js-example-basic-single w-100">
-                        <option value="TX">Texas</option>
-                        <option value="NY">New York</option>
-                        <option value="FL">Florida</option>
-                        <option value="KN">Kansas</option>
-                        <option value="HW">Hawaii</option>
+                        @foreach ($user as $s)
+                        <option value="TX">{{$s->name}}</option>
+                        @endforeach
+
                     </select>
                 </div>
                 <div class="form-group">

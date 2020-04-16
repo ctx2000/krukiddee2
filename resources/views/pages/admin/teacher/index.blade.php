@@ -153,6 +153,7 @@ $("#id").val(id);
 $('#myModal').modal('show');
 });
 </script>
+
 @endsection
 
 @push('plugin-scripts')
@@ -164,4 +165,9 @@ $('#myModal').modal('show');
 @push('custom-scripts')
 <!-- Custom js here -->
 {!! Html::script('admin/assets/js/data-table.js') !!}
+@if (session('feedback'))
+<script>
+    Swal.fire('ผลการทำงาน',"{{session('feedback')}}",'success');
+</script>
+@endif
 @endpush

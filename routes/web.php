@@ -137,12 +137,16 @@ Route::get('admin/student/test', function () {
     return view('pages\admin\student\desc');
 });
 Route::get('administrator/blank', function () {
-    return view('pages.admin.general.blank');
+    $user = App\User::where('type','3')->get();
+    return view('pages.admin.general.blank',[
+        'user'=>$user
+    ]);
 });
 Route::get('administrator/edit', function () {
     return view('pages.admin.member.edit');
 });
 Route::get('administrator/show', function () {
+
     return view('pages.admin.member.show');
 });
 

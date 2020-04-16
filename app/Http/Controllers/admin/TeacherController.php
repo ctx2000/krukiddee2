@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\District;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -122,9 +123,18 @@ class TeacherController extends Controller
         $teacher->tel = $request->tel;
         $teacher->id_card = $request->id_card;
         $teacher->schoolName = $request->schoolName;
-        $teacher->address = $request->address;
+        $teacher->Address = $request->address;
+
+        $teacher->agree = $request->agree;
         $teacher->type = '3';
         $teacher->password = Hash::make($request->password);
+
+            //convert district //159
+        $thai = District::where([['district_code',$request->sub_district],['amphoe_code',$request->district],['province_code',$request->province]])->first();
+            $teacher->sub_district = $thai->district;
+            $teacher->district = $thai->amphoe;
+            $teacher->province = $thai->province;
+            $teacher->zipcode = $thai->zipcode;
         if($request->hasFile('picture')){
             //random file name
             //$newFileName = str_random(40);
@@ -141,7 +151,7 @@ class TeacherController extends Controller
             // })->save($path.$newFileName);
         }
         $teacher->save();
-        return redirect()->route('admin.teacher');
+        return redirect()->route('admin.teacher')->with('feedback','เพิ่มครูสำเร็จ');
 
     }
     public function editTeacher($id){
