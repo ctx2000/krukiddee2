@@ -58,27 +58,28 @@ Route::group(['prefix' => 'teacher'], function(){
 Route::get('/admin/edit', 'admin\AdminController@edit')->name('admin.edit')->middleware('admin');
 Route::post('/admin/update', 'admin\AdminController@update')->name('admin.update')->middleware('admin');
 Route::get('/admin/user/delete/{id}', 'admin\AdminController@deleteUser')->name('admin.deleteUser')->middleware('admin');
-Route::get('/admin/student/delete/{id}', 'admin\AdminController@deleteStudent')->name('admin.deleteStudent')->middleware('admin');
+
 Route::post('/admin/search', 'admin\AdminController@search')->name('admin.search')->middleware('admin');
 Route::get('/admin/slideBig', 'admin\AdminController@slideBig')->name('admin.slideBig')->middleware('admin');
 Route::get('/admin/slideBig/edit/{id}', 'admin\AdminController@slideBigEdit')->name('admin.slideBigEdit')->middleware('admin');
 Route::post('/admin/slideBig/store', 'admin\AdminController@slideStore')->name('admin.slideStore')->middleware('admin');
 
-Route::get('/admin/member/all', 'admin\AdminController@member')->name('admin.member')->middleware('admin');
-Route::get('/admin/member/edit/{id}', 'admin\AdminController@editMember')->name('admin.editMember')->middleware('admin');
-Route::post('/admin/member/update', 'admin\AdminController@memberUpdate')->name('admin.memberUpdate')->middleware('admin');
-Route::post('/admin/member/ban', 'admin\AdminController@memberBaned')->name('admin.memberBaned')->middleware('admin');
-Route::get('/admin/member/unban/{id}', 'admin\AdminController@memberUnban')->name('admin.memberUnban')->middleware('admin');
-Route::get('/admin/member/about/{id}', 'admin\AdminController@memberAbout')->name('admin.memberAbout')->middleware('admin');
+Route::get('/admin/member/all', 'admin\MemberController@member')->name('admin.member')->middleware('admin');
+Route::get('/admin/member/edit/{id}', 'admin\MemberController@editMember')->name('admin.editMember')->middleware('admin');
+Route::post('/admin/member/update', 'admin\MemberController@memberUpdate')->name('admin.memberUpdate')->middleware('admin');
+Route::post('/admin/member/ban', 'admin\MemberController@memberBaned')->name('admin.memberBaned')->middleware('admin');
+Route::get('/admin/member/unban/{id}', 'admin\MemberController@memberUnban')->name('admin.memberUnban')->middleware('admin');
+Route::get('/admin/member/about/{id}', 'admin\MemberController@memberAbout')->name('admin.memberAbout')->middleware('admin');
 
-Route::get('/admin/student/all', 'admin\AdminController@student')->name('admin.student')->middleware('admin');
-Route::get('/admin/addStudent', 'admin\AdminController@addStudent')->name('admin.addStudent')->middleware('admin');
-Route::post('/admin/studentStore', 'admin\AdminController@studentStore')->name('admin.studentStore')->middleware('admin');
-Route::get('/admin/student/edit/{id}', 'admin\AdminController@studentEdit')->name('admin.studentEdit')->middleware('admin');
-Route::post('/admin/student/update', 'admin\AdminController@studentUpdate')->name('admin.studentUpdate')->middleware('admin');
-Route::post('/admin/student/ban', 'admin\AdminController@studentBan')->name('admin.studentBan')->middleware('admin');
-Route::post('/admin/student/unBan', 'admin\AdminController@studentUnban')->name('admin.studentUnban')->middleware('admin');
-Route::get('/admin/student/about/{id}', 'admin\AdminController@aboutStudent')->name('admin.aboutStudent')->middleware('admin');
+Route::get('/admin/student/all', 'admin\StudentController@student')->name('admin.student')->middleware('admin');
+Route::get('/admin/addStudent', 'admin\StudentController@addStudent')->name('admin.addStudent')->middleware('admin');
+Route::post('/admin/studentStore', 'admin\StudentController@studentStore')->name('admin.studentStore')->middleware('admin');
+Route::get('/admin/student/edit/{id}', 'admin\StudentController@studentEdit')->name('admin.studentEdit')->middleware('admin');
+Route::post('/admin/student/update', 'admin\StudentController@studentUpdate')->name('admin.studentUpdate')->middleware('admin');
+Route::post('/admin/student/ban', 'admin\StudentController@studentBan')->name('admin.studentBan')->middleware('admin');
+Route::post('/admin/student/unBan', 'admin\StudentController@studentUnban')->name('admin.studentUnban')->middleware('admin');
+Route::get('/admin/student/about/{id}', 'admin\StudentController@aboutStudent')->name('admin.aboutStudent')->middleware('admin');
+Route::get('/admin/student/delete/{id}', 'admin\StudentController@deleteStudent')->name('admin.deleteStudent')->middleware('admin');
 
 
 
@@ -87,15 +88,15 @@ Route::get('/admin/student/about/{id}', 'admin\AdminController@aboutStudent')->n
 Route::get('/admin/checkReciept', 'admin\AdminController@checkReciept')->name('admin.checkReciept')->middleware('admin');
 Route::get('/admin/allReciept', 'admin\AdminController@allReciept')->name('admin.allReciept')->middleware('admin');
 
-Route::get('/admin/teacher/all', 'admin\AdminController@teacher')->name('admin.teacher')->middleware('admin');
-Route::get('/admin/teacher/add', 'admin\AdminController@addTeacher')->name('admin.addTeacher')->middleware('admin');
-Route::post('/admin/teacher/search', 'admin\AdminController@searchTeacher')->name('admin.searchTeacher')->middleware('admin');
-Route::post('/admin/teacher/store', 'admin\AdminController@storeTeacher')->name('admin.storeTeacher')->middleware('admin');
-Route::get('/admin/teacher/accept', 'admin\AdminController@acceptTeacher')->name('admin.acceptTeacher')->middleware('admin');
-Route::get('/admin/teacher/about/{id}', 'admin\AdminController@aboutTeacher')->name('admin.aboutTeacher')->middleware('admin');
-Route::get('/admin/teacher/edit/{id}', 'admin\AdminController@editTeacher')->name('admin.editTeacher')->middleware('admin');
-Route::get('/admin/teacher/allow/{id}', 'admin\AdminController@allowTeacher')->name('admin.allowTeacher')->middleware('admin');
-Route::post('/admin/teacher/update', 'admin\AdminController@teacherUpdate')->name('admin.teacherUpdate')->middleware('admin');
+Route::get('/admin/teacher/all', 'admin\TeacherController@teacher')->name('admin.teacher')->middleware('admin');
+Route::get('/admin/teacher/add', 'admin\TeacherController@addTeacher')->name('admin.addTeacher')->middleware('admin');
+Route::post('/admin/teacher/search', 'admin\TeacherController@searchTeacher')->name('admin.searchTeacher')->middleware('admin');
+Route::post('/admin/teacher/store', 'admin\TeacherController@storeTeacher')->name('admin.storeTeacher')->middleware('admin');
+Route::get('/admin/teacher/accept', 'admin\TeacherController@acceptTeacher')->name('admin.acceptTeacher')->middleware('admin');
+Route::get('/admin/teacher/about/{id}', 'admin\TeacherController@aboutTeacher')->name('admin.aboutTeacher')->middleware('admin');
+Route::get('/admin/teacher/edit/{id}', 'admin\TeacherController@editTeacher')->name('admin.editTeacher')->middleware('admin');
+Route::get('/admin/teacher/allow/{id}', 'admin\TeacherController@allowTeacher')->name('admin.allowTeacher')->middleware('admin');
+Route::post('/admin/teacher/update', 'admin\TeacherController@teacherUpdate')->name('admin.teacherUpdate')->middleware('admin');
 
 
 
@@ -107,7 +108,7 @@ Route::get('/teacher/checked/{id}/check/{check}', 'teacher\TeacherController@che
 Route::get('/teacher/news','teacher\TeacherController@checkReciept')->middleware('teacher')->name('teacher.checkReciept');
 Route::get('/teacher/edit','teacher\TeacherController@edit')->middleware('teacher')->name('teacher.edit');
 Route::post('/teacher/update', 'teacher\TeacherController@update')->name('teacher.update')->middleware('teacher');
-
+Route::post('/teacher/desc', 'teacher\TeacherController@addDesc')->name('teacher.addDesc')->middleware('teacher');
 Route::resource('/teacher/student', 'teacher\StudentController')->middleware('teacher');
 
 
@@ -144,8 +145,11 @@ Route::get('administrator/edit', function () {
 Route::get('administrator/show', function () {
     return view('pages.admin.member.show');
 });
+
+Route::get('administrator/login', function () {
+    return view('pages\admin\auth\login');
+});
 Route::post('/administrator/auth/login', 'admin\AdminController@login')->name('admin.login');
 Route::get('/dashboards', 'admin\AdminController@indexs')->name('admin.index');
 
 
-Route::post('/teacher/desc', 'teacher\TeacherController@addDesc')->name('teacher.addDesc')->middleware('teacher');
