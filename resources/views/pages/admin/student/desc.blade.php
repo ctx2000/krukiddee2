@@ -25,16 +25,8 @@ Krukidee | แก้ไขข้อมูลนักเรียน
         <div class="card">
             <div class="card-body">
                 <h6 class="card-title">แก้ไขข้อมูล</h6>
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
-                <form action=" {{route('admin.studentStore')}} " method="POST" enctype="multipart/form-data">
+
+                <form action=" {{route('admin.studentStoreDesc')}} " method="POST" enctype="multipart/form-data">
                     @csrf
 
 
@@ -49,7 +41,7 @@ Krukidee | แก้ไขข้อมูลนักเรียน
                                 class="summernote form-control"> เช่น ต้องการซ่อมที่พัก,ต้องการอาหารแห้ง หรือทุนการศึกษา เป็นต้น</textarea>
                         </div>
 
-                    {{-- <input type="hidden" name="id" value="{{$id}}"> --}}
+                    <input type="hidden" name="id" value="{{$id}}">
                     <div class="form-group ">
 
 

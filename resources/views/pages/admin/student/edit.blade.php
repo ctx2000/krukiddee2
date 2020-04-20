@@ -5,9 +5,6 @@ Krukidee | แก้ไขข้อมูลนักเรียน
 @endpush
 
 @push('plugin-styles')
-<!-- Plugin css import here -->
-{!! Html::script('admin/js/app.js') !!}
-{!! Html::style('admin/assets/plugins/select2/select2.min.css') !!}
 <style type="text/css">
     body {
         background-color: #E3E6F6;
@@ -32,6 +29,9 @@ Krukidee | แก้ไขข้อมูลนักเรียน
         border: 1px solid red;
     }
 </style>
+<!-- Plugin css import here -->
+{!! Html::script('admin/js/app.js') !!}
+{!! Html::style('admin/assets/plugins/select2/select2.min.css') !!}
 @endpush
 
 @section('content')
@@ -58,157 +58,159 @@ Krukidee | แก้ไขข้อมูลนักเรียน
                     </ul>
                 </div>
                 @endif
-                <form action=" {{route('admin.studentStore')}} " method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <fieldset>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="name">ชื่อ</label>
-                                <input name="name" type="text" class="form-control" id="name"
-                                    aria-describedby="nameHelp">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="lastname">นามสกุล</label>
-                                <input name="lastname" type="text" class="form-control" id="price"
-                                    aria-describedby="priceHelp">
-                            </div>
+                {!! Form::model($student, ['novalidate','route' => ['admin.studentUpdate'], 'method'
+                =>'post', 'files' => true,'class'=> ($errors->any()) ? 'was-validated' : 'needs-validation'])!!}
+                <fieldset>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="name">ชื่อ</label>
+                            {{ Form::text('name', null, ['class'=>'form-control','id'=>'name','aria-describedby'=>'nameHelp']) }}
 
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label for="grade">ชั้นเรียน</label>
-                                {{ Form::text('grade', null, ['class'=>'form-control']) }}
-                            </div>
-
-                            <div class="form-group col-md-4">
-                                <label for="age">อายุ</label>
-                                <input name="age" type="number" class="form-control" id="name"
-                                    aria-describedby="nameHelp">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="birthday">วันเกิด</label>
-                                {{ Form::date('birthday', \Carbon\Carbon::now(),['class'=>'form-control']) }}
-                            </div>
-                        </div>
-                        <div class="form-row">
-
-
-                            <div class="form-group col-md-6">
-                                <label for="id_card">เลขบัตรประชาชน</label>
-                                {{ Form::text('id_card', null, ['class'=>'form-control','required']) }}
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="tel">หมายเลขโทรศัพท์นักเรียน(ถ้ามี)</label>
-                                {{ Form::text('tel', null, ['class'=>'form-control']) }}
-                            </div>
-
-
+                        <div class="form-group col-md-6">
+                            <label for="lastname">นามสกุล</label>
+                            {{ Form::text('lastname', null, ['class'=>'form-control','id'=>'lastname','aria-describedby'=>'lastnameHelp']) }}
                         </div>
 
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <label for="address">ที่อยู่</label>
-                                {{ Form::text('address', null, ['class'=>'form-control','required']) }}
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="province">จังหวัด</label>
-                                {{Form::select('province',[],null,['id'=>'input_province','class'=>'js-example-basic-single','onchange'=>'showAmphoes()'])}}
-
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="district">อำเภอ</label>
-                                {{Form::select('district',[],null,['id'=>'input_amphoe','class'=>'js-example-basic-single','onchange'=>'showDistricts()'])}}
-
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="sub_district">ตำบล</label>
-                                {{Form::select('sub_district',[],null,['id'=>'input_district','class'=>'js-example-basic-single','onchange'=>'showZipcode()'])}}
-
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="zipcode">รหัสไปรษณีย์</label>
-                                {{ Form::text('zipcode', null, ['id'=>'input_zipcode','class'=>'form-control','disabled']) }}
-                            </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="grade">ชั้นเรียน</label>
+                            {{ Form::text('grade', null, ['class'=>'form-control']) }}
                         </div>
 
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <label for="user_id">เลือกครู</label>
-                                <select class="js-example-basic-single w-100" name="user_id" id="user_id">
-                                    @foreach ($teacher as $t)
-                                        <option value="{{ $t->id }}">
-                                            {{ $t->name.' '.$t->lastname }} โรงเรียน{{$t->schoolname}}</option>
-                                        @endforeach
+                        <div class="form-group col-md-4">
+                            <label for="age">อายุ</label>
+                            {{ Form::number('age', null, ['class'=>'form-control']) }}
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="birthday">วันเกิด</label>
+                            {{ Form::date('birthday',null,['class'=>'form-control']) }}
+                        </div>
+                    </div>
+                    <div class="form-row">
 
-                                </select>
 
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="tel">ระดับความเร่งด่วน</label>
-                                {{ Form::select('level',['1'=>'ไม่เร่งด่วน','2'=>'เร่งด่วนเล็กน้อย','3'=>'เร่งด่วน','4'=>'เร่งด่วนมาก'], null, ['class'=>'js-example-basic-single','placeholder' => 'เลือกระดับความเร่งด่วนในการรับบริจาค..']) }}
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="tel">วันที่ปิดรับบริจาค</label>
-                                {{ Form::date('closeDonate', \Carbon\Carbon::now(),['class'=>'form-control']) }}
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="tel">จำนวนเงินสูงสุด</label>
-                                {{ Form::number('maxDonate', null, ['class'=>'form-control','min'=>0]) }}
-                            </div>
+                        <div class="form-group col-md-6">
+                            <label for="id_card">เลขบัตรประชาชน</label>
+                            {{ Form::text('id_card', null, ['class'=>'form-control','required']) }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="tel">หมายเลขโทรศัพท์นักเรียน(ถ้ามี)</label>
+                            {{ Form::text('tel', null, ['class'=>'form-control']) }}
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="address">ที่อยู่</label>
+                            {{ Form::text('address', null, ['class'=>'form-control','required']) }}
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="province">จังหวัด</label>
+                            {{ Form::text('province', null, ['class'=>'form-control','required']) }}
+                            {{-- {{Form::select('province',[],null,['id'=>'input_province','class'=>'js-example-basic-single','onchange'=>'showAmphoes()'])}} --}}
 
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <label for="bank_of">บัญชีของ : </label>
-                                {{ Form::text('bank_of', null, ['class'=>'form-control']) }}
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="bankName">เลือกธนาคาร</label>
-                                {{ Form::select('bankName', ['ธนาคารกรุงไทย' => 'ธนาคารกรุงไทย', 'ธนาคารกรุงเทพ' => 'ธนาคารกรุงเทพ'
+                        <div class="form-group col-md-2">
+                            <label for="district">อำเภอ</label>
+                            {{ Form::text('district', null, ['class'=>'form-control','required']) }}
+
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="sub_district">ตำบล</label>
+                            {{ Form::text('sub_district', null, ['class'=>'form-control','required']) }}
+
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="zipcode">รหัสไปรษณีย์</label>
+                            {{ Form::text('zipcode', null, ['class'=>'form-control','required']) }}
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="user_id">เลือกครู</label>
+                            <select class="js-example-basic-single w-100" name="user_id" id="user_id">
+                                <option value="{{$oldTeacher->id}}" selected>
+                                    {{$oldTeacher->name.' '.$oldTeacher->lastname}}
+                                    โรงเรียน{{$oldTeacher->schoolname}}</option>
+                                @foreach ($teacher as $t)
+                                <option value="{{ $t->id }}">
+                                    {{ $t->name.' '.$t->lastname }}----โรงเรียน{{$t->schoolname}}</option>
+                                @endforeach
+
+                            </select>
+
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="tel">ระดับความเร่งด่วน</label>
+                            {{ Form::select('level',['1'=>'ไม่เร่งด่วน','2'=>'เร่งด่วนเล็กน้อย','3'=>'เร่งด่วน','4'=>'เร่งด่วนมาก'], null, ['class'=>'js-example-basic-single','placeholder' => 'เลือกระดับความเร่งด่วนในการรับบริจาค..']) }}
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="tel">วันที่ปิดรับบริจาค</label>
+                            {{ Form::date('closeDonate', null,['class'=>'form-control']) }}
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="tel">จำนวนเงินสูงสุด</label>
+                            {{ Form::number('maxDonate', null, ['class'=>'form-control','min'=>0]) }}
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="bank_of">บัญชีของ : </label>
+                            {{ Form::text('bank_of', null, ['class'=>'form-control']) }}
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="bankName">เลือกธนาคาร</label>
+                            {{ Form::select('bankName', ['ธนาคารกรุงไทย' => 'ธนาคารกรุงไทย', 'ธนาคารกรุงเทพ' => 'ธนาคารกรุงเทพ'
                             , 'ธนาคารกรุงศรีอยุธยา' => 'ธนาคารกรุงศรีอยุธยา', 'ธนาคารไทยพานิชย์' => 'ธนาคารไทยพานิชย์', 'ธนาคารกสิกร' => 'ธนาคารกสิกร'
                             , 'ธนาคารเพื่อการเกษตรและสหกรณ์' => 'ธนาคารเพื่อการเกษตรและสหกรณ์', 'ธนาคารทหารไทย' => 'ธนาคารทหารไทย',
                              'ธนาคารเกียรตินาคิน' => 'ธนาคารเกียรตินาคิน', 'ธนาคารซีไอเอ็มบีไทย' => 'ธนาคารซีไอเอ็มบีไทย', 'ธนาคารธนชาต' => 'ธนาคารธนชาต',
                               'ธนาคารออมสิน' => 'ธนาคารออมสิน', '	ธนาคารอาคารสงเคราะห์' => '	ธนาคารอาคารสงเคราะห์', 'ธนาคารอิสลามแห่งประเทศไทย' => 'ธนาคารอิสลามแห่งประเทศไทย'
                         ], null, ['class'=>'js-example-basic-single','placeholder' => 'เลือกธนาคาร...']) }}
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="bankAccountName">ชื่อบัญชีธนาคาร</label>
-                                {{ Form::text('bankAccountName', null, ['class'=>'form-control']) }}
-                            </div>
-
-                            <div class="form-group col-md-3">
-                                <label for="bankNumber">เลขที่บัญชี</label>
-                                {{ Form::text('bankNumber', null, ['class'=>'form-control']) }}
-                            </div>
                         </div>
-                        <div class="form-row ">
-
-
-                        </div>
-                        <div class="form-group">
-                            <label class="">เลือกภาพนักเรียน : </label>
-                            <input id="file_upload" style="display:none" name="picture" type="file" multiple="false">
-                            @if ($errors->has('picture'))
-                            <div class="invalid-feedback">{{ $errors->first('picture') }}</div>
-                            @endif
-
-                            <div id="upload" class="btn btn-outline-info">
-                                <i data-feather="upload-cloud" class="icon-md mr-2"></i>เลือกภาพ
-                            </div>
-
-                            <div id="thumbnail"></div>
+                        <div class="form-group col-md-3">
+                            <label for="bankAccountName">ชื่อบัญชีธนาคาร</label>
+                            {{ Form::text('bankAccountName', null, ['class'=>'form-control']) }}
                         </div>
 
-                        <div class="form-group ">
-                            <div class="float-left">
-                                <a href="{{route('teacher.dashboard')}}" class="btn btn-danger">ยกเลิก</a>
-                            </div>
-                            <div class="float-right">
-                                <button type="submit" class="btn btn-primary">ต่อไป</button>
-                            </div>
+                        <div class="form-group col-md-3">
+                            <label for="bankNumber">เลขที่บัญชี</label>
+                            {{ Form::text('bankNumber', null, ['class'=>'form-control']) }}
                         </div>
-                        <fieldset>
-                </form>
+                    </div>
+                    <div class="form-row ">
+
+
+                    </div>
+                    <div class="form-group">
+                        <label class="">เลือกภาพนักเรียน : </label>
+                        <input id="file_upload" style="display:none" name="picture" type="file" multiple="false">
+                        @if ($errors->has('picture'))
+                        <div class="invalid-feedback">{{ $errors->first('picture') }}</div>
+                        @endif
+
+                        <div id="upload" class="btn btn-outline-info">
+                            <i data-feather="upload-cloud" class="icon-md mr-2"></i>เลือกภาพ
+                        </div>
+
+                        <div id="thumbnail"></div>
+                    </div>
+
+                    <div class="form-group ">
+                        <div class="float-left">
+                            <a href="{{route('teacher.dashboard')}}" class="btn btn-danger">ยกเลิก</a>
+                        </div>
+                        <div class="float-right">
+                            <button type="submit" class="btn btn-primary">ต่อไป</button>
+                        </div>
+                    </div>
+                    <fieldset>
+                        </form>
 
             </div>
         </div>

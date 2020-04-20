@@ -79,17 +79,22 @@ Krukidee | ข้อมูลครู
 
                                 <td>
                                     <div class="btn-group">
+                                        @if ($s->closeDonate < now())
+                                        <a href="#" class="btn btn-secondary " data-toggle="tooltip"
+                                        data-placement="left" title="เพิ่มคำขอบคุณ"><i class="icon-md"
+                                            data-feather="edit-3"></i></a>
+                                        @endif
                                         <button type="button" class="btn btn-light btn-icon"><i class="icon-lg"
                                                 data-feather="settings"></i></button>
                                         <button type="button"
-                                            class="btn btn-light dropdown-toggle dropdown-toggle-split"
+                                            class="btn btn-light dropdown-toggle dropdown-toggle-split btn-icon"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span class="sr-only">Toggle Dropdown</span>
                                         </button>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item"
                                                 href="{{route('admin.studentEdit',['id'=>$s->id])}}">
-                                                <li class="	fas fa-pen"></li><span class=""> แก้ไขข้อมูล</span>
+                                                <i data-feather="edit-2" class="icon-sm mr-2"></i><span class=""> แก้ไขข้อมูล</span>
                                             </a>
 
                                             @if ($s->status=='ban')
@@ -238,4 +243,9 @@ $('#myModal2').modal('show');
 @push('custom-scripts')
 <!-- Custom js here -->
 {!! Html::script('admin/assets/js/data-table.js') !!}
+@if (session('feedback'))
+<script>
+    Swal.fire('ผลการทำงาน',"{{session('feedback')}}",'success');
+</script>
+@endif
 @endpush

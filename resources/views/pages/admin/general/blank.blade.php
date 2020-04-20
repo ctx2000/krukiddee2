@@ -22,9 +22,9 @@ Krukidee | หน้าหลัก
                 <div class="form-group">
                     <label>Single select box using select 2</label>
                     <select class="js-example-basic-single w-100">
-                        @foreach ($user as $s)
+                        {{-- @foreach ($user as $s)
                         <option value="TX">{{$s->name}}</option>
-                        @endforeach
+                        @endforeach --}}
 
                     </select>
                 </div>

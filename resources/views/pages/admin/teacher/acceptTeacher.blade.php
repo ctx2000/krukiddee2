@@ -6,6 +6,7 @@ Krukidee | อนุมัติครู
 
 @push('plugin-styles')
 <!-- Plugin css import here -->
+{!! Html::script('admin/js/app.js') !!}
 {!! Html::style('admin/assets/plugins/datatables-net/dataTables.bootstrap4.css') !!}
 @endpush
 

@@ -74,6 +74,7 @@ Route::get('/admin/member/about/{id}', 'admin\MemberController@memberAbout')->na
 Route::get('/admin/student/all', 'admin\StudentController@student')->name('admin.student')->middleware('admin');
 Route::get('/admin/addStudent', 'admin\StudentController@addStudent')->name('admin.addStudent')->middleware('admin');
 Route::post('/admin/studentStore', 'admin\StudentController@studentStore')->name('admin.studentStore')->middleware('admin');
+Route::post('/admin/studentStoreDesc', 'admin\StudentController@studentStoreDesc')->name('admin.studentStoreDesc')->middleware('admin');
 Route::get('/admin/student/edit/{id}', 'admin\StudentController@studentEdit')->name('admin.studentEdit')->middleware('admin');
 Route::post('/admin/student/update', 'admin\StudentController@studentUpdate')->name('admin.studentUpdate')->middleware('admin');
 Route::post('/admin/student/ban', 'admin\StudentController@studentBan')->name('admin.studentBan')->middleware('admin');

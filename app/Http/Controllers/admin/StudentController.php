@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\admin;
-
+use App\District;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -97,10 +97,14 @@ class StudentController extends Controller
             $student->birthday = $request->birthday;
             $student->id_card = $request->id_card;
             $student->bank_of = $request->bank_of;
-            $student->district = $request->district;
-            $student->province = $request->province;
-            $student->user_id = auth()->user()->id;
 
+            $student->user_id = $request->user_id;
+
+            $thai = District::where([['district_code',$request->sub_district],['amphoe_code',$request->district],['province_code',$request->province]])->first();
+            $student->sub_district = $thai->district;
+            $student->district = $thai->amphoe;
+            $student->province = $thai->province;
+            $student->zipcode = $thai->zipcode;
                 if($request->hasFile('picture')){
                 //random file name
                 $file_image = $request->file('picture');
@@ -117,7 +121,22 @@ class StudentController extends Controller
                     'id'=>$student->id
                 ]);
             }else{
+                // dd($request->description1);
+                // DB::table('students')
+                // ->where('id', $request->id)
+                // ->update([
+                //     'description1'=>$request->description1,
+                //     'description2'=>$request->description2
 
+                // ]);
+                // // dd($request->description2);
+                // return redirect()->route('admin.student')->with('feedback','เพิ่มนักเรียนสำเร็จ');
+            }
+
+
+    }
+    public function studentStoreDesc(Request $request){
+                       // dd($request->description1);
                 DB::table('students')
                 ->where('id', $request->id)
                 ->update([
@@ -127,20 +146,24 @@ class StudentController extends Controller
                 ]);
                 // dd($request->description2);
                 return redirect()->route('admin.student')->with('feedback','เพิ่มนักเรียนสำเร็จ');
-            }
-
-
     }
     public function studentEdit($id){
         $student = Student::where('id',$id)->first();
         $oldTeacher = User::where('id','=',$student->user_id)->first();
         $teacher = User::where('type','=',3)->get();
-        return view('admin.tool.editStudent',[
+
+        return view('pages\admin\student\edit',[
             'student'=>$student,
             'oldTeacher'=>$oldTeacher,
             'teacher'=>$teacher
 
         ]);
+        // return view('admin.tool.editStudent',[
+        //     'student'=>$student,
+        //     'oldTeacher'=>$oldTeacher,
+        //     'teacher'=>$teacher
+
+        // ]);
     }
     public function studentUpdate(Request $request){
         $request->validate([
