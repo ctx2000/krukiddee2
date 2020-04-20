@@ -126,12 +126,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 // //ralatable
 // Route::get('/admin/member/all', 'admin\AdminController@member')->name('admin.member')->middleware('admin');
 // Route::get('/admin/member/ajax', 'admin\AdminController@memberAjax')->name('admin.memberAjax')->middleware('admin');
-Route::get('test/home', function () {
-    return view('pages.user.home.index');
-});
-Route::get('/users', function () {
+Route::get('test1', function () {
     return view('pages.user.general.about');
 });
+// Route::get('/users', function () {
+//     return view('pages.user.general.about');
+// });
 //test
 Route::get('admin/student/test', function () {
 
@@ -156,5 +156,3 @@ Route::get('administrator/login', function () {
 });
 Route::post('/administrator/auth/login', 'admin\AdminController@login')->name('admin.login');
 Route::get('/dashboards', 'admin\AdminController@indexs')->name('admin.index');
-
-
