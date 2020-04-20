@@ -1,110 +1,65 @@
-<div class="wpo-ne-footer">
-    <!-- start wpo-news-letter-section -->
-    <section class="wpo-news-letter-section">
-        <div class="container">
-            <div class="row">
-                <div class="col col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-                    <div class="wpo-newsletter">
-                        <h3>Follow us For ferther information</h3>
-                        <div class="wpo-newsletter-form">
-                            <form>
-                                <div>
-                                    <input type="text" placeholder="Enter Your Email" class="form-control">
-                                    <button type="submit">Subscribe</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- end container -->
-    </section>
-    <!-- end wpo-news-letter-section -->
-    <!-- start wpo-site-footer -->
-    <footer class="wpo-site-footer">
-        <div class="wpo-upper-footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col col-lg-3 col-md-3 col-sm-6">
-                        <div class="widget about-widget">
-                            <div class="logo widget-title">
-                                <img src="assets/images/logo.png" alt="blog">
-                            </div>
-                            <p>Build and Earn with your online store with lots of cool and exclusive wpo-features </p>
-                            <ul>
-                                <li><a href="#"><i class="ti-facebook"></i></a></li>
-                                <li><a href="#"><i class="ti-twitter-alt"></i></a></li>
-                                <li><a href="#"><i class="ti-instagram"></i></a></li>
-                                <li><a href="#"><i class="ti-google"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col col-lg-3 col-md-3 col-sm-6">
-                        <div class="widget link-widget resource-widget">
-                            <div class="widget-title">
-                                <h3>Top News</h3>
-                            </div>
-                            <div class="news-wrap">
-                                <div class="news-img">
-                                    <img src="assets/images/footer/img-1.jpg" alt="">
-                                </div>
-                                <div class="news-text">
-                                    <h3>Education for all poor children</h3>
-                                    <span>12 Nov, 2020</span>
-                                </div>
-                            </div>
-                            <div class="news-wrap">
-                                <div class="news-img">
-                                    <img src="assets/images/footer/img-2.jpg" alt="">
-                                </div>
-                                <div class="news-text">
-                                    <h3>Education for all poor children</h3>
-                                    <span>12 Nov, 2020</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col col-lg-2 col-md-3 col-sm-6">
-                        <div class="widget link-widget">
-                            <div class="widget-title">
-                                <h3>Useful Links</h3>
-                            </div>
-                            <ul>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Our Causes</a></li>
-                                <li><a href="#">Our Mission</a></li>
-                                <li><a href="#">Contact Us</a></li>
-                                <li><a href="#">Our Event</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col col-lg-3 col-lg-offset-1 col-md-3 col-sm-6">
-                        <div class="widget market-widget wpo-service-link-widget">
-                            <div class="widget-title">
-                                <h3>Contact </h3>
-                            </div>
-                            <p>online store with lots of cool and exclusive wpo-features</p>
-                            <div class="contact-ft">
-                                <ul>
-                                    <li><i class="fi flaticon-pin"></i>28 Street, New York City, USA</li>
-                                    <li><i class="fi flaticon-call"></i>+000123456789</li>
-                                    <li><i class="fi flaticon-envelope"></i>Hastium@gmail.com</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- end container -->
+<footer class="footer"><img class="footer__bg img--bg" src="{{asset('user/img/background__layout.png')}}" alt="bg"/>
+  <div class="container">
+    <div class="row bottom-50">
+      <div class="col-md-5 col-xl-4 text-center text-md-left"><a class="logo logo--footer" href="index.html"><img class="logo__img" src="{{asset('user/img/logo_zoo_white.png')}}" alt="logo"/></a>
+        <div class="footer__details">
+          <p><strong>Location:</strong> <span>av. Washington 165, NY CA 54003</span></p>
+          <p><strong>Phone:</strong> <a href="tel:+31859644725">+31 85 964 47 25</a> <a href="tel:+31859644725">+31 65 792 63 11</a></p>
+          <p><strong>Email:</strong> <a href="mailto:info@animalsworld.com">info@animalsworld.com</a></p>
+          <p><strong>Openning hours:</strong> <span>9:00 AM - 5:00 PM</span></p>
         </div>
-        <div class="wpo-lower-footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col col-xs-12">
-                        <p class="copyright">&copy; 2020 Nasarna. All rights reserved</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- end wpo-site-footer -->
-</div>
+        <ul class="socials">
+          <li class="socials__item"><a class="socials__link" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+          <li class="socials__item"><a class="socials__link" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+          <li class="socials__item"><a class="socials__link" href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+          <li class="socials__item"><a class="socials__link" href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+        </ul>
+      </div>
+      <div class="col-md-7 col-xl-5 d-none d-md-block">
+        <h6 class="footer__title">Menu & Links</h6>
+        <ul class="footer-menu">
+          <li class="footer-menu__item"><a class="footer-menu__link" href="#">Home</a></li>
+          <li class="footer-menu__item"><a class="footer-menu__link" href="#">Membership </a></li>
+          <li class="footer-menu__item"><a class="footer-menu__link" href="#">Pages</a></li>
+          <li class="footer-menu__item"><a class="footer-menu__link" href="#">Education</a></li>
+          <li class="footer-menu__item"><a class="footer-menu__link" href="#">Animals</a></li>
+          <li class="footer-menu__item"><a class="footer-menu__link" href="#">Support</a></li>
+          <li class="footer-menu__item"><a class="footer-menu__link" href="#">Schedule</a></li>
+          <li class="footer-menu__item"><a class="footer-menu__link" href="#">Events</a></li>
+          <li class="footer-menu__item"><a class="footer-menu__link" href="#">Gallery</a></li>
+          <li class="footer-menu__item"><a class="footer-menu__link" href="#">Blog</a></li>
+          <li class="footer-menu__item"><a class="footer-menu__link" href="#">Contacts</a></li>
+          <li class="footer-menu__item"><a class="footer-menu__link" href="#">Donate</a></li>
+          <li class="footer-menu__item"><a class="footer-menu__link" href="#">Foundation</a></li>
+          <li class="footer-menu__item"><a class="footer-menu__link" href="#">Tickets</a></li>
+        </ul>
+        <ul class="footer-submenu">
+          <li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Documents</a></li>
+          <li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Association of Zoo</a></li>
+          <li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Aqurium</a></li>
+          <li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Terrarium</a></li>
+          <li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Terra Park</a></li>
+          <li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Cooperation</a></li>
+          <li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Libriry</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 d-none d-xl-block">
+        <h6 class="footer__title"><span>Instagram</span> <i class="fa fa-instagram" aria-hidden="true"></i>
+        </h6>
+        <div class="footer-instagram"><a class="footer-instagram__item" href="#">
+          <div class="footer-instagram__img"><img class="img--bg" src="{{asset('user/img/f_ig-1.jpg')}}" alt="ig"/></div></a><a class="footer-instagram__item" href="#">
+          <div class="footer-instagram__img"><img class="img--bg" src="{{asset('user/img/f_ig-2.jpg')}}" alt="ig"/></div></a><a class="footer-instagram__item" href="#">
+          <div class="footer-instagram__img"><img class="img--bg" src="{{asset('user/img/f_ig-3.jpg')}}" alt="ig"/></div></a><a class="footer-instagram__item" href="#">
+          <div class="footer-instagram__img"><img class="img--bg" src="{{asset('user/img/f_ig-4.jpg')}}" alt="ig"/></div></a><a class="footer-instagram__item" href="#">
+          <div class="footer-instagram__img"><img class="img--bg" src="{{asset('user/img/f_ig-5.jpg')}}" alt="ig"/></div></a><a class="footer-instagram__item" href="#">
+          <div class="footer-instagram__img"><img class="img--bg" src="{{asset('user/img/f_ig-6.jpg')}}" alt="ig"/></div></a></div>
+      </div>
+    </div>
+    <div class="row align-items-center">
+      <div class="col-sm-6 text-center text-sm-left">
+        <div class="footer-privacy"><a class="footer-privacy__link" href="#">Privacy Policy</a><span class="footer-privacy__divider">|</span><a class="footer-privacy__link" href="#">Term and Condision</a></div>
+      </div>
+      <div class="col-sm-6 text-center text-sm-right"><a class="footer__link" href="#"><img src="{{asset('user/img/footer-logo.png')}}" alt="logo"/></a></div>
+    </div>
+  </div>
+</footer>

@@ -10,537 +10,120 @@
 
 @section('content')
 <!-- Page content here -->
-<!-- start of hero -->
-<section class="hero hero-style-3">
-    <div class="hero-slider">
-        <div class="slide">
-            <div class="container">
-                <img src="assets/images/slider/slide-4.jpg" alt class="slider-bg">
-                <div class="row">
-                    <div class="col col-md-6 slide-caption">
-                        <div class="slide-title">
-                            <h2>Let’s be Kind for <span>Children</span></h2>
-                        </div>
-                        <div class="slide-subtitle">
-                            <p>High Quality Charity Theme in Envato Market.</p>
-                            <p>You Can Satisfied Yourself By Helping.</p>
-                        </div>
-                        <div class="btns">
-                            <a href="causes-single.html" class="theme-btn">Donate Now</a>
-                            <a href="causes.html" class="theme-btn-s2">Know More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- promo start-->
+<section class="promo-primary">
+  <picture>
+    <source srcset="{{asset('user/img/contacts.jpg')}}" media="(min-width: 992px)"/><img class="img--bg" src="{{asset('user/img/contacts.jpg')}}" alt="img"/>
+  </picture>
+  <div class="container">
+    <div class="row">
+      <div class="col-auto">
+        <div class="align-container">
+          <div class="align-container__item"><span class="promo-primary__pre-title">Wild World</span>
+            <h1 class="promo-primary__title"><span>Our</span> <span>Contacts</span></h1>
+          </div>
         </div>
-        <div class="slide">
-            <div class="container">
-                <img src="assets/images/slider/slide-3.jpg" alt class="slider-bg">
-                <div class="row">
-                    <div class="col col-md-6 slide-caption">
-                        <div class="slide-title">
-                            <h2>Let’s be Kind for <span>Children</span></h2>
-                        </div>
-                        <div class="slide-subtitle">
-                            <p>High Quality Charity Theme in Envato Market.</p>
-                            <p>You Can Satisfied Yourself By Helping.</p>
-                        </div>
-                        <div class="btns">
-                            <a href="causes-single.html" class="theme-btn">Donate Now</a>
-                            <a href="causes.html" class="theme-btn-s2">Know More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="slide">
-            <div class="container">
-                <img src="assets/images/slider/slide-1.jpg" alt class="slider-bg">
-                <div class="row">
-                    <div class="col col-md-6 slide-caption">
-                        <div class="slide-title">
-                            <h2>Let’s be Kind for <span>Children</span></h2>
-                        </div>
-                        <div class="slide-subtitle">
-                            <p>High Quality Charity Theme in Envato Market.</p>
-                            <p>You Can Satisfied Yourself By Helping.</p>
-                        </div>
-                        <div class="btns">
-                            <a href="causes-single.html" class="theme-btn">Donate Now</a>
-                            <a href="causes.html" class="theme-btn-s2">Know More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </section>
-<!-- end of hero slider -->
-<!-- wpo-mission-area start -->
-<div class="wpo-mission-area section-padding">
-    <div class="container">
-        <div class="row">
+<!-- promo end-->
+<!-- section start-->
+<section class="section">
+  <div class="container">
+    <div class="row bottom-50">
+      <div class="col-12">
+        <div class="heading heading--primary heading--center">
+          <h2 class="heading__title no-margin-bottom"><span>Get in touch</span> <span>with us</span></h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-10 offset-lg-1 col-xl-8 offset-xl-2">
+        <form class="form" id="ajax-form" action="javascript:void(0);" method="post">
+          <div class="row">
+            <div class="col-md-6">
+              <input class="form__field" type="text" name="name" placeholder="Your Name"/>
+            </div>
+            <div class="col-md-6">
+              <input class="form__field" type="email" name="email" placeholder="Your Email"/>
+            </div>
+            <div class="col-md-6">
+              <input class="form__field" type="tel" name="phone" placeholder="Your Phone"/>
+            </div>
+            <div class="col-md-6">
+              <input class="form__field" type="text" name="subject" placeholder="Subject"/>
+            </div>
             <div class="col-12">
-                <div class="wpo-section-title">
-                    <span>What We Do?</span>
-                    <h2>We Are In A Mission To Help The Helpless</h2>
-                </div>
+              <textarea class="form__field form__message" name="message" placeholder="Text"></textarea>
             </div>
-        </div>
-        <div class="wpo-mission-wrap">
-            <div class="row">
-                <div class="col-md-3 col-sm-6 col-12 custom-grid">
-                    <div class="wpo-mission-item">
-                        <div class="wpo-mission-icon-5">
-                            <i class="fi flaticon-water"></i>
-                        </div>
-                        <div class="wpo-mission-content">
-                            <h2>Clean Water</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-12 custom-grid">
-                    <div class="wpo-mission-item">
-                        <div class="wpo-mission-icon-6">
-                            <i class="fi flaticon-food-and-restaurant"></i>
-                        </div>
-                        <div class="wpo-mission-content">
-                            <h2>Healthy Food</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-12 custom-grid">
-                    <div class="wpo-mission-item">
-                        <div class="wpo-mission-icon-7">
-                            <i class="fi flaticon-book"></i>
-                        </div>
-                        <div class="wpo-mission-content">
-                            <h2>Pure Education</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-12 custom-grid">
-                    <div class="wpo-mission-item">
-                        <div class="wpo-mission-icon-8">
-                            <i class="fi flaticon-care"></i>
-                        </div>
-                        <div class="wpo-mission-content">
-                            <h2>Medical Facilities</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-12 text-center">
+              <input class="form__submit" type="submit" value="Send"/>
             </div>
-        </div>
-    </div>
-</div>
-<!-- wpo-mission-area end -->
-<!-- wpo-about-area start -->
-<div class="wpo-about-area section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 colsm-12">
-                <div class="wpo-about-text">
-                    <div class="wpo-section-title">
-                        <span>What We Do?</span>
-                        <h2>We Are In A Mission To Help The Helpless</h2>
-                    </div>
-                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there.</p>
-                    <p>Thing embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, </p>
-                    <div class="btns">
-                        <a href="about.html" class="theme-btn">Know More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 colsm-12">
-                <div class="wpo-about-img">
-                    <img src="assets/images/about.png" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- wpo-about-area end -->
-<!-- wpo-case-area start -->
-<div class="wpo-case-area section-padding">
-    <div class="container">
-        <div class="row">
             <div class="col-12">
-                <div class="wpo-section-title">
-                    <span>Our Causes</span>
-                    <h2>Popular Causes What You Should Know</h2>
+              <div class="alert alert--success alert--filled">
+                <div class="alert__icon">
+                  <svg class="icon">
+                    <use xlink:href="#check"></use>
+                  </svg>
                 </div>
+                <p class="alert__text"><strong>Well done!</strong> Your form has been sent</p><span class="alert__close">
+                  <svg class="icon">
+                    <use xlink:href="#close"></use>
+                  </svg></span>
+              </div>
+              <div class="alert alert--error alert--filled">
+                <div class="alert__icon">
+                  <svg class="icon">
+                    <use xlink:href="#close"></use>
+                  </svg>
+                </div>
+                <p class="alert__text"><strong>Oh snap!</strong> Your form has not been sent</p><span class="alert__close">
+                  <svg class="icon">
+                    <use xlink:href="#close"></use>
+                  </svg></span>
+              </div>
             </div>
-        </div>
-        <div class="wpo-case-wrap">
-            <div class="wpo-case-slider">
-                <div class="wpo-case-single">
-                    <div class="wpo-case-item">
-                        <div class="wpo-case-img">
-                            <img src="assets/images/case/img-1.png" alt="">
-                        </div>
-                        <div class="wpo-case-content">
-                            <div class="wpo-case-text-top">
-                                <h2>Ensure Education for every poor children</h2>
-                                <div class="progress-section">
-                                    <div class="process">
-                                        <div class="progress">
-                                            <div class="progress-bar">
-                                                <div class="progress-value"><span>65.5</span>%</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <ul>
-                                    <li><span>Raised:</span> $7,000.00</li>
-                                    <li><span>Goal:</span> $8,000.00</li>
-                                </ul>
-                            </div>
-                            <div class="case-btn">
-                                <ul>
-                                    <li><a href="causes.html">Learn More</a></li>
-                                    <li><a href="causes-single.html">Donate Now</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="wpo-case-single">
-                    <div class="wpo-case-item">
-                        <div class="wpo-case-img">
-                            <img src="assets/images/case/img-2.png" alt="">
-                        </div>
-                        <div class="wpo-case-content">
-                            <div class="wpo-case-text-top">
-                                <h2>Supply drinking water for the people</h2>
-                                <div class="progress-section">
-                                    <div class="process">
-                                        <div class="progress">
-                                            <div class="progress-bar">
-                                                <div class="progress-value"><span>40.5</span>%</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <ul>
-                                    <li><span>Raised:</span> $7,000.00</li>
-                                    <li><span>Goal:</span> $8,000.00</li>
-                                </ul>
-                            </div>
-                            <div class="case-btn">
-                                <ul>
-                                    <li><a href="causes.html">Learn More</a></li>
-                                    <li><a href="causes-single.html">Donate Now</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="wpo-case-single">
-                    <div class="wpo-case-item">
-                        <div class="wpo-case-img">
-                            <img src="assets/images/case/img-3.png" alt="">
-                        </div>
-                        <div class="wpo-case-content">
-                            <div class="wpo-case-text-top">
-                                <h2>Providing Healthy Food for the children</h2>
-                                <div class="progress-section">
-                                    <div class="process">
-                                        <div class="progress">
-                                            <div class="progress-bar">
-                                                <div class="progress-value"><span>80.5</span>%</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <ul>
-                                    <li><span>Raised:</span> $7,000.00</li>
-                                    <li><span>Goal:</span> $8,000.00</li>
-                                </ul>
-                            </div>
-                            <div class="case-btn">
-                                <ul>
-                                    <li><a href="causes.html">Learn More</a></li>
-                                    <li><a href="causes-single.html">Donate Now</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+          </div>
+        </form>
+      </div>
     </div>
-</div>
-<!-- wpo-case-area end -->
-<!-- .wpo-counter-area start -->
-<div class="wpo-counter-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="wpo-counter-grids">
-                    <div class="grid">
-                        <div>
-                            <h2><span class="odometer" data-count="6200">00</span>+</h2>
-                        </div>
-                        <p>Donation</p>
-                    </div>
-                    <div class="grid">
-                        <div>
-                            <h2><span class="odometer" data-count="80">00</span>+</h2>
-                        </div>
-                        <p>Fund Raised</p>
-                    </div>
-                    <div class="grid">
-                        <div>
-                            <h2><span class="odometer" data-count="245">00</span>+</h2>
-                        </div>
-                        <p>Volunteers</p>
-                    </div>
-                    <div class="grid">
-                        <div>
-                            <h2><span class="odometer" data-count="605">00</span>+</h2>
-                        </div>
-                        <p>Projects</p>
-                    </div>
-                </div>
-            </div>
+  </div>
+</section>
+<!-- section end-->
+<!-- section start-->
+<section class="map-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-lg-5 col-xl-4">
+        <div class="contacts-banner">
+          <p>
+            <svg class="icon">
+              <use xlink:href="#map-pin"></use>
+            </svg> av. Washington 165, NY CA 54003
+          </p>
+          <p>
+            <svg class="icon">
+              <use xlink:href="#phone-call"></use>
+            </svg> <a href="tel:+31859644725">+31 85 964 47 25</a> <a href="tel:31859644725">+31 65 792 63 11</a>
+          </p>
+          <p>
+            <svg class="icon">
+              <use xlink:href="#mail"></use>
+            </svg> <a href="mailto:info@animalsworld.com">info@animalsworld.com</a>
+          </p>
+          <p>
+            <svg class="icon">
+              <use xlink:href="#clock"></use>
+            </svg> 9:00 AM - 5:00 PM
+          </p>
         </div>
+      </div>
     </div>
-</div>
-<!-- .wpo-counter-area end -->
-<!-- wpo-team-area start -->
-<div class="wpo-team-area section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="wpo-section-title">
-                    <span>Meet Our Team</span>
-                    <h2>Our Expert Volunteer</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-6 col-12 custom-grid">
-                <div class="wpo-team-wrap">
-                    <div class="wpo-team-img">
-                        <img src="assets/images/team/team-1.jpg" alt="">
-                    </div>
-                    <div class="wpo-team-content">
-                        <div class="wpo-team-text-sub">
-                            <h2>Smith Tomkin</h2>
-                            <span>CEO & Founder</span>
-                            <ul>
-                                <li><a href="#"><i class="ti-facebook"></i></a></li>
-                                <li><a href="#"><i class="ti-twitter"></i></a></li>
-                                <li><a href="#"><i class="ti-google"></i></a></li>
-                                <li><a href="#"><i class="ti-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-12 custom-grid">
-                <div class="wpo-team-wrap">
-                    <div class="wpo-team-img">
-                        <img src="assets/images/team/team-2.jpg" alt="">
-                    </div>
-                    <div class="wpo-team-content">
-                        <div class="wpo-team-text-sub">
-                            <h2>Robert Honey</h2>
-                            <span>Volunteer</span>
-                            <ul>
-                                <li><a href="#"><i class="ti-facebook"></i></a></li>
-                                <li><a href="#"><i class="ti-twitter"></i></a></li>
-                                <li><a href="#"><i class="ti-google"></i></a></li>
-                                <li><a href="#"><i class="ti-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-12 custom-grid">
-                <div class="wpo-team-wrap">
-                    <div class="wpo-team-img">
-                        <img src="assets/images/team/team-3.jpg" alt="">
-                    </div>
-                    <div class="wpo-team-content">
-                        <div class="wpo-team-text-sub">
-                            <h2>Juliya Jossoy</h2>
-                            <span>Volunteer</span>
-                            <ul>
-                                <li><a href="#"><i class="ti-facebook"></i></a></li>
-                                <li><a href="#"><i class="ti-twitter"></i></a></li>
-                                <li><a href="#"><i class="ti-google"></i></a></li>
-                                <li><a href="#"><i class="ti-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- wpo-team-area end -->
-<!-- world area start -->
-<div class="wpo-world-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="wpo-world-section">
-                    <h2>Lets Chenge The World With Humanity</h2>
-                    <a href="volunteer.html"><img src="assets/images/team/1.png" alt="">Become A Volunteer</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- world area end -->
-<!-- wpo-event-area start -->
-<div class="wpo-event-area section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="wpo-section-title">
-                    <span>Our Events</span>
-                    <h2>Upcoming Events</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-sm-6 col-12 custom-grid">
-                <div class="wpo-event-item">
-                    <div class="wpo-event-img">
-                        <img src="assets/images/event/img-1.jpg" alt="">
-                        <div class="thumb-text">
-                            <span>25</span>
-                            <span>NOV</span>
-                        </div>
-                    </div>
-                    <div class="wpo-event-text">
-                        <h2>Education for All Children</h2>
-                        <ul>
-                            <li><i class="fa fa-clock-o" aria-hidden="true"></i>8.00 - 5.00</li>
-                            <li><i class="fi flaticon-pin"></i>Newyork City</li>
-                        </ul>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                        <a href="event-single.html">Learn More...</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 col-12 custom-grid">
-                <div class="wpo-event-item">
-                    <div class="wpo-event-img">
-                        <img src="assets/images/event/img-2.jpg" alt="">
-                        <div class="thumb-text-2">
-                            <span>25</span>
-                            <span>NOV</span>
-                        </div>
-                    </div>
-                    <div class="wpo-event-text">
-                        <h2>Food for All Everyone</h2>
-                        <ul>
-                            <li><i class="fa fa-clock-o" aria-hidden="true"></i>8.00 - 5.00</li>
-                            <li><i class="fi flaticon-pin"></i>Newyork City</li>
-                        </ul>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                        <a href="event-single.html">Learn More...</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 col-12 custom-grid">
-                <div class="wpo-event-item">
-                    <div class="wpo-event-img">
-                        <img src="assets/images/event/img-3.jpg" alt="">
-                        <div class="thumb-text-3">
-                            <span>25</span>
-                            <span>NOV</span>
-                        </div>
-                    </div>
-                    <div class="wpo-event-text">
-                        <h2>Free Treatment </h2>
-                        <ul>
-                            <li><i class="fa fa-clock-o" aria-hidden="true"></i>8.00 - 5.00</li>
-                            <li><i class="fi flaticon-pin"></i>Newyork City</li>
-                        </ul>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                        <a href="event-single.html">Learn More...</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- wpo-event-area end -->
-<!-- wpo-cta-area start -->
-<div class="wpo-cta-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="wpo-cta-text">
-                    <h2>You Can Help The Poor With Us</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse </p>
-                    <div class="btns">
-                        <a href="causes-single.html" class="theme-btn">Donate Now</a>
-                        <a href="volunteer.html" class="theme-btn-s2">Join Us Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- wpo-cta-area end -->
-<!-- wpo-blog-area start -->
-<div class="wpo-blog-area section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="wpo-section-title">
-                    <span>Our Blog</span>
-                    <h2>Latest News</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-6 col-12 custom-grid">
-                <div class="wpo-blog-item">
-                    <div class="wpo-blog-img">
-                        <img src="assets/images/blog/img-1.jpg" alt="">
-                    </div>
-                    <div class="wpo-blog-content">
-                        <span>Nov 24, 2020</span>
-                        <h2>Help The Helpless</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-12 custom-grid">
-                <div class="wpo-blog-item">
-                    <div class="wpo-blog-img">
-                        <img src="assets/images/blog/img-2.jpg" alt="">
-                    </div>
-                    <div class="wpo-blog-content">
-                        <span>Nov 24, 2020</span>
-                        <h2>Help The Helpless</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-12 custom-grid">
-                <div class="wpo-blog-item">
-                    <div class="wpo-blog-img">
-                        <img src="assets/images/blog/img-3.jpg" alt="">
-                    </div>
-                    <div class="wpo-blog-content">
-                        <span>Nov 24, 2020</span>
-                        <h2>Help The Helpless</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- wpo-blog-area end -->
+  </div>
+  <div id="map" data-api-key="AIzaSyD5ES8GFHrarPhIVpDhFDea6fPtga0Wy4Y" data-longitude="-73.935242" data-latitude="40.730610" data-marker="{{asset('user/img/placeholder.png')}}"></div>
+</section>
+<!-- section end-->
 @endsection
 
 @push('plugin-scripts')
