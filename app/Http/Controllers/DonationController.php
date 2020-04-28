@@ -26,8 +26,8 @@ class DonationController extends Controller
         $sumTea = User::where('type','3')->count();
         $sumUser = User::where('type','1')->count();
         $sumStu = Student::count();
-        $max = Student::where([['level','=',4],['status','=','open']])->take(6)->get();
-        $student = Student::where([['status','=','open'],['level','!=',4]])->orderBy('level','desc')->get();
+        $max = Student::where([['level_id','=',4],['status','=','open']])->take(6)->get();
+        $student = Student::where([['status','=','open'],['level_id','!=',4]])->orderBy('level_id','desc')->get();
         //return $student;
         // return view('home',[//รีเทินไปเวลคัม
         //     'student' => $student
@@ -194,7 +194,7 @@ class DonationController extends Controller
     }
     public function cause($id){
         $id = Crypt::decrypt($id);
-        $max = Student::where([['level','=',4],['status','=','open']])->take(6)->get();
+        $max = Student::where([['level_id','=',4],['status','=','open']])->take(6)->get();
         $student = Student::where('id',$id)->first();
         $sum = Donation::where('student_id',$id)->count();
         return view('cause',[
@@ -204,7 +204,7 @@ class DonationController extends Controller
         ])->with('s',$student);
     }
     public function donateLevel($level){
-        $donate = Student::where('level',$level)->get();
+        $donate = Student::where('level_id',$level)->get();
         return view('DonateLevel',[
             'donate' => $donate
         ]);
