@@ -39,6 +39,11 @@ class NontificationController extends Controller
             $non->data = $data;
             $non->save();
         }
+        DB::table('students')
+            ->where('id', $id)
+            ->update([
+                'status'=>'close'
+            ]);
 
         return  redirect()->route('student.index');
 

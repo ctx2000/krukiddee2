@@ -79,11 +79,7 @@ Krukidee | ข้อมูลครู
 
                                 <td>
                                     <div class="btn-group">
-                                        @if ($s->closeDonate < now())
-                                        <a href="#" class="btn btn-secondary " data-toggle="tooltip"
-                                        data-placement="left" title="เพิ่มคำขอบคุณ"><i class="icon-md"
-                                            data-feather="edit-3"></i></a>
-                                        @endif
+
                                         <button type="button" class="btn btn-light btn-icon"><i class="icon-lg"
                                                 data-feather="settings"></i></button>
                                         <button type="button"
@@ -124,6 +120,13 @@ Krukidee | ข้อมูลครู
                                                     class="">ดูข้อมูล</span></a>
 
                                         </div>
+                                        @if ($s->closeDonate < now())
+                                        <a href="#" class="btn btn-secondary " data-toggle="tooltip"
+                                        data-placement="left" title="เพิ่มคำขอบคุณ"><i class="icon-md"
+                                            data-feather="edit-3"></i></a>
+                                        @endif
+
+
                                     </div>
                                 </td>
                             </tr>
