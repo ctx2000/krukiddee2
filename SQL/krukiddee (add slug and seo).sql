@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 21 เม.ย. 2020 เมื่อ 12:42 AM
--- เวอร์ชันของเซิร์ฟเวอร์: 10.4.11-MariaDB
+-- Generation Time: May 03, 2020 at 12:35 AM
+-- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `districts`
+-- Table structure for table `districts`
 --
 
 CREATE TABLE `districts` (
@@ -40,7 +40,7 @@ CREATE TABLE `districts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- dump ตาราง `districts`
+-- Dumping data for table `districts`
 --
 
 INSERT INTO `districts` (`id`, `district`, `amphoe`, `province`, `zipcode`, `district_code`, `amphoe_code`, `province_code`) VALUES
@@ -7552,7 +7552,7 @@ INSERT INTO `districts` (`id`, `district`, `amphoe`, `province`, `zipcode`, `dis
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `donations`
+-- Table structure for table `donations`
 --
 
 CREATE TABLE `donations` (
@@ -7568,16 +7568,17 @@ CREATE TABLE `donations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- dump ตาราง `donations`
+-- Dumping data for table `donations`
 --
 
 INSERT INTO `donations` (`id`, `user_id`, `student_id`, `price`, `picture`, `description`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 5, 1000, '5e94b192c81ba.jpg', 'asdasd', 'true', '2020-04-13 18:38:10', '2020-04-13 18:38:10');
+(1, 1, 5, 1000, '5e94b192c81ba.jpg', 'asdasd', 'true', '2020-04-13 18:38:10', '2020-04-13 18:38:10'),
+(2, 1, 2, 200, '5eadee716f3ec.jpg', '555', 'checking', '2020-05-02 22:04:33', '2020-05-02 22:04:33');
 
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `footers`
+-- Table structure for table `footers`
 --
 
 CREATE TABLE `footers` (
@@ -7589,7 +7590,31 @@ CREATE TABLE `footers` (
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `migrations`
+-- Table structure for table `levels`
+--
+
+CREATE TABLE `levels` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `levelname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `order` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `levels`
+--
+
+INSERT INTO `levels` (`id`, `levelname`, `order`, `created_at`, `updated_at`) VALUES
+(1, '1', NULL, NULL, NULL),
+(2, '2', NULL, NULL, NULL),
+(3, '3', NULL, NULL, NULL),
+(4, '4', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -7599,7 +7624,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- dump ตาราง `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -7624,12 +7649,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (72, '2020_04_16_180740_add_slug_to_students_table', 9),
 (73, '2020_04_16_182710_add_sub_district_to_users_table', 9),
 (74, '2020_04_16_212555_add_sub_district_and_zipcode_to_students_table', 10),
-(75, '2020_04_16_212749_add_district_and_province_and_slug_and_zipcode_to_users_table', 10);
+(75, '2020_04_16_212749_add_district_and_province_and_slug_and_zipcode_to_users_table', 10),
+(77, '2020_04_21_055501_create_levels_table', 11);
 
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `news`
+-- Table structure for table `news`
 --
 
 CREATE TABLE `news` (
@@ -7641,7 +7667,7 @@ CREATE TABLE `news` (
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `nontifications`
+-- Table structure for table `nontifications`
 --
 
 CREATE TABLE `nontifications` (
@@ -7658,7 +7684,7 @@ CREATE TABLE `nontifications` (
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `password_resets`
+-- Table structure for table `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -7670,7 +7696,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `slides`
+-- Table structure for table `slides`
 --
 
 CREATE TABLE `slides` (
@@ -7685,7 +7711,7 @@ CREATE TABLE `slides` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- dump ตาราง `slides`
+-- Dumping data for table `slides`
 --
 
 INSERT INTO `slides` (`id`, `titleBig`, `titlesmall1`, `titlesmall2`, `picture`, `level`, `created_at`, `updated_at`) VALUES
@@ -7694,7 +7720,7 @@ INSERT INTO `slides` (`id`, `titleBig`, `titlesmall1`, `titlesmall2`, `picture`,
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `students`
+-- Table structure for table `students`
 --
 
 CREATE TABLE `students` (
@@ -7718,12 +7744,15 @@ CREATE TABLE `students` (
   `description1` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description2` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `picture` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `level` varchar(3) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `picture_cover` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `level_id` int(10) UNSIGNED NOT NULL,
   `closeDonate` date NOT NULL,
   `maxDonate` double NOT NULL,
   `totalDonate` double DEFAULT NULL,
   `status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'open',
+  `title` varchar(120) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `seo` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cause` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nonti` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'null',
   `user_id` int(10) UNSIGNED NOT NULL,
@@ -7732,28 +7761,28 @@ CREATE TABLE `students` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- dump ตาราง `students`
+-- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`id`, `name`, `lastname`, `address`, `grade`, `age`, `birthday`, `id_card`, `sub_district`, `district`, `province`, `zipcode`, `tel`, `bank_of`, `bankAccountName`, `bankName`, `bankNumber`, `description1`, `description2`, `picture`, `level`, `closeDonate`, `maxDonate`, `totalDonate`, `status`, `slug`, `cause`, `nonti`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'เด็กหญิงสุนิษา', 'สิทธิแก้ว', '371 หมู่ 20 บ้านขามเรียง ต.ขามเรียง', 'ป.1', 7, '2012-01-02', '0000000000000', NULL, 'กันทรวิชัย', 'มหาสารคาม', NULL, '0619703808', 'ยาย', 'นางลักคณา ช่างเหลา', 'ธนาคารเพื่อการเกษตรและสหกรณ์', '020087486889', '<div dir=\"auto\" style=\"font-family: &quot;Segoe UI Historic&quot;, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 15px; white-space: pre-wrap;\"><span style=\"background-color: rgb(255, 255, 255);\"><b>KruKidDee</b> ได้ประสานกับทางครูที่โรงเรียน และได้ลงพื้นที่ไปยังครอบครัวของ<b> เด็กหญิงสุนิษา สิทธิแก้ว </b></span></div><div dir=\"auto\" style=\"font-family: &quot;Segoe UI Historic&quot;, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 15px; white-space: pre-wrap;\"><span style=\"background-color: rgb(255, 255, 255);\">ที่ บ้านขามเรียง ต.ขามเรียง อ.กันทรวิชัย จ.มหาสารคาม ได้มีการสอบถามเกี่ยวกับความเป็นอยู่ของครอบครัว เด็กหญิงสุนิษา สิทธิแก้ว น้องกำลังเรียนอยู่ชั้น ป.1 เป็นเด็กน่ารัก ร่าเริง แจ่มใส </span></div><div dir=\"auto\" style=\"font-family: &quot;Segoe UI Historic&quot;, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 15px; white-space: pre-wrap;\"><span style=\"background-color: rgb(255, 255, 255);\"><br></span></div><div dir=\"auto\" style=\"font-family: &quot;Segoe UI Historic&quot;, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 15px; white-space: pre-wrap;\"><span style=\"background-color: rgb(255, 255, 255);\">ส่วนพ่อแม่ของน้องแยกทางกัน แม่ของน้องไปทำงานที่กรุงเทพฯ เลยทำให้น้องต้องพักอาศัยอยู่กับตากับยายตั้งแต่เด็ก </span></div>', '<div dir=\"auto\" style=\"\">ปัจจุบันแม่ของน้องก็ขาดการติดต่อจากทางบ้านนานๆทีแม่ส่งเงินมาให้สัปดาห์ละ 300-500 ซึ่งเป็นจำนวนเงินที่น้อยมากๆเลยก็ว่าได้ บางครั้งก็ไม่ได้ส่งมาให้ทางบ้านได้ใช้เลย</div><div dir=\"auto\" style=\"\"><br></div><div dir=\"auto\" style=\"\"> </div><div dir=\"auto\" style=\"\">ส่วนตากับยายมีอาชีพทำนาและรับจ้างทั่วไป เช่น ก่อสร้าง ตัดไม้ เผาถ่าน ช่วงทำนาก็ทำนา แต่ผลผลิตจากการทำนาปีนี้ได้น้อย เพราะ เกิดจากปัญหาภัยแล้ง และรายได้ส่วนมากก็มาจากคุณตา ซึ่งยายของน้องก็ป่วยไม่ค่อยสบายต้องไปหาหมออยู่เป็นประจำ</div><h4 style=\"\"><br><ul><li>ส่งของบริจาคได้ที่</li></ul></h4><div dir=\"auto\" style=\"\"><div dir=\"auto\">นางลักคณา ช่างเหลา</div><div dir=\"auto\">371 หมู่ 20 บ้านขามเรียง ตำบลขามเรียง อำเภอกันทรวิชัย จังหวัดมหาสารคาม 44150 โทร 061-9703808</div><div dir=\"auto\">**เลขที่บัญชีของยาย** (คนที่ดูแลเด็ก)&nbsp;</div><div dir=\"auto\">020087486889</div><div dir=\"auto\">นางลักคณา ช่างเหลา</div><div dir=\"auto\">ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร</div><div dir=\"auto\">เบอร์โทรยาย (ที่ดูแลเด็ก)&nbsp; 061-9703808</div><div dir=\"auto\"><br></div><h4><ul><li>ติดต่อได้ที่</li></ul></h4><div dir=\"auto\">Facebook : <a href=\"https://www.facebook.com/Krukiddee-104154931116666\" target=\"_blank\">krukiddee</a></div><div dir=\"auto\">IG : <a href=\"https://www.instagram.com/k.krukiddee/\" target=\"_blank\">k.krukiddee</a></div><div dir=\"auto\">Line : k.krukiddee</div><div dir=\"auto\">E-mail : krukiddee@gmail.com</div><div dir=\"auto\">#ช่วยเหลือเด็ก</div><div dir=\"auto\">#สานต่อความฝัน</div><div dir=\"auto\">#ครูคิดดี</div></div>', '5e8c9cc35209e.jpg', '4', '2020-04-25', 5000, NULL, 'open', NULL, '', 'null', 13, '2020-04-07 08:31:15', '2020-04-09 23:16:26'),
-(2, 'เด็กหญิงเกวลิน', 'ชินโฮง', '90 หมู่ 22 บ้านเขียบ ตำบลขามเรียง 44150', 'ป.1', 7, '2020-04-07', '0000000000001', NULL, 'อำเภอกันทรวิชัย', 'มหาสารคาม', NULL, '0870276735', 'ย่า', 'นางสมร มณีนก', 'ธนาคารเพื่อการเกษตรและสหกรณ์', '018462942785', '<div class=\"o9v6fnle cxmmr5t8 oygrvhab hcukyx3x c1et5uql ii04i59q\" style=\"overflow-wrap: break-word; margin: 0.5em 0px 0px; white-space: pre-wrap; font-family: &quot;Segoe UI Historic&quot;, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 15px;\"><div dir=\"auto\" style=\"font-family: inherit;\"><div class=\"o9v6fnle cxmmr5t8 oygrvhab hcukyx3x c1et5uql ii04i59q\" style=\"font-family: Nunito, sans-serif; font-size: 14.4px; white-space: normal; overflow-wrap: break-word; margin: 0.5em 0px 0px;\"><div dir=\"auto\"><b>KruKidDee </b>ได้ประสานกับทางครูที่โรงเรียน และได้ลงพื้นที่ไปยังครอบครัวของ <b>เด็กหญิงเกวลิน ชินโฮง และ เด็กชายกรวิชญ์ ชินโฮง</b></div><div dir=\"auto\">อาศัยอยู่ร่วมกัน 5 คน มี ปู่ ย่า แม่ของเด็ก และเด็กอีก 2 คน เด็ก 2 คนนี้มีนิสัยร่าเริงแจ่มใส เป็นเด็กน่ารัก ร่าเริงและยังช่วยครอบครัวทำงานบ้านอีกด้วย</div><div dir=\"auto\">พ่อของเด็กทำอาชีพขับรถบรรทุกอ้อยอยู่ที่อำเภอชุมแพ จังหวัดขอนแก่น ส่วนแม่ทำอาชีพรับจ้างเป็นแม่บ้าน จังหวัดมหาสารคาม ที่แม่ได้พาลูกๆมาอาศัยอยู่กับปู่ ย่า นั้นเพราะไม่มีบ้านอยู่อาศัยเลยพาลูกมาพักอาศัยอยู่กับย่า ตอนนี้ยังหาเงินทุนสร้างบ้านใหม่ไม่ได้เลยต้องอาศัยอยู่ที่นี่ไปก่อน</div><div dir=\"auto\"><br></div></div><div class=\"o9v6fnle cxmmr5t8 oygrvhab hcukyx3x c1et5uql ii04i59q\" style=\"font-family: Nunito, sans-serif; font-size: 14.4px; white-space: normal; overflow-wrap: break-word; margin: 0.5em 0px 0px;\"><div dir=\"auto\">ส่วนปู่ทำอาชีพทำนาแต่ไม่ใช่นาของตัวเอง เป็นนาเช่าและนาเช่าก็จะแบ่งผลผลิตกับเจ้าของที่นา ส่วนย่าทำอาชีพขายผักไปรับผักจากตลาดมาขายตามตลาดเล็กๆตามหมู่บ้านอีกที ซึ่งกำไรจากการขายนั้นก็ไม่ได้เยอะ ได้กำไรไม่กี่บาท แต่พอขายได้ก็เอาเงินหมุนเวียนไปซื้อผักมาขายแบบนี้เรื่อยๆ ก็เอากำไรที่ได้นั้นมาซื้อกับข้าวกินในแต่ละวัน ยังเป็นรายได้เสริมให้กับครอบครัวได้อีกส่วนหนึ่ง</div></div></div></div>', '<div class=\"o9v6fnle cxmmr5t8 oygrvhab hcukyx3x c1et5uql ii04i59q\" style=\"overflow-wrap: break-word; margin: 0.5em 0px 0px;\"><div dir=\"auto\" style=\"\"><span style=\"font-family: &quot;Segoe UI Historic&quot;, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 15px; white-space: pre-wrap;\">รายได้หลักๆก็มาจากแม่ที่ทำงานเป็นแม่บ้าน ซึ่งไม่พอใช้กับค่าใช้จ่ายภายในบ้านเพราะอาศัยอยู่ด้วยกันหลายคน ทั้งค่ากับข้าว ค่าน้ำ-ค่าไฟ และค่าใช้จ่ายอื่นๆ อีกมากมาย</span></div><div dir=\"auto\" style=\"\"><span style=\"font-family: &quot;Segoe UI Historic&quot;, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 15px; white-space: pre-wrap;\"><br></span>อยากจะขอเชิญชวนพี่ๆน้องๆที่เห็นโพสต์นี้ช่วยกันกดไลค์กดแชร์เพื่อจะได้ให้คนอื่นๆได้เห็นโพสต์นี้และร่วมกันบริจาคเงิน หรือจะบริจาคเป็นสิ่งของ เสื้อผ้า อุปกรณ์การเรียน ฯ เล็กๆน้อยๆ พอที่จะช่วยให้ครอบครัวนี้ได้และนำเงินที่ได้จากการบริจาคไปเป็นทุนการศึกษาให้น้องๆต่อไปและพอจะช่วยเหลือครอบครัวนี้ได้ครับ</div><div dir=\"auto\" style=\"\"><br></div><div dir=\"auto\" style=\"\"><h4><ul><li>ส่งของบริจาคได้ที่</li></ul></h4><div dir=\"auto\">นางสมร มณีนก</div><div dir=\"auto\">90 หมู่ 22 บ้านเขียบ ตำบลขามเรียง อำเภอกันทรวิชัย จังหวัดมหาสารคาม 44150 โทร 087-0276735</div><div dir=\"auto\">**เลขที่บัญชีของย่า** (คนที่ดูแลเด็ก)</div><div dir=\"auto\">018462942785</div><div dir=\"auto\">นางสมร มณีนก</div><div dir=\"auto\">ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร</div><div dir=\"auto\">เบอร์โทรย่า (ที่ดูแลเด็ก)&nbsp; 087-0276735</div><h4><ul><li>ติดต่อได้ที่</li></ul></h4><div dir=\"auto\">Facebook : krukiddee</div><div dir=\"auto\">IG : k.krukiddee</div><div dir=\"auto\">Line : k.krukiddee</div><div dir=\"auto\">E-mail : krukiddee@gmail.com</div><div dir=\"auto\">#ช่วยเหลือเด็ก</div><div dir=\"auto\">#สานต่อความฝัน</div><div dir=\"auto\">#ครูคิดดี</div></div></div>', '5e8c9de9c5131.jpg', '4', '2020-04-25', 10000, NULL, 'open', NULL, NULL, 'null', 13, '2020-04-07 08:36:09', '2020-04-07 08:47:59'),
-(3, 'เด็กหญิงฐาปนี', 'คลังแสง', '91 หมู่ 17 บ้านเขียบ ตำบลขามเรียง 44150', 'ป.4', 10, '2020-04-07', '0000000000002', NULL, 'กันทรวิชัย', 'มหาสารคาม', NULL, '0621751603', 'แม่', 'นางสำรีย์ ทองขันธ์', 'ธนาคารกรุงไทย', '954-030388-5', '<span style=\"font-family: &quot;Segoe UI Historic&quot;, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 15px; white-space: pre-wrap;\"><b>KruKidDee </b>ได้ประสานกับทางครูที่โรงเรียน และได้ลงพื้นที่บ้านเขียบ บ้านเลขที่ 91 หมู่ 17 ต.ขามเรียง อ.กันทรวิชัย จ.มหาสารคาม ได้มีการสอบถามข้อมูลและความเป็นอยู่ของครอบครัว <b>เด็กหญิงฐาปนี คลังแสง</b> (น้องไข่มุก) อายุ 10 ขวบ เรียนอยู่ชั้น ป. 4 น้องไข่มุกเดินไม่ได้ตั้งแต่เด็ก แต่ได้ทำการบำบัดรักษา ที่โรงพยาบาลศรีนครินทร์ จนสามารถเดินได้เป็นปกติและน้องเป็นผังผืดอยู่ที่คอซึ่งตอนนี้ยังไม่ได้รักษา รอให้โตก่อนค่อยผ่าได้ น้องเป็นเด็กที่ไม่ค่อยสมบูรณ์ผอมมาก ตัวน้องไข่มุกเองก็พัฒนาการได้ช้า ไปโรงเรียนได้แต่น้องเรียนไม่ค่อยรู้เรื่อง ตามไม่ทันเพื่อนๆ</span>', '<div dir=\"auto\" style=\"font-family: &quot;Segoe UI Historic&quot;, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 15px; white-space: pre-wrap;\">น้องไข่มุกพักอาศัยอยู่กับพ่อแม่และยาย ส่วนอาชีพของพ่อแม่นั้นคือทำนาและรับจ้างทั่วไป ส่วนแม่ก็รับจ้างทั่วไปแต่ว่าช่วงนี้ไม่ค่อยมีงานทำเลยครับ รายได้หลักๆก็ได้มาจากพ่อ พ่อเป็นคนดูแลเรื่องค่าใช้จ่ายซะส่วนมาก งานรับจ้างทั่วไปนั้นก็ไม่ได้มีประจำทุกวัน ซึ่งรายได้ที่ได้มานั้นอาจไม่ได้พอเพียงในการใช้จ่ายภายในบ้าน เพราะตอนนี้พ่อทำงานหาเงินคนเดียว</div><div dir=\"auto\" style=\"font-family: &quot;Segoe UI Historic&quot;, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 15px; white-space: pre-wrap;\"><br></div><div dir=\"auto\" style=\"font-family: &quot;Segoe UI Historic&quot;, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 15px; white-space: pre-wrap;\"><div class=\"o9v6fnle cxmmr5t8 oygrvhab hcukyx3x c1et5uql ii04i59q\" style=\"overflow-wrap: break-word; margin: 0.5em 0px 0px;\"><h4><ul><li style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">ส่งของบริจาคได้ที่</font></li></ul></h4><div dir=\"auto\" style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">นางสำรีย์ ทองขันธ์</font></div><div dir=\"auto\" style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">91 หมู่ 17 บ้านเขียบ ตำบลขามเรียง อำเภอกันทรวิชัย จังหวัดมหาสารคาม 44150 โทร 062-1751603</font></div></div><div class=\"o9v6fnle cxmmr5t8 oygrvhab hcukyx3x c1et5uql ii04i59q\" style=\"overflow-wrap: break-word; margin: 0.5em 0px 0px;\"><div dir=\"auto\" style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">**เลขที่บัญชีของแม่**</font></div><div dir=\"auto\" style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">954-030388-5</font></div><div dir=\"auto\" style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">นางสำรีย์ ทองขันธ์</font></div><div dir=\"auto\" style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">ธนาคารกรุงไทย</font></div><div dir=\"auto\" style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">เบอร์โทร  062-1751603</font></div></div><div class=\"o9v6fnle cxmmr5t8 oygrvhab hcukyx3x c1et5uql ii04i59q\" style=\"overflow-wrap: break-word; margin: 0.5em 0px 0px;\"><h4><ul><li style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">ติดต่อได้ที่</font></li></ul></h4><div dir=\"auto\" style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">Facebook : krukiddee</font></div><div dir=\"auto\" style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">IG : k.krukiddee</font></div><div dir=\"auto\" style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">Line : k.krukiddee</font></div><div dir=\"auto\" style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">E-mail : krukiddee@gmail.com</font></div></div></div>', '5e8c9eb3c6cab.jpg', '4', '2020-04-25', 5000, NULL, 'open', NULL, NULL, 'null', 13, '2020-04-07 08:39:31', '2020-04-07 08:43:55'),
-(4, 'หญิงปพิชญา', 'ดวงมาลา', '99 หมู่ 15 บ้านดอนมัน ตำบลขามเรียง  44150', 'ป.2', 8, '2020-04-07', '0000000000003', NULL, 'อำเภอกันทรวิชัย', 'มหาสารคาม', NULL, '0636107003', 'ตา', 'นายยวน ดวงมาลา', 'ธนาคารกรุงไทย', '678-2-30828-2', '<div><b>KruKidDee </b>ได้ประสานกับทางครูที่โรงเรียน และได้ลงพื้นที่ไปยังครอบครัว<b>เด็กหญิงปพิชญา ดวงมาลา&nbsp;</b></div><div>บ้านเลขที่ 99 หมู่ที่ 15 บ้านดอนมัน ต.ขามเรียง อ.กันทรวิชัย จ.มหาสารคาม ได้สอบถามความเป็นอยู่ของครอบครัวนี้พบว่า เด็กหญิงปพิชญา ดวงมาลา อยู่ชั้น ป.2 อาศัยอยู่กัน 4 คน มี ตา,ยาย,น้า,แล้วก็ตัวน้อง&nbsp;</div><div>พ่อแม่ของน้องได้แยกทางกันตั้งแต่น้องยังเด็ก เลยได้อาศัยอยู่กับตายาย แม่ของน้องน้ำไปทำงานโรงงานอยู่ที่ กทม แต่ไม่ได้ส่งเงินมาเลี้ยงดูเลย</div><div>ส่วนตาก็เก็บของเก่า เก็บขวดขาย เพราะไม่มีนาทำกิน รายได้มาจากการเก็บของเก่าขายของตา และรายได้อีกทางมาจากน้า น้าของน้องน้ำเรียน</div><div>วิทยาลัยดุริยางคศิลป์อยู่ที่มหาวิทยาลัยมหาสารคาม ปี 4 ก็เลยรับงานตอนกลางคืน พอที่จะได้เงินมาช่วยค่าใช้จ่ายภายในครอบครัว แต่งานก็ไม่ได้มีตลอดเลยทำให้เงินไม่เพียงพอ เพราะต้องส่งตัวเองเรียนด้วย</div>', '<div>น้องปพิชญา(น้องน้ำ) เป็นเด็กพิเศษคือ แรกเกิดหมอบอกว่าน้องอาจจะไม่รอด แต่พอน้องเกิดได้ไม่นานน้องก็ได้ผ่าตัดลำไส้ที่ขอนแก่น จากนั้นก็ไปผ่าตัดต่อที่โรงพยาบาลศิริราชที่กรุงเทพฯ ปัจจุบันน้องสุขภาพไม่ค่อยดี น้องผอมมากแต่ท้องน้องโตกว่าปกติ เป็นเด็กที่การเจริญเติบโตช้า ท้องร่วงบ่อยครั้ง กินอะไรนิดหน่อยก็มักจะขับถ่ายตลอด เพราะลำไส้เปื่อย ส่วนตัวน้องเป็นเด็กร่าเริงสนุกสนานครับ&nbsp;</div><div style=\"text-align: left;\"><span style=\"font-size: 0.9rem;\">&nbsp; &nbsp;อยากจะขอเชิญชวนพี่ๆน้องๆที่เห็นโพสต์นี้ช่วยกันกดไลค์กดแชร์เพื่อจะได้ให้คนอื่นๆได้เห็นโพสต์นี้และร่วมกันบริจาคเงิน หรือ สิ่งของ เสื้อผ้า อุปกรณ์การเรียน ฯ เล็กๆน้อยๆ คนละ 5 บาท 10 บาท เพื่อเป็นทุนการศึกษาให้น้องๆต่อไปและพอจะช่วยเหลือครอบครัวนี้ได้ครับ</span></div><div style=\"text-align: left;\"><br></div><div style=\"text-align: left;\"><span style=\"font-size: 0.9rem;\"><h4><ul><li>ส่งของบริจาคได้ที่</li></ul></h4><div>นายยวน ดวงมาลา (ตาของน้อง)</div><div>99 หมู่ 15 บ้านดอนมัน ตำบลขามเรียง อำเภอกันทรวิชัย จังหวัดมหาสารคาม 44150 โทร 0636107003</div><div>*เลขที่บัญชีของตา*&nbsp;</div><div>เลขที่บัญชี 678-2-30828-2</div><div>นายยวน ดวงมาลา</div><div>ธนาคารกรุงไทย</div><div>เบอร์โทร&nbsp; 0636107003</div><div><br></div><h4><ul><li>ติดต่อได้ที่</li></ul></h4><div>Facebook : krukiddee</div><div>IG : k.krukiddee</div><div>Line : k.krukiddee</div><div>E-mail : krukiddee@gmail.com</div><div>#ช่วยเหลือเด็ก</div><div>#สานต่อความฝัน</div><div>#ครูคิดดี</div></span></div>', '5e8ca126b1e88.jpg', '3', '2020-04-29', 4000, NULL, 'open', NULL, NULL, 'null', 13, '2020-04-07 08:49:58', '2020-04-07 08:49:58'),
-(5, 'testad', 'ad', '191/7', 'ป.5', 11, '2020-04-08', '1739900682835', NULL, 'กันทรวิชัย', 'ยโสธร', NULL, '0940424511', 'ย่า', 'ใจดี จัง', 'ธนาคารเกียรตินาคิน', '3333', 'เช่น ความเป็นอยู่,ภาระ,สถานะครอบครัว เป็นต้น', 'เช่น ต้องการซ่อมที่พัก,ต้องการอาหารแห้ง หรื<b>อทุนการศึกษา เป็นต้น</b>', '5e8deb39e6410.jpg', '4', '2020-04-17', 5000, 1000, 'open', NULL, NULL, 'null', 15, '2020-04-08 08:18:17', '2020-04-08 08:18:17'),
-(6, 'ads', 'asd', '191/30 หมู่15', 'ป.5', 11, '2020-04-15', '65545', NULL, 'qqq', 'มหาสารคาม', NULL, '098899', 'ตา', 'กฟก', 'ธนาคารกรุงเทพ', '1955455544', NULL, NULL, '5e95fc7aee3aa.jpg', '2', '2020-04-16', 5000, NULL, 'open', NULL, NULL, 'null', 15, '2020-04-14 18:10:02', '2020-04-14 18:10:02'),
-(8, 'ads', 'asd', '191/30 หมู่15', 'ป.5', 11, '2020-04-15', '6554544', NULL, 'qqq', 'มหาสารคาม', NULL, '0988994', 'ตา', 'กฟก', 'ธนาคารซีไอเอ็มบีไทย', '19554555442', NULL, NULL, '5e95fcd00c889.jpg', '2', '2020-04-16', 5000, NULL, 'open', NULL, NULL, 'null', 15, '2020-04-14 18:11:28', '2020-04-14 18:11:28'),
-(11, 'as', 'as', '191/7', 'ป.5', 11, '2020-04-17', '1234567555534', NULL, '3505', '35', NULL, '0940424511', 'ตา', 'กฟก', 'ธนาคารกรุงศรีอยุธยา', '1955455544', NULL, NULL, '', '1', '2020-04-25', 5000, NULL, 'open', NULL, NULL, 'null', 15, '2020-04-17 14:35:51', '2020-04-17 14:35:51'),
-(13, 'as', 'as', '191/7', 'ป.5', 11, '2020-04-17', '1234567555434', NULL, '8101', '81', NULL, '0940424511', 'ตา', 'กฟก', 'ธนาคารกรุงศรีอยุธยา', '1955455544', NULL, NULL, '', '1', '2020-04-25', 5000, NULL, 'open', NULL, NULL, 'null', 15, '2020-04-17 14:37:46', '2020-04-17 14:37:46'),
-(14, 'as', 'as', '191/7', 'ป.5', 11, '2020-04-17', '1234567555455', NULL, '8101', '81', NULL, '0940424511', 'ตา', 'กฟก', 'ธนาคารกรุงศรีอยุธยา', '1955455544', NULL, NULL, '', '1', '2020-04-25', 5000, NULL, 'open', NULL, NULL, 'null', 15, '2020-04-17 14:41:41', '2020-04-17 14:41:41'),
-(15, 'as', 'as', '191/7', 'ป.5', 11, '2020-04-17', '1234567555665', NULL, '8101', '81', NULL, '0940424511', 'ตา', 'กฟก', 'ธนาคารกรุงศรีอยุธยา', '1955455544', NULL, NULL, '', '1', '2020-04-25', 5000, NULL, 'open', NULL, NULL, 'null', 15, '2020-04-17 14:44:16', '2020-04-17 14:44:16'),
-(16, 'as', 'as', '191/7', 'ป.5', 11, '2020-04-17', '1234567555965', NULL, '8101', '81', NULL, '0940424511', 'ตา', 'กฟก', 'ธนาคารกรุงศรีอยุธยา', '1955455544', 'เช่น ความเป็นอยู่,ภาระ,สถานะครอบครัว เป็นต้น', 'เช่น ต้องการซ่อมที่พัก,ต้องการอาหารแห้ง หรือทุนการศึกษา เป็นต้น', '', '1', '2020-04-25', 5000, NULL, 'open', NULL, NULL, 'null', 15, '2020-04-17 14:46:16', '2020-04-17 14:46:16'),
-(17, 'aasd', 'asdasd', 'asd111', 'ป.5', 11, '2020-04-18', '1234567891111', 'เชียงเพ็ง', 'ป่าติ้ว', 'ยโสธร', '35150', '0999999999', 'ตา', 'กฟก', 'ธนาคารไทยพานิชย์', '1955455544', 'เช่น ความเป็นอยู่,ภาระ,สถานะครอบครัว เป็นต้น', 'เช่น ต้องการซ่อมที่พัก,ต้องการอาหารแห้ง หรือทุนการศึกษา เป็นต้น', '', '1', '2020-04-25', 1000, NULL, 'open', NULL, NULL, 'null', 15, '2020-04-17 15:00:26', '2020-04-17 15:00:26');
+INSERT INTO `students` (`id`, `name`, `lastname`, `address`, `grade`, `age`, `birthday`, `id_card`, `sub_district`, `district`, `province`, `zipcode`, `tel`, `bank_of`, `bankAccountName`, `bankName`, `bankNumber`, `description1`, `description2`, `picture`, `picture_cover`, `level_id`, `closeDonate`, `maxDonate`, `totalDonate`, `status`, `title`, `slug`, `seo`, `cause`, `nonti`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'เด็กหญิงสุนิษา', 'สิทธิแก้ว', '371 หมู่ 20 บ้านขามเรียง ต.ขามเรียง', 'ป.1', 7, '2012-01-02', '0000000000000', NULL, 'กันทรวิชัย', 'มหาสารคาม', NULL, '0619703808', 'ยาย', 'นางลักคณา ช่างเหลา', 'ธนาคารเพื่อการเกษตรและสหกรณ์', '020087486889', '<div dir=\"auto\" style=\"font-family: &quot;Segoe UI Historic&quot;, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 15px; white-space: pre-wrap;\"><span style=\"background-color: rgb(255, 255, 255);\"><b>KruKidDee</b> ได้ประสานกับทางครูที่โรงเรียน และได้ลงพื้นที่ไปยังครอบครัวของ<b> เด็กหญิงสุนิษา สิทธิแก้ว </b></span></div><div dir=\"auto\" style=\"font-family: &quot;Segoe UI Historic&quot;, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 15px; white-space: pre-wrap;\"><span style=\"background-color: rgb(255, 255, 255);\">ที่ บ้านขามเรียง ต.ขามเรียง อ.กันทรวิชัย จ.มหาสารคาม ได้มีการสอบถามเกี่ยวกับความเป็นอยู่ของครอบครัว เด็กหญิงสุนิษา สิทธิแก้ว น้องกำลังเรียนอยู่ชั้น ป.1 เป็นเด็กน่ารัก ร่าเริง แจ่มใส </span></div><div dir=\"auto\" style=\"font-family: &quot;Segoe UI Historic&quot;, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 15px; white-space: pre-wrap;\"><span style=\"background-color: rgb(255, 255, 255);\"><br></span></div><div dir=\"auto\" style=\"font-family: &quot;Segoe UI Historic&quot;, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 15px; white-space: pre-wrap;\"><span style=\"background-color: rgb(255, 255, 255);\">ส่วนพ่อแม่ของน้องแยกทางกัน แม่ของน้องไปทำงานที่กรุงเทพฯ เลยทำให้น้องต้องพักอาศัยอยู่กับตากับยายตั้งแต่เด็ก </span></div>', '<div dir=\"auto\" style=\"\">ปัจจุบันแม่ของน้องก็ขาดการติดต่อจากทางบ้านนานๆทีแม่ส่งเงินมาให้สัปดาห์ละ 300-500 ซึ่งเป็นจำนวนเงินที่น้อยมากๆเลยก็ว่าได้ บางครั้งก็ไม่ได้ส่งมาให้ทางบ้านได้ใช้เลย</div><div dir=\"auto\" style=\"\"><br></div><div dir=\"auto\" style=\"\"> </div><div dir=\"auto\" style=\"\">ส่วนตากับยายมีอาชีพทำนาและรับจ้างทั่วไป เช่น ก่อสร้าง ตัดไม้ เผาถ่าน ช่วงทำนาก็ทำนา แต่ผลผลิตจากการทำนาปีนี้ได้น้อย เพราะ เกิดจากปัญหาภัยแล้ง และรายได้ส่วนมากก็มาจากคุณตา ซึ่งยายของน้องก็ป่วยไม่ค่อยสบายต้องไปหาหมออยู่เป็นประจำ</div><h4 style=\"\"><br><ul><li>ส่งของบริจาคได้ที่</li></ul></h4><div dir=\"auto\" style=\"\"><div dir=\"auto\">นางลักคณา ช่างเหลา</div><div dir=\"auto\">371 หมู่ 20 บ้านขามเรียง ตำบลขามเรียง อำเภอกันทรวิชัย จังหวัดมหาสารคาม 44150 โทร 061-9703808</div><div dir=\"auto\">**เลขที่บัญชีของยาย** (คนที่ดูแลเด็ก)&nbsp;</div><div dir=\"auto\">020087486889</div><div dir=\"auto\">นางลักคณา ช่างเหลา</div><div dir=\"auto\">ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร</div><div dir=\"auto\">เบอร์โทรยาย (ที่ดูแลเด็ก)&nbsp; 061-9703808</div><div dir=\"auto\"><br></div><h4><ul><li>ติดต่อได้ที่</li></ul></h4><div dir=\"auto\">Facebook : <a href=\"https://www.facebook.com/Krukiddee-104154931116666\" target=\"_blank\">krukiddee</a></div><div dir=\"auto\">IG : <a href=\"https://www.instagram.com/k.krukiddee/\" target=\"_blank\">k.krukiddee</a></div><div dir=\"auto\">Line : k.krukiddee</div><div dir=\"auto\">E-mail : krukiddee@gmail.com</div><div dir=\"auto\">#ช่วยเหลือเด็ก</div><div dir=\"auto\">#สานต่อความฝัน</div><div dir=\"auto\">#ครูคิดดี</div></div>', '5e8c9cc35209e.jpg', NULL, 4, '2020-04-25', 5000, NULL, 'close', NULL, NULL, NULL, '', 'null', 13, '2020-04-07 08:31:15', '2020-04-09 23:16:26'),
+(2, 'เด็กหญิงเกวลิน', 'ชินโฮง', '90 หมู่ 22 บ้านเขียบ ตำบลขามเรียง 44150', 'ป.1', 7, '2020-04-07', '0000000000001', NULL, 'อำเภอกันทรวิชัย', 'มหาสารคาม', NULL, '0870276735', 'ย่า', 'นางสมร มณีนก', 'ธนาคารเพื่อการเกษตรและสหกรณ์', '018462942785', '<div class=\"o9v6fnle cxmmr5t8 oygrvhab hcukyx3x c1et5uql ii04i59q\" style=\"overflow-wrap: break-word; margin: 0.5em 0px 0px; white-space: pre-wrap; font-family: &quot;Segoe UI Historic&quot;, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 15px;\"><div dir=\"auto\" style=\"font-family: inherit;\"><div class=\"o9v6fnle cxmmr5t8 oygrvhab hcukyx3x c1et5uql ii04i59q\" style=\"font-family: Nunito, sans-serif; font-size: 14.4px; white-space: normal; overflow-wrap: break-word; margin: 0.5em 0px 0px;\"><div dir=\"auto\"><b>KruKidDee </b>ได้ประสานกับทางครูที่โรงเรียน และได้ลงพื้นที่ไปยังครอบครัวของ <b>เด็กหญิงเกวลิน ชินโฮง และ เด็กชายกรวิชญ์ ชินโฮง</b></div><div dir=\"auto\">อาศัยอยู่ร่วมกัน 5 คน มี ปู่ ย่า แม่ของเด็ก และเด็กอีก 2 คน เด็ก 2 คนนี้มีนิสัยร่าเริงแจ่มใส เป็นเด็กน่ารัก ร่าเริงและยังช่วยครอบครัวทำงานบ้านอีกด้วย</div><div dir=\"auto\">พ่อของเด็กทำอาชีพขับรถบรรทุกอ้อยอยู่ที่อำเภอชุมแพ จังหวัดขอนแก่น ส่วนแม่ทำอาชีพรับจ้างเป็นแม่บ้าน จังหวัดมหาสารคาม ที่แม่ได้พาลูกๆมาอาศัยอยู่กับปู่ ย่า นั้นเพราะไม่มีบ้านอยู่อาศัยเลยพาลูกมาพักอาศัยอยู่กับย่า ตอนนี้ยังหาเงินทุนสร้างบ้านใหม่ไม่ได้เลยต้องอาศัยอยู่ที่นี่ไปก่อน</div><div dir=\"auto\"><br></div></div><div class=\"o9v6fnle cxmmr5t8 oygrvhab hcukyx3x c1et5uql ii04i59q\" style=\"font-family: Nunito, sans-serif; font-size: 14.4px; white-space: normal; overflow-wrap: break-word; margin: 0.5em 0px 0px;\"><div dir=\"auto\">ส่วนปู่ทำอาชีพทำนาแต่ไม่ใช่นาของตัวเอง เป็นนาเช่าและนาเช่าก็จะแบ่งผลผลิตกับเจ้าของที่นา ส่วนย่าทำอาชีพขายผักไปรับผักจากตลาดมาขายตามตลาดเล็กๆตามหมู่บ้านอีกที ซึ่งกำไรจากการขายนั้นก็ไม่ได้เยอะ ได้กำไรไม่กี่บาท แต่พอขายได้ก็เอาเงินหมุนเวียนไปซื้อผักมาขายแบบนี้เรื่อยๆ ก็เอากำไรที่ได้นั้นมาซื้อกับข้าวกินในแต่ละวัน ยังเป็นรายได้เสริมให้กับครอบครัวได้อีกส่วนหนึ่ง</div></div></div></div>', '<div class=\"o9v6fnle cxmmr5t8 oygrvhab hcukyx3x c1et5uql ii04i59q\" style=\"overflow-wrap: break-word; margin: 0.5em 0px 0px;\"><div dir=\"auto\" style=\"\"><span style=\"font-family: &quot;Segoe UI Historic&quot;, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 15px; white-space: pre-wrap;\">รายได้หลักๆก็มาจากแม่ที่ทำงานเป็นแม่บ้าน ซึ่งไม่พอใช้กับค่าใช้จ่ายภายในบ้านเพราะอาศัยอยู่ด้วยกันหลายคน ทั้งค่ากับข้าว ค่าน้ำ-ค่าไฟ และค่าใช้จ่ายอื่นๆ อีกมากมาย</span></div><div dir=\"auto\" style=\"\"><span style=\"font-family: &quot;Segoe UI Historic&quot;, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 15px; white-space: pre-wrap;\"><br></span>อยากจะขอเชิญชวนพี่ๆน้องๆที่เห็นโพสต์นี้ช่วยกันกดไลค์กดแชร์เพื่อจะได้ให้คนอื่นๆได้เห็นโพสต์นี้และร่วมกันบริจาคเงิน หรือจะบริจาคเป็นสิ่งของ เสื้อผ้า อุปกรณ์การเรียน ฯ เล็กๆน้อยๆ พอที่จะช่วยให้ครอบครัวนี้ได้และนำเงินที่ได้จากการบริจาคไปเป็นทุนการศึกษาให้น้องๆต่อไปและพอจะช่วยเหลือครอบครัวนี้ได้ครับ</div><div dir=\"auto\" style=\"\"><br></div><div dir=\"auto\" style=\"\"><h4><ul><li>ส่งของบริจาคได้ที่</li></ul></h4><div dir=\"auto\">นางสมร มณีนก</div><div dir=\"auto\">90 หมู่ 22 บ้านเขียบ ตำบลขามเรียง อำเภอกันทรวิชัย จังหวัดมหาสารคาม 44150 โทร 087-0276735</div><div dir=\"auto\">**เลขที่บัญชีของย่า** (คนที่ดูแลเด็ก)</div><div dir=\"auto\">018462942785</div><div dir=\"auto\">นางสมร มณีนก</div><div dir=\"auto\">ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร</div><div dir=\"auto\">เบอร์โทรย่า (ที่ดูแลเด็ก)&nbsp; 087-0276735</div><h4><ul><li>ติดต่อได้ที่</li></ul></h4><div dir=\"auto\">Facebook : krukiddee</div><div dir=\"auto\">IG : k.krukiddee</div><div dir=\"auto\">Line : k.krukiddee</div><div dir=\"auto\">E-mail : krukiddee@gmail.com</div><div dir=\"auto\">#ช่วยเหลือเด็ก</div><div dir=\"auto\">#สานต่อความฝัน</div><div dir=\"auto\">#ครูคิดดี</div></div></div>', '5e8c9de9c5131.jpg', NULL, 4, '2020-04-25', 10000, 200, 'open', NULL, NULL, NULL, NULL, 'null', 13, '2020-04-07 08:36:09', '2020-04-07 08:47:59'),
+(3, 'เด็กหญิงฐาปนี', 'คลังแสง', '91 หมู่ 17 บ้านเขียบ ตำบลขามเรียง 44150', 'ป.4', 10, '2020-04-07', '0000000000002', NULL, 'กันทรวิชัย', 'มหาสารคาม', NULL, '0621751603', 'แม่', 'นางสำรีย์ ทองขันธ์', 'ธนาคารกรุงไทย', '954-030388-5', '<span style=\"font-family: &quot;Segoe UI Historic&quot;, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 15px; white-space: pre-wrap;\"><b>KruKidDee </b>ได้ประสานกับทางครูที่โรงเรียน และได้ลงพื้นที่บ้านเขียบ บ้านเลขที่ 91 หมู่ 17 ต.ขามเรียง อ.กันทรวิชัย จ.มหาสารคาม ได้มีการสอบถามข้อมูลและความเป็นอยู่ของครอบครัว <b>เด็กหญิงฐาปนี คลังแสง</b> (น้องไข่มุก) อายุ 10 ขวบ เรียนอยู่ชั้น ป. 4 น้องไข่มุกเดินไม่ได้ตั้งแต่เด็ก แต่ได้ทำการบำบัดรักษา ที่โรงพยาบาลศรีนครินทร์ จนสามารถเดินได้เป็นปกติและน้องเป็นผังผืดอยู่ที่คอซึ่งตอนนี้ยังไม่ได้รักษา รอให้โตก่อนค่อยผ่าได้ น้องเป็นเด็กที่ไม่ค่อยสมบูรณ์ผอมมาก ตัวน้องไข่มุกเองก็พัฒนาการได้ช้า ไปโรงเรียนได้แต่น้องเรียนไม่ค่อยรู้เรื่อง ตามไม่ทันเพื่อนๆ</span>', '<div dir=\"auto\" style=\"font-family: &quot;Segoe UI Historic&quot;, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 15px; white-space: pre-wrap;\">น้องไข่มุกพักอาศัยอยู่กับพ่อแม่และยาย ส่วนอาชีพของพ่อแม่นั้นคือทำนาและรับจ้างทั่วไป ส่วนแม่ก็รับจ้างทั่วไปแต่ว่าช่วงนี้ไม่ค่อยมีงานทำเลยครับ รายได้หลักๆก็ได้มาจากพ่อ พ่อเป็นคนดูแลเรื่องค่าใช้จ่ายซะส่วนมาก งานรับจ้างทั่วไปนั้นก็ไม่ได้มีประจำทุกวัน ซึ่งรายได้ที่ได้มานั้นอาจไม่ได้พอเพียงในการใช้จ่ายภายในบ้าน เพราะตอนนี้พ่อทำงานหาเงินคนเดียว</div><div dir=\"auto\" style=\"font-family: &quot;Segoe UI Historic&quot;, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 15px; white-space: pre-wrap;\"><br></div><div dir=\"auto\" style=\"font-family: &quot;Segoe UI Historic&quot;, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 15px; white-space: pre-wrap;\"><div class=\"o9v6fnle cxmmr5t8 oygrvhab hcukyx3x c1et5uql ii04i59q\" style=\"overflow-wrap: break-word; margin: 0.5em 0px 0px;\"><h4><ul><li style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">ส่งของบริจาคได้ที่</font></li></ul></h4><div dir=\"auto\" style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">นางสำรีย์ ทองขันธ์</font></div><div dir=\"auto\" style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">91 หมู่ 17 บ้านเขียบ ตำบลขามเรียง อำเภอกันทรวิชัย จังหวัดมหาสารคาม 44150 โทร 062-1751603</font></div></div><div class=\"o9v6fnle cxmmr5t8 oygrvhab hcukyx3x c1et5uql ii04i59q\" style=\"overflow-wrap: break-word; margin: 0.5em 0px 0px;\"><div dir=\"auto\" style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">**เลขที่บัญชีของแม่**</font></div><div dir=\"auto\" style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">954-030388-5</font></div><div dir=\"auto\" style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">นางสำรีย์ ทองขันธ์</font></div><div dir=\"auto\" style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">ธนาคารกรุงไทย</font></div><div dir=\"auto\" style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">เบอร์โทร  062-1751603</font></div></div><div class=\"o9v6fnle cxmmr5t8 oygrvhab hcukyx3x c1et5uql ii04i59q\" style=\"overflow-wrap: break-word; margin: 0.5em 0px 0px;\"><h4><ul><li style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">ติดต่อได้ที่</font></li></ul></h4><div dir=\"auto\" style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">Facebook : krukiddee</font></div><div dir=\"auto\" style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">IG : k.krukiddee</font></div><div dir=\"auto\" style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">Line : k.krukiddee</font></div><div dir=\"auto\" style=\"font-family: inherit;\"><font style=\"background-color: rgb(255, 255, 255);\">E-mail : krukiddee@gmail.com</font></div></div></div>', '5e8c9eb3c6cab.jpg', NULL, 4, '2020-04-25', 5000, NULL, 'open', NULL, NULL, NULL, NULL, 'null', 13, '2020-04-07 08:39:31', '2020-04-07 08:43:55'),
+(4, 'หญิงปพิชญา', 'ดวงมาลา', '99 หมู่ 15 บ้านดอนมัน ตำบลขามเรียง  44150', 'ป.2', 8, '2020-04-07', '0000000000003', NULL, 'อำเภอกันทรวิชัย', 'มหาสารคาม', NULL, '0636107003', 'ตา', 'นายยวน ดวงมาลา', 'ธนาคารกรุงไทย', '678-2-30828-2', '<div><b>KruKidDee </b>ได้ประสานกับทางครูที่โรงเรียน และได้ลงพื้นที่ไปยังครอบครัว<b>เด็กหญิงปพิชญา ดวงมาลา&nbsp;</b></div><div>บ้านเลขที่ 99 หมู่ที่ 15 บ้านดอนมัน ต.ขามเรียง อ.กันทรวิชัย จ.มหาสารคาม ได้สอบถามความเป็นอยู่ของครอบครัวนี้พบว่า เด็กหญิงปพิชญา ดวงมาลา อยู่ชั้น ป.2 อาศัยอยู่กัน 4 คน มี ตา,ยาย,น้า,แล้วก็ตัวน้อง&nbsp;</div><div>พ่อแม่ของน้องได้แยกทางกันตั้งแต่น้องยังเด็ก เลยได้อาศัยอยู่กับตายาย แม่ของน้องน้ำไปทำงานโรงงานอยู่ที่ กทม แต่ไม่ได้ส่งเงินมาเลี้ยงดูเลย</div><div>ส่วนตาก็เก็บของเก่า เก็บขวดขาย เพราะไม่มีนาทำกิน รายได้มาจากการเก็บของเก่าขายของตา และรายได้อีกทางมาจากน้า น้าของน้องน้ำเรียน</div><div>วิทยาลัยดุริยางคศิลป์อยู่ที่มหาวิทยาลัยมหาสารคาม ปี 4 ก็เลยรับงานตอนกลางคืน พอที่จะได้เงินมาช่วยค่าใช้จ่ายภายในครอบครัว แต่งานก็ไม่ได้มีตลอดเลยทำให้เงินไม่เพียงพอ เพราะต้องส่งตัวเองเรียนด้วย</div>', '<div>น้องปพิชญา(น้องน้ำ) เป็นเด็กพิเศษคือ แรกเกิดหมอบอกว่าน้องอาจจะไม่รอด แต่พอน้องเกิดได้ไม่นานน้องก็ได้ผ่าตัดลำไส้ที่ขอนแก่น จากนั้นก็ไปผ่าตัดต่อที่โรงพยาบาลศิริราชที่กรุงเทพฯ ปัจจุบันน้องสุขภาพไม่ค่อยดี น้องผอมมากแต่ท้องน้องโตกว่าปกติ เป็นเด็กที่การเจริญเติบโตช้า ท้องร่วงบ่อยครั้ง กินอะไรนิดหน่อยก็มักจะขับถ่ายตลอด เพราะลำไส้เปื่อย ส่วนตัวน้องเป็นเด็กร่าเริงสนุกสนานครับ&nbsp;</div><div style=\"text-align: left;\"><span style=\"font-size: 0.9rem;\">&nbsp; &nbsp;อยากจะขอเชิญชวนพี่ๆน้องๆที่เห็นโพสต์นี้ช่วยกันกดไลค์กดแชร์เพื่อจะได้ให้คนอื่นๆได้เห็นโพสต์นี้และร่วมกันบริจาคเงิน หรือ สิ่งของ เสื้อผ้า อุปกรณ์การเรียน ฯ เล็กๆน้อยๆ คนละ 5 บาท 10 บาท เพื่อเป็นทุนการศึกษาให้น้องๆต่อไปและพอจะช่วยเหลือครอบครัวนี้ได้ครับ</span></div><div style=\"text-align: left;\"><br></div><div style=\"text-align: left;\"><span style=\"font-size: 0.9rem;\"><h4><ul><li>ส่งของบริจาคได้ที่</li></ul></h4><div>นายยวน ดวงมาลา (ตาของน้อง)</div><div>99 หมู่ 15 บ้านดอนมัน ตำบลขามเรียง อำเภอกันทรวิชัย จังหวัดมหาสารคาม 44150 โทร 0636107003</div><div>*เลขที่บัญชีของตา*&nbsp;</div><div>เลขที่บัญชี 678-2-30828-2</div><div>นายยวน ดวงมาลา</div><div>ธนาคารกรุงไทย</div><div>เบอร์โทร&nbsp; 0636107003</div><div><br></div><h4><ul><li>ติดต่อได้ที่</li></ul></h4><div>Facebook : krukiddee</div><div>IG : k.krukiddee</div><div>Line : k.krukiddee</div><div>E-mail : krukiddee@gmail.com</div><div>#ช่วยเหลือเด็ก</div><div>#สานต่อความฝัน</div><div>#ครูคิดดี</div></span></div>', '5e8ca126b1e88.jpg', NULL, 3, '2020-04-29', 4000, NULL, 'open', NULL, NULL, NULL, NULL, 'null', 13, '2020-04-07 08:49:58', '2020-04-07 08:49:58'),
+(5, 'testad', 'ad', '191/7', 'ป.5', 11, '2020-04-08', '1739900682835', NULL, 'กันทรวิชัย', 'ยโสธร', NULL, '0940424511', 'ย่า', 'ใจดี จัง', 'ธนาคารเกียรตินาคิน', '3333', 'เช่น ความเป็นอยู่,ภาระ,สถานะครอบครัว เป็นต้น', 'เช่น ต้องการซ่อมที่พัก,ต้องการอาหารแห้ง หรื<b>อทุนการศึกษา เป็นต้น</b>', '5e8deb39e6410.jpg', NULL, 4, '2020-04-17', 5000, 1000, 'open', NULL, NULL, NULL, NULL, 'null', 15, '2020-04-08 08:18:17', '2020-04-08 08:18:17'),
+(6, 'ads', 'asd', '191/30 หมู่15', 'ป.5', 11, '2020-04-15', '65545', NULL, 'qqq', 'มหาสารคาม', NULL, '098899', 'ตา', 'กฟก', 'ธนาคารกรุงเทพ', '1955455544', NULL, NULL, '5e95fc7aee3aa.jpg', NULL, 2, '2020-04-16', 5000, NULL, 'open', NULL, NULL, NULL, NULL, 'null', 15, '2020-04-14 18:10:02', '2020-04-14 18:10:02'),
+(8, 'ads', 'asd', '191/30 หมู่15', 'ป.5', 11, '2020-04-15', '6554544', NULL, 'qqq', 'มหาสารคาม', NULL, '0988994', 'ตา', 'กฟก', 'ธนาคารซีไอเอ็มบีไทย', '19554555442', NULL, NULL, '5e95fcd00c889.jpg', NULL, 2, '2020-04-16', 5000, NULL, 'open', NULL, NULL, NULL, NULL, 'null', 15, '2020-04-14 18:11:28', '2020-04-14 18:11:28'),
+(11, 'as', 'as', '191/7', 'ป.5', 11, '2020-04-17', '1234567555534', NULL, '3505', '35', NULL, '0940424511', 'ตา', 'กฟก', 'ธนาคารกรุงศรีอยุธยา', '1955455544', NULL, NULL, '', NULL, 1, '2020-04-25', 5000, NULL, 'open', NULL, NULL, NULL, NULL, 'null', 15, '2020-04-17 14:35:51', '2020-04-17 14:35:51'),
+(13, 'as', 'as', '191/7', 'ป.5', 11, '2020-04-17', '1234567555434', NULL, '8101', '81', NULL, '0940424511', 'ตา', 'กฟก', 'ธนาคารกรุงศรีอยุธยา', '1955455544', NULL, NULL, '', NULL, 1, '2020-04-25', 5000, NULL, 'open', NULL, NULL, NULL, NULL, 'null', 15, '2020-04-17 14:37:46', '2020-04-17 14:37:46'),
+(14, 'as', 'as', '191/7', 'ป.5', 11, '2020-04-17', '1234567555455', NULL, '8101', '81', NULL, '0940424511', 'ตา', 'กฟก', 'ธนาคารกรุงศรีอยุธยา', '1955455544', NULL, NULL, '', NULL, 1, '2020-04-25', 5000, NULL, 'open', NULL, NULL, NULL, NULL, 'null', 15, '2020-04-17 14:41:41', '2020-04-17 14:41:41'),
+(15, 'as', 'as', '191/7', 'ป.5', 11, '2020-04-17', '1234567555665', NULL, '8101', '81', NULL, '0940424511', 'ตา', 'กฟก', 'ธนาคารกรุงศรีอยุธยา', '1955455544', NULL, NULL, '', NULL, 1, '2020-04-25', 5000, NULL, 'open', NULL, NULL, NULL, NULL, 'null', 15, '2020-04-17 14:44:16', '2020-04-17 14:44:16'),
+(16, 'as', 'as', '191/7', 'ป.5', 11, '2020-04-17', '1234567555965', NULL, '8101', '81', NULL, '0940424511', 'ตา', 'กฟก', 'ธนาคารกรุงศรีอยุธยา', '1955455544', 'เช่น ความเป็นอยู่,ภาระ,สถานะครอบครัว เป็นต้น', 'เช่น ต้องการซ่อมที่พัก,ต้องการอาหารแห้ง หรือทุนการศึกษา เป็นต้น', '', NULL, 1, '2020-04-25', 5000, NULL, 'open', NULL, NULL, NULL, NULL, 'null', 15, '2020-04-17 14:46:16', '2020-04-17 14:46:16'),
+(17, 'aasd', 'asdasd', 'asd111', 'ป.5', 11, '2020-04-18', '1234567891111', 'เชียงเพ็ง', 'ป่าติ้ว', 'ยโสธร', '35150', '0999999999', 'ตา', 'กฟก', 'ธนาคารไทยพานิชย์', '1955455544', 'เช่น ความเป็นอยู่,ภาระ,สถานะครอบครัว เป็นต้น', 'เช่น ต้องการซ่อมที่พัก,ต้องการอาหารแห้ง หรือทุนการศึกษา เป็นต้น', '', NULL, 1, '2020-04-25', 1000, NULL, 'open', NULL, NULL, NULL, NULL, 'null', 15, '2020-04-17 15:00:26', '2020-04-17 15:00:26');
 
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -7783,16 +7812,16 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- dump ตาราง `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `lastname`, `email`, `tel`, `schoolname`, `Address`, `pic_id_card`, `id_card`, `sub_district`, `zipcode`, `province`, `district`, `email_verified_at`, `password`, `type`, `agree`, `status`, `slug`, `cause`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'member', 'member', 'member@gmail.com', '1234156123', NULL, '123456', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$ZhG31/ucChzroRB1Lsi4R./b8OiVAormU3Yl.DTSQ3VfjI6Ni2H.K', 1, NULL, '', NULL, NULL, 'EBRvtFWqj6oPZDX8qgYx0Xx8Y5t7MOBuTHYZMjDYPXjXdYQC0cXT4ZndS0N7', '2020-03-11 01:49:58', '2020-03-11 01:49:58'),
+(1, 'member', 'member', 'member@gmail.com', '1234156123', NULL, '123456', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$ZhG31/ucChzroRB1Lsi4R./b8OiVAormU3Yl.DTSQ3VfjI6Ni2H.K', 1, NULL, '', NULL, NULL, '63NqzX5k1tgICfKwXeLU13zimkNqRccKbqkI7e2m2slwKMKiJVCZaWr9Fukd', '2020-03-11 01:49:58', '2020-03-11 01:49:58'),
 (3, 'มาโนช', 'fsdfrer', 'bosssa5558@gmail.com', '0940424511', NULL, '191/7', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$PDzhVa2WV7kOdsw.ZrqeF.iFDNCTsUJjDxQPk4ibiVk6iDHgDTWhy', 1, NULL, '', NULL, NULL, '3h0rBQHXX03haovvcOZWmFzmH8kSJNaHeIJNq0LISFRN6sMYLj1Ohdl6K90L', '2020-03-11 02:46:56', '2020-03-11 02:46:56'),
 (12, 'มาโนช', '1212', 'bossersa5558@gmail.com', '0940424511', NULL, '191/7', 'x', 'x', NULL, NULL, NULL, NULL, NULL, '$2y$10$bdaz8iATNlQkg6gPO5WqJeMoyy30Yq35xTbgoKDRbo8wvq2McR2ny', 1, NULL, NULL, NULL, NULL, '6qBcCZtY9KO0vmnRtsErgZnIyxev5BhqIxd3oF2bX62iA8xXWMeZZgexE2PW', '2020-03-11 06:28:41', '2020-03-11 06:28:41'),
-(13, 'มาโนช', 'วิริยะ', 'teacher@gmail.com', '0940424511', 'tes', '191/7, ต.เชียงเพ็ง', '5e68e7c07f802.jpeg', '3434434343434', NULL, NULL, NULL, NULL, NULL, '$2y$10$pOE55ZdMMTo9ucKyryMrvebaFRi37KGLBF2/4R0a7NHYsX.mA8.4i', 3, NULL, '', NULL, NULL, '82LBYxFq40TU1EHNHOduBgSun0sB0veWWtX8S3rwGNjbmk73moVzwqiGlJk0', '2020-03-11 06:29:36', '2020-03-11 06:29:36'),
+(13, 'มาโนช', 'วิริยะ', 'teacher@gmail.com', '0940424511', 'tes', '191/7, ต.เชียงเพ็ง', '5e68e7c07f802.jpeg', '3434434343434', NULL, NULL, NULL, NULL, NULL, '$2y$10$pOE55ZdMMTo9ucKyryMrvebaFRi37KGLBF2/4R0a7NHYsX.mA8.4i', 3, NULL, '', NULL, NULL, 'rAjT0zNpbkn81zoimM1TyFROloKnfdVxkq0ibB7bXJl3y0jozd6cPqoYpxh7', '2020-03-11 06:29:36', '2020-03-11 06:29:36'),
 (14, 'มาโนช', '123', 'member2@gmail.com', '094042451', NULL, '191/7', 'x', 'x', NULL, NULL, NULL, NULL, NULL, '$2y$10$DTkyqQQnOvZ2eeRgsBVPVuVTA/CeEyn1PcV/b2gAi5HIyI7de2PS2', 1, NULL, NULL, NULL, NULL, 'ObcbxsB9TcHOtLwz4LeUWyMedPFLvErYgzltqNqCiuiTYOCaDLQDtCgMfUpR', '2020-03-11 06:56:20', '2020-03-11 06:56:20'),
-(15, 'admin', 'admin', 'admin@gmail.com', '1234567891', NULL, '123', 'x', 'x', NULL, NULL, NULL, NULL, NULL, '$2y$10$TioFiBtKaI.L9cLvCYfrJeRnilzBGgVo4EhYzrMsmyNWuxoI7facK', 0, NULL, NULL, NULL, NULL, 'm7Gc5WKismO0xZDJsn90gOwAICulLeRSlyrfOEWpI6zB2igc0EbsXiSG1qIe', '2020-03-12 02:54:45', '2020-03-12 02:54:45'),
+(15, 'admin', 'admin', 'admin@gmail.com', '1234567891', NULL, '123', 'x', 'x', NULL, NULL, NULL, NULL, NULL, '$2y$10$TioFiBtKaI.L9cLvCYfrJeRnilzBGgVo4EhYzrMsmyNWuxoI7facK', 0, NULL, NULL, NULL, NULL, 'UWOnCaYoQDlIkGKWi6DBGiT0vHwAqcvkYmEa7XbbuYWCrAhUPb5r374aJnRN', '2020-03-12 02:54:45', '2020-03-12 02:54:45'),
 (16, 'มาโนช วิริยะ', 'วิริยะ', '5465456@gmail.com', '0940424511', NULL, 'ต.เชียงเพ็ง', '5e6a457ea0347.jpeg', '1231566545', NULL, NULL, NULL, NULL, NULL, '$2y$10$6Y/EL9gm4J77UoQKTjlR6eN0DODI6ZHeGmKOof/s.aDD0navVUnz6', 1, NULL, NULL, NULL, NULL, '4yz0ztX0GfAwylBSW6YZWGpTW9XVJpv0EeqrdisS9Z3OKLCJhgu7cYkz3Asr', '2020-03-12 07:21:50', '2020-03-12 07:21:50'),
 (19, 'มาโนช', 'adasd', 'bosssadf5558@gmail.com', '0940424511', '0', '191/7', '0', '1010101010101', NULL, NULL, NULL, NULL, NULL, '$2y$10$2sR8ByQh/0V9CsjK1XRxGOEyR/1LmH1ZZ0i2hUjHr8DHComK/4RZK', 1, NULL, NULL, NULL, NULL, 'KSKVWL5CZ4DxaYOwLKwDONfDtdupBIom16GLqf8TlGfZeEizbxg1TeOPnjsa', '2020-03-25 09:25:18', '2020-03-25 09:25:18'),
 (22, 'กดกดเ', 'ใจดี', 'bosssaaa5558@gmail.com', '0999999999', 'tesss', '191/7', '5e7e46d60fc39.jpeg', '1739900682833', NULL, NULL, NULL, NULL, NULL, '$2y$10$z.2B8dXWzWSSnUQM4D0/f.we8OTwRAmC/lRNPQqeM0PnR5aZyGB5e', 3, NULL, NULL, NULL, NULL, NULL, '2020-03-27 11:32:54', '2020-03-27 11:32:54'),
@@ -7823,6 +7852,12 @@ ALTER TABLE `donations`
 -- Indexes for table `footers`
 --
 ALTER TABLE `footers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `levels`
+--
+ALTER TABLE `levels`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -7864,7 +7899,8 @@ ALTER TABLE `students`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `students_id_card_unique` (`id_card`),
   ADD UNIQUE KEY `students_slug_unique` (`slug`),
-  ADD KEY `students_user_id_foreign` (`user_id`);
+  ADD KEY `students_user_id_foreign` (`user_id`),
+  ADD KEY `level_id` (`level_id`);
 
 --
 -- Indexes for table `users`
@@ -7888,7 +7924,7 @@ ALTER TABLE `districts`
 -- AUTO_INCREMENT for table `donations`
 --
 ALTER TABLE `donations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `footers`
@@ -7897,10 +7933,16 @@ ALTER TABLE `footers`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `levels`
+--
+ALTER TABLE `levels`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT for table `news`
@@ -7954,6 +7996,7 @@ ALTER TABLE `nontifications`
 -- Constraints for table `students`
 --
 ALTER TABLE `students`
+  ADD CONSTRAINT `students_ibfk_1` FOREIGN KEY (`level_id`) REFERENCES `levels` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `students_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
