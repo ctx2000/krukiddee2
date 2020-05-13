@@ -89,6 +89,10 @@ Krukidee | ข้อมูลครู
                                         </button>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item"
+                                            href="{{route('admin.aboutStudent',['id'=>$s->id])}}">
+                                            <i data-feather="eye" class="icon-sm mr-2"></i> <span
+                                                class="">ดูข้อมูล</span></a>
+                                            <a class="dropdown-item"
                                                 href="{{route('admin.studentEdit',['id'=>$s->id])}}">
                                                 <i data-feather="edit-2" class="icon-sm mr-2"></i><span class=""> แก้ไขข้อมูล</span>
                                             </a>
@@ -114,10 +118,7 @@ Krukidee | ข้อมูลครู
                                                     ลบข้อมูล</span>
                                             </a>
 
-                                            <a class="dropdown-item"
-                                                href="{{route('admin.aboutStudent',['id'=>$s->id])}}">
-                                                <i data-feather="eye" class="icon-sm mr-2"></i> <span
-                                                    class="">ดูข้อมูล</span></a>
+
 
                                         </div>
                                         @if ($s->closeDonate < now())

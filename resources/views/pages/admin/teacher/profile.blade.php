@@ -1,14 +1,30 @@
-@extends('layouts/adminNav')
-@section('content')
-<style>
+@extends('layouts.admin.master')
 
-</style>
+@push('title')
+Krukidee | ข้อมูลครู
+@endpush
+
+@push('plugin-styles')
+<!-- Plugin css import here -->
+{!! Html::style('admin/assets/plugins/datatables-net/dataTables.bootstrap4.css') !!}
+{!! Html::script('admin/js/app.js') !!}
+@endpush
+
+@section('content')
+<!-- Page content here -->
+<nav class="page-breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">ข้อมูลครู</a></li>
+        <li class="breadcrumb-item active" aria-current="page">ทั้งหมด</li>
+    </ol>
+</nav>
+
 <div class="content-wrapper">
     <div class="container">
 
         <div class="card">
             <div class="row">
-                <div class="col-12">
+                <div class="col-10">
                     <div class="card-body">
                         <div class="card-title mb-4">
                             <div class="d-flex justify-content-start">
@@ -33,19 +49,19 @@
                                     @endif
                                     @if ($teacher->type == 3)
                                     @if ($teacher->status=='ban')
-                                    <a class="btn btn-success"
-                                        href="{{route('admin.memberUnban',['id'=>$id])}}">
-                                        <li class="	far fa-calendar-check"></li> ปลดแบน
+                                    <a class="btn btn-success" href="{{route('admin.memberUnban',['id'=>$id])}}">
+                                        <i data-feather="user-check" class="icon-sm mr-1"></i> ปลดแบน
                                     </a>
                                     @else
 
                                     <a class="btn btn-info cause" href="#" data-name="{{$teacher->name}}"
                                         data-id="{{$id}}">
-                                        <li class="fas fa-ban"></li> แบนผู้ใช้
+                                        <i data-feather="slash" class="icon-sm mr-1"></i>แบนผู้ใช้
                                     </a>
                                     @endif
                                     <a href="{{route('admin.deleteUser',['id'=>$id])}}"
-                                        class="btn btn-danger delete-confirm"><li class="	fas fa-trash-alt"></li> ลบข้อมูลผู้ใช้</a>
+                                        class="btn btn-danger delete-confirm"><i data-feather="trash"
+                                            class="icon-sm mr-1"></i>ลบข้อมูลผู้ใช้</a>
                                     @endif
                                 </div>
                                 <div class="ml-auto">
@@ -127,27 +143,36 @@
                         </div>
                         <div class="tab-pane fade" id="connectedServices" role="tabpanel"
                             aria-labelledby="ConnectedServices-tab">
-                            <table class="table">
-                                <tr>
-                                    <th>ชื่อ-นามสกุล</th>
-                                    <th>ชั้นเรียน</th>
-                                    <th>อายุ</th>
-                                    <th>วันเกิด</th>
-                                </tr>
+                            <div class="table-responsive">
+                                <table id="dataTableExample" class="table">
+                                    <thead>
+                                        <tr>
 
-                                @foreach ($student as $s)
-                                <tr>
-                                    <td> <a href="{{route('admin.aboutStudent',['id'=>$s->id])}}"> {{$s->name.' '.$s->lastname}}</a></td>
-                                    <td>{{$s->grade}}</td>
-                                    <td>{{$s->age}}</td>
-                                    <td>{{$s->birthday}}</td>
+                                            <th>#</th>
+                                            <th>ชื่อ-นามสกุล</th>
+                                            <th>ชั้นเรียน</th>
+                                            <th>อายุ</th>
+                                            <th>วันเกิด</th>
+
+                                        </tr>
+                                    </thead>
+
+                                    @foreach ($student as $s)
+                                    <tr>
+                                        <th>{{$s->id}}</th>
+                                        <td> <a href="{{route('admin.aboutStudent',['id'=>$s->id])}}">
+                                                {{$s->name.' '.$s->lastname}}</a></td>
+                                        <td>{{$s->grade}}</td>
+                                        <td>{{$s->age}}</td>
+                                        <td>{{$s->birthday}}</td>
 
 
-                                </tr>
+                                    </tr>
 
 
-                                @endforeach
-                            </table>
+                                    @endforeach
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -185,42 +210,41 @@
     });
 });
 </script>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">ระบุสาเหตุการแบนผู้ใช้</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <form method="POST" action="{{route('admin.memberBaned')}}">
-                @csrf
-                <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">แบนผู้ใช้:</label>
-                    <input type="text" class="form-control" id="name" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="message-text" class="col-form-label">สาเหตุ:</label>
-                    <textarea class="form-control" id="cause" name="cause"></textarea>
-                </div>
-                <input type="hidden" id="id" name="id">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">ระบุสาเหตุการแบนผู้ใช้</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{route('admin.memberBaned')}}">
+                    @csrf
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">แบนผู้ใช้:</label>
+                        <input type="text" class="form-control" id="name" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">สาเหตุ:</label>
+                        <textarea class="form-control" id="cause" name="cause"></textarea>
+                    </div>
+                    <input type="hidden" id="id" name="id">
 
-        </div>
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">ยืนยัน</button>
-            </form>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">ยืนยัน</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
 
+            </div>
         </div>
     </div>
 </div>
-</div>
 
 <script>
-$('.cause').click(function(){
+    $('.cause').click(function(){
 // get data from edit btn
 
 var name = $(this).attr('data-name');
@@ -236,3 +260,21 @@ $('#myModal').modal('show');
 });
 </script>
 @endsection
+
+
+
+@push('plugin-scripts')
+<!-- Plugin js import here -->
+{!! Html::script('admin/assets/plugins/datatables-net/jquery.dataTables.js') !!}
+{!! Html::script('admin/assets/plugins/datatables-net-bs4/dataTables.bootstrap4.js') !!}
+@endpush
+
+@push('custom-scripts')
+<!-- Custom js here -->
+{!! Html::script('admin/assets/js/data-table.js') !!}
+@if (session('feedback'))
+<script>
+    Swal.fire('ผลการทำงาน',"{{session('feedback')}}",'success');
+</script>
+@endif
+@endpush

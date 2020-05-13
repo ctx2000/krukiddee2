@@ -77,7 +77,7 @@ class TeacherController extends Controller
         foreach ($donate as $d) {
             $sum=$d->price+$sum;
         }
-        return view('admin/tool/aboutTeacher',[
+        return view('pages\admin\teacher\profile',[
             'teacher' => $teacher,
             'student' => $student,
             'sum' => $sum,

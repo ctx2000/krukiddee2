@@ -13,6 +13,7 @@ use App\Http\Requests\StudentRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
+use Exception;
 class DonationController extends Controller
 {
     /**
@@ -192,11 +193,18 @@ class DonationController extends Controller
 
         //2foreatch น่าจะได้
     }
-    public function cause($id){
-        $id = Crypt::decrypt($id);
+    public function cause($slug){
+        //$id = Crypt::decrypt($id);
+
         $max = Student::where([['level_id','=',4],['status','=','open']])->take(6)->get();
-        $student = Student::where('id',$id)->first();
+        $student = Student::where('slug',$slug)->first();
+        //
+        if($student == null){
+            return view('errors.404');
+        }
+        $id = $student->id;
         $sum = Donation::where('student_id',$id)->count();
+
         return view('cause',[
             // 's'=>$student,
             'sum'=>$sum,

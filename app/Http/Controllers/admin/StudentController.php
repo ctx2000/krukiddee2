@@ -28,7 +28,7 @@ class StudentController extends Controller
         // ]);
     }
     public function addStudent(){
-        $teacher = User::where('type','=',3)->get();
+        $teacher = User::where('type','=',3)->orWhere('type','=',0)->get();
 
         return view('pages\admin\student\insert',[
             'teacher'=>$teacher
@@ -48,7 +48,7 @@ class StudentController extends Controller
             'bankAccountName'=>['required','max:255'],
             'bankName'=>['required','max:255'],
             'bankNumber'=>['numeric','required'],
-            'level'=>['required'],
+            'level_id'=>['required'],
             'closeDonate'=>['required'],
             'maxDonate'=>['numeric','required'],
             'grade'=>['required','max:255'],
@@ -66,7 +66,7 @@ class StudentController extends Controller
             'bankAccountName.required'=> 'กรุณากรอกข้อมูล 2',
             'bankName.required'=> 'กรุณากรอกข้อมูล 3',
             'bankNumber.required'=> 'กรุณากรอกข้อมูล 4',
-            'level.required'=> 'กรุณากรอกข้อมูล 5',
+            'level_id.required'=> 'กรุณากรอกข้อมูล 5',
             'closeDonate.required'=> 'กรุณากรอกข้อมูล 6',
             'maxDonate.required'=> 'กรุณากรอกข้อมูล 7',
             'grade.required'=> 'กรุณากรอกข้อมูล 8',
@@ -79,8 +79,12 @@ class StudentController extends Controller
         ]);
         if (!isset($request->description1)) {
 
-
+            $slug = preg_replace('~[^\pL\d]+~u', '-', $request->title);
             $student = new Student();
+            $student->title = $request->title;
+            $student->slug = $slug;
+            $student->seo = $request->seo;
+
             $student->name = $request->name;
             $student->lastname = $request->lastname;
             $student->address = $request->address;
@@ -89,7 +93,7 @@ class StudentController extends Controller
             $student->bankName = $request->bankName;
             $student->bankNumber = $request->bankNumber;
             // $student->description = $request->description;
-            $student->level = $request->level;
+            $student->level_id = $request->level_id;
             $student->closeDonate = $request->closeDonate;
             $student->maxDonate = $request->maxDonate;
             $student->grade = $request->grade;
@@ -114,6 +118,15 @@ class StudentController extends Controller
                     $student->picture = $newFileName;
 
                 }
+                if($request->hasFile('picture_cover')){
+
+                    $file_image = $request->file('picture_cover');
+                    $newFileName = uniqid().'.'.$file_image->getClientOriginalExtension();
+
+                    $file_image->move(public_path('storage/images_cover'), $newFileName);
+                        $student->picture_cover = $newFileName;
+
+                    }
 
                 $student->save();
 
@@ -173,9 +186,9 @@ class StudentController extends Controller
             'age'=>['required','numeric','max:255'],
             'birthday'=>['required','max:255'],
             'tel'=>['required','numeric'],
-            'id_card'=>['required','numeric','digits:13'],
+
             'address'=>['required',  'max:255'],
-            'level'=>['required',  'max:255'],
+            'level_id'=>['required',  'max:255'],
             'closeDonate'=>['required',  'max:255'],
             'maxDonate'=>['required','numeric'],
             'bank_of'=>['required',  'max:255'],
@@ -203,29 +216,36 @@ class StudentController extends Controller
             'bankNumber.required' => 'กรุณากรอกข้อมูล',
             'bankNumber.numeric' => 'กรอกตัวเลขเท่านั้น',
             //'description.required' => 'กรุณากรอกข้อมูล',
-            'id_card.required' => 'กรุณากรอกหมายเลขโทรศัพท์',
-            'id_card.digits'=>'เลขบัตรประชาชน13หลัก',
-            'id_card.numeric'=>'กรอกตัวเลขเท่านั้น',
+
 
         ]);
         if($request->hasFile('picture')){
-            //random file name
-            //$newFileName = str_random(40);
+
             $file_image = $request->file('picture');
             $newFileName = uniqid().'.'.$file_image->getClientOriginalExtension();
 
-            $file_image->move(public_path('storage/id_card'), $newFileName);
-            $teacher->pic_id_card = $newFileName;
+            $file_image->move(public_path('storage/images'), $newFileName);
 
-            //resize
-            // $path = Storage::disk('public')->path('images/resize/');
-            // Image::make($request->picture->getRealPath(),$newFileName)->resize(120,null,function($contraint){
-            //     $contraint->aspectRatio();
-            // })->save($path.$newFileName);
+
+
         }else{
             $x  = Student::where('id','=',$request->id)->first();
             $newFileName = $x->picture;
         }
+        if($request->hasFile('picture_cover')){
+
+            $file_image2 = $request->file('picture_cover');
+            $newFileName2 = uniqid().'.'.$file_image2->getClientOriginalExtension();
+
+            $file_image2->move(public_path('storage/images_cover'), $newFileName2);
+
+
+
+        }else{
+            $x  = Student::where('id','=',$request->id)->first();
+            $newFileName2 = $x->picture_cover;
+        }
+        $slug = preg_replace('~[^\pL\d]+~u', '-', $request->title);
         DB::table('students')
             ->where('id', $request->id)
             ->update([
@@ -237,7 +257,7 @@ class StudentController extends Controller
                 'id_card' => $request->id_card,
                 'tel' => $request->tel,
                 'address' => $request->address,
-                'level' => $request->level,
+                'level_id' => $request->level_id,
                 'closeDonate' => $request->closeDonate,
                 'maxDonate' => $request->maxDonate,
                 'bank_of' => $request->bank_of,
@@ -245,8 +265,11 @@ class StudentController extends Controller
                 'bankAccountName' => $request->bankAccountName,
                 'bankNumber' => $request->bankNumber,
                 'user_id' => $request->user_id,
-                'description' => $request->description,
-                'picture' => $newFileName
+                'picture' => $newFileName,
+                'picture_cover' => $newFileName2,
+                'seo' => $request->seo,
+                'title' => $request->title,
+                'slug' => $slug
 
                 ]);
                 return redirect()->route('admin.student');
@@ -272,7 +295,7 @@ class StudentController extends Controller
         foreach ($donate as $d) {
             $sum=$sum+$d->price;
         }
-        return view('admin/tool/aboutStudent',[
+        return view('pages\admin\student\profile',[
             'student'=>$student,
             'teacher'=>$teacher,
             'donate'=>$donate,

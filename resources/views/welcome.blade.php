@@ -86,8 +86,8 @@
                             <div class="case-btn">
 
                                 <ul>
-                                    <li><a href="{{route('donation.cause',['id'=>$id])}}">ดูข้อมูลเพิ่มเติม</a></li>
-                                    <li><a href="{{route('donation.cause',['id'=>$id])}}">บริจาค</a></li>
+                                    <li><a href="{{route('donation.cause',['slug'=>$m->slug])}}">ดูข้อมูลเพิ่มเติม</a></li>
+                                    <li><a href="{{route('donation.cause',['slug'=>$m->slug])}}">บริจาค</a></li>
                                 </ul>
                             </div>
                         </div>

@@ -1,8 +1,16 @@
-@extends('layouts/adminNav')
-@section('content')
-<style>
+@extends('layouts.admin.master')
 
-</style>
+@push('title')
+Krukidee | ข้อมูลครู
+@endpush
+
+@push('plugin-styles')
+<!-- Plugin css import here -->
+{!! Html::style('admin/assets/plugins/datatables-net/dataTables.bootstrap4.css') !!}
+{!! Html::script('admin/js/app.js') !!}
+@endpush
+
+@section('content')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
 <div class="content-wrapper">
@@ -107,37 +115,43 @@
                             <hr />
 
                         </div>
+
                         <div class="tab-pane fade" id="connectedServices" role="tabpanel"
                             aria-labelledby="ConnectedServices-tab">
-                            <table class="table">
-                                <tr>
-                                    <th>จำนวนเงินที่บริจาค</th>
-                                    <th>ความคิดเห็น</th>
-                                    <th>รูป</th>
-                                    <th>สถานะ</th>
-                                </tr>
+                            <div class="table-responsive">
+                                <table id="dataTableExample" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>จำนวนเงินที่บริจาค</th>
+                                            <th>ความคิดเห็น</th>
+                                            <th>รูป</th>
+                                            <th>สถานะ</th>
+                                        </tr>
+                                    </thead>
+                                    @foreach ($donate as $d)
+                                    <tr>
+                                        <td>{{$d->id}}</td>
+                                        <td>{{$d->price}}</td>
+                                        <td>{{$d->description}}</td>
+                                        <td>
+                                            <div class="bigGallPic" id="bigGallDiv" onclick="this.style.display='none'">
+                                            </div>
+                                            <a href="{{asset('storage/receipt/'.$d->picture)}}" data-toggle="lightbox"
+                                                data-title="" data-footer="">
+                                                <img class="img-fluid" src="{{asset('storage/receipt/'.$d->picture)}}"
+                                                    width="50" height="50" alt="">
+                                            </a>
+                                        </td>
+                                        <td>{{$d->status}}</td>
 
-                                @foreach ($donate as $d)
-                                <tr>
-                                    <td>{{$d->price}}</td>
-                                    <td>{{$d->description}}</td>
-                                    <td>
-                                        <div class="bigGallPic" id="bigGallDiv" onclick="this.style.display='none'">
-                                        </div>
-                                        <a href="{{asset('storage/receipt/'.$d->picture)}}" data-toggle="lightbox"
-                                            data-title="" data-footer="">
-                                            <img class="img-fluid" src="{{asset('storage/receipt/'.$d->picture)}}"
-                                                width="50" height="50" alt="">
-                                        </a>
-                                    </td>
-                                    <td>{{$d->status}}</td>
+
+                                    </tr>
 
 
-                                </tr>
-
-
-                                @endforeach
-                            </table>
+                                    @endforeach
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -153,6 +167,20 @@
 
     </div>
 </div>
-
-
 @endsection
+
+@push('plugin-scripts')
+<!-- Plugin js import here -->
+{!! Html::script('admin/assets/plugins/datatables-net/jquery.dataTables.js') !!}
+{!! Html::script('admin/assets/plugins/datatables-net-bs4/dataTables.bootstrap4.js') !!}
+@endpush
+
+@push('custom-scripts')
+<!-- Custom js here -->
+{!! Html::script('admin/assets/js/data-table.js') !!}
+@if (session('feedback'))
+<script>
+    Swal.fire('ผลการทำงาน',"{{session('feedback')}}",'success');
+</script>
+@endif
+@endpush

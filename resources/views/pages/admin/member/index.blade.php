@@ -73,6 +73,14 @@ Krukidee | ข้อมูลสมาชิก
                                             <span class="sr-only">Toggle Dropdown</span>
                                         </button>
                                         <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="{{route('admin.memberAbout',['id'=>$id])}}">
+                                                <i data-feather="eye" class="icon-sm mr-2"></i>
+                                                <span class="">ดูข้อมูล</span>
+                                              </a>
+                                              <a class="dropdown-item" href="{{route('admin.editMember',['id'=>$id])}}">
+                                                <i data-feather="edit-2" class="icon-sm mr-2"></i>
+                                                <span>แก้ไขข้อมูล</span>
+                                              </a>
                                             @if($s->status == '')
                                             <a class="dropdown-item cause" id="cause" href="#" data-name="{{$s->name}}" data-id="{{$id}}">
                                               <i data-feather="user-x" class="icon-sm mr-2"></i>
@@ -84,14 +92,8 @@ Krukidee | ข้อมูลสมาชิก
                                             <span>ปลดแบบผู้ใช้</span>
                                             </a>
                                             @endif
-                                            <a class="dropdown-item" href="{{route('admin.memberAbout',['id'=>$id])}}">
-                                              <i data-feather="eye" class="icon-sm mr-2"></i>
-                                              <span class="">ดูข้อมูล</span>
-                                            </a>
-                                            <a class="dropdown-item" href="{{route('admin.editMember',['id'=>$id])}}">
-                                              <i data-feather="edit-2" class="icon-sm mr-2"></i>
-                                              <span>แก้ไขข้อมูล</span>
-                                            </a>
+
+
                                             <a class="dropdown-item" onclick="onDeleteMember({{$s->id}})" href="#"><i
                                                     data-feather="trash" class="icon-sm mr-2"></i> <span
                                                     class="">ลบข้อมูล</span></a>

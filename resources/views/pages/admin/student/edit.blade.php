@@ -24,6 +24,11 @@ Krukidee | แก้ไขข้อมูลนักเรียน
         height: 100px;
         margin: 5px;
     }
+    #thumbnail2 img {
+        width: 100px;
+        height: 100px;
+        margin: 5px;
+    }
 
     canvas {
         border: 1px solid red;
@@ -62,16 +67,19 @@ Krukidee | แก้ไขข้อมูลนักเรียน
                 =>'post', 'files' => true,'class'=> ($errors->any()) ? 'was-validated' : 'needs-validation'])!!}
                 <fieldset>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="name">ชื่อ</label>
                             {{ Form::text('name', null, ['class'=>'form-control','id'=>'name','aria-describedby'=>'nameHelp']) }}
 
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="lastname">นามสกุล</label>
                             {{ Form::text('lastname', null, ['class'=>'form-control','id'=>'lastname','aria-describedby'=>'lastnameHelp']) }}
                         </div>
-
+                        <div class="form-group col-md-4">
+                            <label for="title">ชื่อ-นามสกุล ภาษาอังกฤษ <small class="text-primary">*url ไม่ต้องใส่(-)</small></label>
+                            {{ Form::text('title', null, ['class'=>'form-control','id'=>'title','aria-describedby'=>'lastnameHelp']) }}
+                        </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
@@ -147,7 +155,7 @@ Krukidee | แก้ไขข้อมูลนักเรียน
                         </div>
                         <div class="form-group col-md-3">
                             <label for="tel">ระดับความเร่งด่วน</label>
-                            {{ Form::select('level',['1'=>'ไม่เร่งด่วน','2'=>'เร่งด่วนเล็กน้อย','3'=>'เร่งด่วน','4'=>'เร่งด่วนมาก'], null, ['class'=>'js-example-basic-single','placeholder' => 'เลือกระดับความเร่งด่วนในการรับบริจาค..']) }}
+                            {{ Form::select('level_id',App\level::all()->pluck('levelname','id'), null, ['class'=>'js-example-basic-single','placeholder' => 'เลือกระดับความเร่งด่วนในการรับบริจาค..']) }}
                         </div>
                         <div class="form-group col-md-3">
                             <label for="tel">วันที่ปิดรับบริจาค</label>
@@ -187,6 +195,12 @@ Krukidee | แก้ไขข้อมูลนักเรียน
 
 
                     </div>
+                    <div class="form-group ">
+                        <label for="description">รายละเอียดสั้นๆ/ข้อมูลนักเรียน <small class="text-primary">(SEO)</small></label>
+
+                        {{ Form::textarea('seo', null, ['id'=>'exampleFormControlTextarea1','rows'=>'5','class'=>'form-control']) }}
+
+                    </div>
                     <div class="form-group">
                         <label class="">เลือกภาพนักเรียน : </label>
                         <input id="file_upload" style="display:none" name="picture" type="file" multiple="false">
@@ -197,10 +211,26 @@ Krukidee | แก้ไขข้อมูลนักเรียน
                         <div id="upload" class="btn btn-outline-info">
                             <i data-feather="upload-cloud" class="icon-md mr-2"></i>เลือกภาพ
                         </div>
+                        <small class="text-primary">*ขนาด 123 x 4567</small>
 
                         <div id="thumbnail"></div>
                     </div>
 
+                    <div class="form-group">
+                        <label class="">เลือกภาพหน้าปกนักเรียน : </label>
+                        <input id="file_upload2" style="display:none" name="picture_cover" type="file" multiple="false">
+                        @if ($errors->has('picture_cover'))
+                        <div class="invalid-feedback">{{ $errors->first('picture_cover') }}</div>
+                        @endif
+
+                        <div id="upload2" class="btn btn-outline-info">
+                            <i data-feather="upload-cloud" class="icon-md mr-2"></i>เลือกภาพ
+                        </div>
+                        <small class="text-primary">*ขนาด 123 x 4567</small>
+
+                        <div id="thumbnail2"></div>
+                    </div>
+                <input type="hidden" name="id" value="{{$student->id}}">
                     <div class="form-group ">
                         <div class="float-left">
                             <a href="{{route('teacher.dashboard')}}" class="btn btn-danger">ยกเลิก</a>
@@ -411,7 +441,48 @@ function showZipcode(){
             } // end for loop
 
         } // end showThumbnail
+        $("#upload2").on("click", function(e) {
+            $("#file_upload2").show().click().hide();
+            e.preventDefault();
+        });
+        $("#file_upload2").on("change", function(e) {
+            var files = this.files
+            showThumbnail2(files)
+        });
 
+
+        function showThumbnail2(files) {
+
+            $("#thumbnail2").html("");
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i]
+                var imageType = /image.*/
+                if (!file.type.match(imageType)) {
+                    //     console.log("Not an Image");
+                    continue;
+                }
+
+                var image = document.createElement("img");
+                var thumbnail = document.getElementById("thumbnail2");
+                image.file = file;
+                thumbnail.appendChild(image)
+
+                var reader = new FileReader()
+                reader.onload = (function(aImg) {
+                    return function(e) {
+                        aImg.src = e.target.result;
+                    };
+                }(image))
+
+                var ret = reader.readAsDataURL(file);
+                var canvas = document.createElement("canvas");
+                ctx = canvas.getContext("2d");
+                image.onload = function() {
+                    ctx.drawImage(image, 100, 100)
+                }
+            } // end for loop
+
+        } // end showThumbnail
 
 
     });
