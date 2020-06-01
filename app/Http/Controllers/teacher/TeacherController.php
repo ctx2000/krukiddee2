@@ -13,7 +13,8 @@ class TeacherController extends Controller
 {
     public function index()
     {
-        return view('teacher/dashboard');
+        return view('pages\teacher\student\blank');
+        //return view('teacher/dashboard');
     }
     public function show(){
         return 'show teacher';

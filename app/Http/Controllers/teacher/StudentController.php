@@ -20,9 +20,13 @@ class StudentController extends Controller
     {
 
         $stu = Student::where('user_id','=',auth()->user()->id)->get();
-        return view('teacher/seeStudent',[
-            'stu' => $stu
+
+        return view('pages\teacher\student\index',[
+            'student'=>$stu
         ]);
+        // return view('teacher/seeStudent',[
+        //     'stu' => $stu
+        // ]);
 
 
     }
@@ -34,7 +38,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('teacher/addStudent');
+        return view('pages\teacher\student\insert');
+        // return view('teacher/addStudent');
     }
 
     /**

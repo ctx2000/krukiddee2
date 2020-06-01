@@ -1,4 +1,4 @@
-@extends('layouts.admin.master')
+@extends('layouts.teacher.master')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @push('title')
 Krukidee | เพิ่มข้อมูลนักเรียน
@@ -52,7 +52,7 @@ Krukidee | เพิ่มข้อมูลนักเรียน
     <div class="col-md-12 stretch-card">
         <div class="card">
             <div class="card-body">
-                <h6 class="card-title">เพิ่มข้อมูลนักเรียน</h6>
+                <h6 class="card-title">แก้ไขข้อมูล</h6>
                 @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -143,13 +143,7 @@ Krukidee | เพิ่มข้อมูลนักเรียน
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="user_id">เลือกครู</label>
-                                <select class="js-example-basic-single w-100" name="user_id" id="user_id">
-                                    @foreach ($teacher as $t)
-                                        <option value="{{ $t->id }}">
-                                            {{ $t->name.' '.$t->lastname }} โรงเรียน{{$t->schoolname}}</option>
-                                        @endforeach
 
-                                </select>
 
                             </div>
                             <div class="form-group col-md-3">
@@ -229,7 +223,7 @@ Krukidee | เพิ่มข้อมูลนักเรียน
 
                         <div class="form-group ">
                             <div class="float-left">
-                                <a href="{{route('admin.dashboard')}}" class="btn btn-danger">ยกเลิก</a>
+                                <a href="{{route('teacher.dashboard')}}" class="btn btn-danger">ยกเลิก</a>
                             </div>
                             <div class="float-right">
                                 <button type="submit" class="btn btn-primary">ต่อไป</button>

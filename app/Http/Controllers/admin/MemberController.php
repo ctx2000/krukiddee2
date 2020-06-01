@@ -118,7 +118,7 @@ class MemberController extends Controller
             $sum=$d->price+$sum;
         }
 
-        return view('admin/tool/aboutMember',[
+        return view('pages\admin\member\profile',[
             'user' => $user,
             'donate' => $donate,
             'count' => $count,

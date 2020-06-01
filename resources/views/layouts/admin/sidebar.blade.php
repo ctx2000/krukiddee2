@@ -26,7 +26,7 @@
         </a>
       </li>
       <li class="nav-item nav-category">จัดการครู</li>
-      <li class="nav-item {{ active_class(['admin/teacher/all']) }}">
+      <li class="nav-item {{ active_class(['admin/teacher/*']) }}">
         <a href="{{ route('admin.teacher') }}" class="nav-link">
           <i class="link-icon" data-feather="book-open"></i>
           <span class="link-title">ข้อมูลครู</span>
@@ -45,7 +45,7 @@
         </a>
       </li>
       <li class="nav-item nav-category">จัดการนักเรียน</li>
-      <li class="nav-item {{ active_class(['admin/student/all']) }}">
+      <li class="nav-item {{ active_class(['admin/student/*']) }}">
         <a href="{{route('admin.student')}}" class="nav-link">
           <i class="link-icon" data-feather="users"></i>
           <span class="link-title">ข้อมูลนักเรียน</span>
