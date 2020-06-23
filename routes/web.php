@@ -22,6 +22,12 @@ Route::get('/teacherRegister', function(){
     return view('auth/teacherRegister');
 })->name('teacherRegister');
 
+Route::get('/news', function(){
+    return view('pages\user\home\login');
+})->name('news');
+Route::get('/news2', function(){
+    return view('pages\user\general/donation');
+})->name('news');
 
 
 Auth::routes();

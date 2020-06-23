@@ -12,7 +12,9 @@
     <!-- end plugin css -->
     @stack('plugin-styles')
     <!-- common css -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     {!! Html::style('user/css/styles.min.css') !!}
+
     <!-- end common css -->
     @stack('style')
 		<!-- web-font loader-->
@@ -44,7 +46,7 @@
 			@include('layouts.user.header')
 			<!-- header end-->
 			<main class="main">
-        @yield('content')
+            @yield('content')
 			</main>
 			<!-- footer start-->
 			@include('layouts.user.footer')
